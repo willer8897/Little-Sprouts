@@ -1,16 +1,27 @@
 package org.lsdt.optaplannerLittleSprouts;
 
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 public class Child {
 	private int id;
+	private int present;
 	private String name;
 	private int parentid;
 	private int age;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+    private Date birthday;
+	
 	public Child(){}
-	public Child(String name, int parentid, int age){
+	public Child(int present, String name, int parentid, int age, Date birthday){
+		this.present = present;
 		this.name = name;
 		this.parentid = parentid;
 		this.age = age;
+		this.birthday = birthday;
 	}
 	
 	public int getId() {
@@ -18,6 +29,12 @@ public class Child {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getPresent() {
+		return present;
+	}
+	public void setPresent(int present) {
+		this.present = present;
 	}
 	public String getName() {
 		return name;
@@ -36,5 +53,11 @@ public class Child {
 	}
 	public void setAge(int age) {
 		this.age = age;
+	}
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 }

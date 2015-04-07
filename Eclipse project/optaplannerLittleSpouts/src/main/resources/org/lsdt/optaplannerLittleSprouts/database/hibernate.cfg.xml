@@ -16,12 +16,12 @@
    
    <!-- Add MySql username here -->
    <property name="hibernate.connection.username">
-      
+   
    </property>
    
    <!-- Add MySql password here -->
    <property name="hibernate.connection.password">
-      
+   
    </property>
 
    <!-- List of XML mapping files -->
@@ -30,6 +30,7 @@
 	<mapping resource="Child.hbm.xml"/>
 	<mapping resource="Request.hbm.xml"/>
 	<mapping resource="Availability.hbm.xml"/>
+	<mapping resource="Schedule.hbm.xml"/>
 
 </session-factory>
 </hibernate-configuration>
