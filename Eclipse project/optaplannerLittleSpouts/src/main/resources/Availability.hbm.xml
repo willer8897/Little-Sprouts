@@ -6,7 +6,7 @@
 <hibernate-mapping>
    <class name="org.lsdt.optaplannerLittleSprouts.Availability" table="Availability">
       <meta attribute="class-description">
-         This class contains the user details. 
+         This class contains the Availability details. 
       </meta>
       <id name="id" type="int" column="id">
          <generator class="native"/>
@@ -17,5 +17,6 @@
       <property name="wedhours" column="2hours" type="string"/>
       <property name="thuhours" column="3hours" type="string"/>
       <property name="frihours" column="4hours" type="string"/>
+      <property name="is_child" column="is_child" type="int"/>
    </class>
 </hibernate-mapping>

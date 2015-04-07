@@ -10,7 +10,6 @@ public class Child {
 	private int present;
 	private String name;
 	private int parentid;
-	private int age;
 	
 	@Temporal(TemporalType.TIMESTAMP)
     private Date birthday;
@@ -20,7 +19,6 @@ public class Child {
 		this.present = present;
 		this.name = name;
 		this.parentid = parentid;
-		this.age = age;
 		this.birthday = birthday;
 	}
 	
@@ -47,12 +45,6 @@ public class Child {
 	}
 	public void setParentid(int parentid) {
 		this.parentid = parentid;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
 	}
 	public Date getBirthday() {
 		return birthday;

@@ -28,6 +28,7 @@
 	<mapping resource="User.hbm.xml"/>
 	<mapping resource="Room.hbm.xml"/>
 	<mapping resource="Child.hbm.xml"/>
+	<mapping resource="Present.hbm.xml"/>
 	<mapping resource="Request.hbm.xml"/>
 	<mapping resource="Availability.hbm.xml"/>
 	<mapping resource="Schedule.hbm.xml"/>
