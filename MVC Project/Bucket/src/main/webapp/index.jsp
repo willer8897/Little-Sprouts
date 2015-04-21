@@ -12,10 +12,10 @@
 
 <table id="Home_Border" border="1" align="center" cellpadding="3" cellspacing="3" style="width:20%">
 	<tr>
-		<td><a href="login.html">Login</a></td>
+		<td align="center"><a href="login.html">Login</a></td>
 	</tr>
 	<tr>
-		<td><a href="signup.html">Signup</a></td>
+		<td align="center"><a href="signup.html">Signup</a></td>
 	</tr>
 </table>
 
