@@ -37,8 +37,7 @@
 <br />
 <table border="1" align="center" style="width:100%">
 	<tr>
-    	<td height="499" align="center" valign="middle" style="width:25%">Notifications</td>
-        <td align="center" valign="middle" style="wifth:75%">Schedule</td>
+        <td height="500" align="center" valign="middle" style="wifth:75%">Schedule</td>
   </tr>
 </table>
 

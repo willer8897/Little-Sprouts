@@ -10,7 +10,7 @@
 
 <img id="MainLogo" src="assets/img/littlespouts_logo.jpg" alt="Bucket" />
 
-<table id="Home_Border" border="1" align="center" cellpadding="3" cellspacing="3" style="width:20%">
+<table id="Home_Border" border="1" align="center" cellpadding="3" cellspacing="3">
 	<tr>
 		<td align="center"><a href="login.html">Login</a></td>
 	</tr>
