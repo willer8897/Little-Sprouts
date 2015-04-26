@@ -62,8 +62,7 @@ public class UserController {
 		} else {
 			boolean found = userService.findByLogin(userLogin.getUserName(), userLogin.getPassword());
 			if (found) {  
-				User user = new User();
-				user = userService.findAndGetAttributes(userLogin.getUserName());
+				User user = userService.findAndGetAttributes(userLogin.getUserName());
 				if(user.getType() == 'M')
 					return "mdashboard";
 				else if(user.getType() == 'T')

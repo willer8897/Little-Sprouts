@@ -51,7 +51,7 @@
 
 				<div align="center">
 					<button>Login</button>
-					<button href="<spring:url value="login.html"/>">Cancel</button>
+					<button href="<spring:url value="*/login.html"/>">Cancel</button>
 				</div>
 
 			</fieldset>

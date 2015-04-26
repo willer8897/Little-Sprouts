@@ -77,8 +77,10 @@
 					<br />	
 					<div>
 						<label for="typeInput">Type</label>
-						<div>
-							<form:input type="type" path="type" placeholder="Type" /><br />
+						<div align="center">
+							Administration: <form:radiobutton value="M" path="type" /><br />
+							Teacher: <form:radiobutton value="T" path="type" /><br />
+							Parent: <form:radiobutton value="P" path="type" /><br />
 							<form:errors path="type" cssClass="error"/>
 						</div>
 					</div>
