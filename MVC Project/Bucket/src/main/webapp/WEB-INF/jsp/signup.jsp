@@ -109,10 +109,10 @@
 	
 					<div>
 						<br />
-						<button>Submit</button>
-						<button>Cancel</button>					
+						<button class="btn btn-primary">Login</button>
+						<button class="btn btn-primary" href="<spring:url value="*/login.html"/>">Cancel</button>
 					</div>
-	
+					<br /><br /><br />
 				</fieldset>
 			</form:form>
 		</div>
