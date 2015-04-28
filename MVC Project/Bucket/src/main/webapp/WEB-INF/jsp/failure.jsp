@@ -21,20 +21,17 @@
 
 	<table id="Login_Border" border="1" align="center" cellpadding="3"
 		cellspacing="3" style="width: 20%">
-		<div>
+		<div align="center">
 			<div>
 				<h3>User Login failure</h3>
 			</div>
 			<div>
 				<div>
-					<strong>Error logging in!</strong> Try logging in again.
+					<strong>Error logging in!</strong> Try logging in again. <br /> <br />
+					<a href="<spring:url value="login.html"/>">Try again?</a>
 				</div>
 			</div>
-		</div>
-		<div></div>
-		<div></div>
-
-		<a href="<spring:url value="login.html"/>">Try again?</a>
+		</div>		
 	</table>
 
 
