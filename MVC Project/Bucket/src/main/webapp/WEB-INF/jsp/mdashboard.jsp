@@ -47,11 +47,10 @@
 	    </div>
 	    <div>
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">Home</a></li>
-	        <li><a href="mdashboard.html">Dashboard</a></li>
+	        <li class="active"><a href="mdashboard.html">Dashboard</a></li>
 	        <li><a href="mnews.html">News</a></li>
 	        <li><a href="mrequestshtml">Requests</a></li>
-	        <li><a href="taccounts.html">Accounts</a></li>
+	        <li><a href="maccounts.html">Accounts</a></li>
 	      </ul>
 	    </div>
 	  </div>

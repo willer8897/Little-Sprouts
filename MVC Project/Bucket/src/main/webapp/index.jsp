@@ -20,7 +20,7 @@
 	<div class="container-fluid" align="center">
 		<img id="MainLogo" src="assets/img/littlespouts_logo.jpg" alt="Bucket" /> <br />
 		<div style="width: 20%">
-			<legend align="center">Welcome!</legend>
+			<legend align="center">Scheduling Service</legend>
 			<div>
 				<a href="login.html" class="btn btn-primary" role="button">Login</a>
 				<a href="signup.html" class="btn btn-primary" role="button">Signup</a>

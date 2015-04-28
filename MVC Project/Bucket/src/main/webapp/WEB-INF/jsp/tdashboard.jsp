@@ -46,8 +46,7 @@
 	    </div>
 	    <div>
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">Home</a></li>
-	        <li><a href="tdashboard.html">Dashboard</a></li>
+	       <li class="active"><a href="tdashboard.html">Dashboard</a></li>
 	        <li><a href="tnews.html">News</a></li>
 	        <li><a href="tavailability.html">Availability</a></li>
 	        <li><a href="trequests.html">Requests</a></li>

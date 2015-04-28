@@ -46,8 +46,7 @@
 	    </div>
 	    <div>
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">Home</a></li>
-	        <li><a href="pdashboard.html">Dashboard</a></li>
+	        <li class="active"><a href="pdashboard.html">Dashboard</a></li>
 	        <li><a href="pnews.html">News</a></li>
 	        <li><a href="prequests.html">Requests</a></li>
 	      </ul>
