@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<SchedulingPeriod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="TOY1" xsi:noNamespaceSchemaLocation="competition.xsd">
+  <StartDate>2010-01-01</StartDate>
+  <EndDate>2010-01-07</EndDate>
+  <Skills>
+    <Skill>Nurse</Skill>
+  </Skills>
+  <ShiftTypes>
+    <Shift ID="11">
+      <StartTime>07:00:00</StartTime>
+      <EndTime>15:00:00</EndTime>
+      <Description>Early</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="12">
+      <StartTime>08:00:00</StartTime>
+      <EndTime>14:00:00</EndTime>
+      <Description>Late</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>    
+    <Shift ID="13">
+      <StartTime>14:00:00</StartTime>
+      <EndTime>18:00:00</EndTime>
+      <Description>Night</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="14">
+      <StartTime>07:00:00</StartTime>
+      <EndTime>14:00:00</EndTime>
+      <Description>Late</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="21">
+      <StartTime>06:00:00</StartTime>
+      <EndTime>12:00:00</EndTime>
+      <Description>Early</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="22">
+      <StartTime>07:00:00</StartTime>
+      <EndTime>15:00:00</EndTime>
+      <Description>Night</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="23">
+      <StartTime>07:00:00</StartTime>
+      <EndTime>11:00:00</EndTime>
+      <Description>Late</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="24">
+      <StartTime>08:00:00</StartTime>
+      <EndTime>18:00:00</EndTime>
+      <Description>Night</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="25">
+      <StartTime>11:00:00</StartTime>
+      <EndTime>18:00:00</EndTime>
+      <Description>Night</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="33">
+      <StartTime>07:00:00</StartTime>
+      <EndTime>13:00:00</EndTime>
+      <Description>Early</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="34">
+      <StartTime>08:00:00</StartTime>
+      <EndTime>13:00:00</EndTime>
+      <Description>Early</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="35">
+      <StartTime>13:00:00</StartTime>
+      <EndTime>18:00:00</EndTime>
+      <Description>Night</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="45">
+      <StartTime>09:00:00</StartTime>
+      <EndTime>18:00:00</EndTime>
+      <Description>Night</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+    <Shift ID="51">
+      <StartTime>06:00:00</StartTime>
+      <EndTime>09:00:00</EndTime>
+      <Description>Early</Description>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Shift>
+  </ShiftTypes>
+   <Patterns>
+    <Pattern ID="0" weight="-1">
+      <PatternEntries>
+        <PatternEntry index="0">
+          <ShiftType>13</ShiftType>
+          <Day>Any</Day>
+        </PatternEntry>
+        <PatternEntry index="1">
+          <ShiftType>12</ShiftType>
+          <Day>Any</Day>
+        </PatternEntry>
+        <PatternEntry index="2">
+          <ShiftType>11</ShiftType>
+          <Day>Any</Day>
+        </PatternEntry>
+      </PatternEntries>
+    </Pattern>
+  </Patterns>
+  <Contracts>
+    <Contract ID="0">
+      <Description>Mike's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>   
+    <Contract ID="1">
+      <Description>Rob's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="2">
+      <Description>Heather's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="3">
+      <Description>Kory's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="4">
+      <Description>Mew's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="5">
+      <Description>Mew 2's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="6">
+      <Description>Charmander's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="7">
+      <Description>Bulbasaur's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="8">
+      <Description>Squirtle's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="9">
+      <Description>Josh's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="10">
+      <Description>Ben's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="11">
+      <Description>Luke's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="12">
+      <Description>Tim's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">2</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="13">
+      <Description>13's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">2</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="14">
+      <Description>14's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">2</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="15">
+      <Description>15's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">2</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="16">
+      <Description>16's Contract</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">10</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">3</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">2</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">true</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="17">
+      <Description>Part-Time</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">3</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">1</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">false</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="18">
+      <Description>Part-Time</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">3</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">1</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">false</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="19">
+      <Description>Part-Time</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">3</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">1</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">false</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+    <Contract ID="20">
+      <Description>Part-Time</Description>
+      <SingleAssignmentPerDay weight="1">true</SingleAssignmentPerDay>
+      <MaxNumAssignments on="1" weight="1">3</MaxNumAssignments>
+      <MinNumAssignments on="1" weight="1">1</MinNumAssignments>
+      <MaxConsecutiveWorkingDays on="1" weight="1">5</MaxConsecutiveWorkingDays>
+      <MinConsecutiveWorkingDays on="1" weight="1">1</MinConsecutiveWorkingDays>
+      <MaxConsecutiveFreeDays on="1" weight="1">5</MaxConsecutiveFreeDays>
+      <MinConsecutiveFreeDays on="1" weight="1">1</MinConsecutiveFreeDays>
+      <MaxConsecutiveWorkingWeekends on="0" weight="0">0</MaxConsecutiveWorkingWeekends>
+      <MinConsecutiveWorkingWeekends on="0" weight="0">0</MinConsecutiveWorkingWeekends>
+      <MaxWorkingWeekendsInFourWeeks on="0" weight="0">0</MaxWorkingWeekendsInFourWeeks>
+      <WeekendDefinition>SaturdaySunday</WeekendDefinition>
+      <CompleteWeekends weight="1">true</CompleteWeekends>
+      <IdenticalShiftTypesDuringWeekend weight="1">true</IdenticalShiftTypesDuringWeekend>
+      <NoNightShiftBeforeFreeWeekend weight="0">false</NoNightShiftBeforeFreeWeekend>
+      <AlternativeSkillCategory weight="0">false</AlternativeSkillCategory>
+      <UnwantedPatterns>
+          
+      </UnwantedPatterns>
+    </Contract>
+  </Contracts>
+  <Employees>
+    <Employee ID="0">
+      <ContractID>0</ContractID>
+      <Name>Mike</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="1">
+      <ContractID>1</ContractID>
+      <Name>Rob</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="2">
+      <ContractID>2</ContractID>
+      <Name>Heather</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="3">
+      <ContractID>3</ContractID>
+      <Name>Cory</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="4">
+      <ContractID>4</ContractID>
+      <Name>Mew</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="5">
+      <ContractID>5</ContractID>
+      <Name>Mew 2</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="6">
+      <ContractID>6</ContractID>
+      <Name>Charmander</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="7">
+      <ContractID>7</ContractID>
+      <Name>Bulbasaur</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="8">
+      <ContractID>8</ContractID>
+      <Name>Squirtle</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="9">
+      <ContractID>9</ContractID>
+      <Name>Josh</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="10">
+      <ContractID>10</ContractID>
+      <Name>Ben</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="11">
+      <ContractID>11</ContractID>
+      <Name>Luke</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="12">
+      <ContractID>12</ContractID>
+      <Name>Tim</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="13">
+      <ContractID>13</ContractID>
+      <Name>Marth</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="14">
+      <ContractID>14</ContractID>
+      <Name>Ice Climbers</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="15">
+      <ContractID>15</ContractID>
+      <Name>Timothy</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="16">
+      <ContractID>16</ContractID>
+      <Name>Dave</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="17">
+      <ContractID>17</ContractID>
+      <Name>Marcus</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="18">
+      <ContractID>18</ContractID>
+      <Name>Mario</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="19">
+      <ContractID>19</ContractID>
+      <Name>Kirby</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+    <Employee ID="20">
+      <ContractID>20</ContractID>
+      <Name>Wario</Name>
+      <Skills>
+        <Skill>Nurse</Skill>
+      </Skills>
+    </Employee>
+  </Employees>
+  <CoverRequirements>
+    <DayOfWeekCover>
+      <Day>Monday</Day>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>11</Shift>
+        <Preferred>4</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>12</Shift>
+        <Preferred>3</Preferred>
+      </Cover>   
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>13</Shift>
+        <Preferred>3</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>14</Shift>
+        <Preferred>2</Preferred>
+      </Cover>
+    </DayOfWeekCover>
+    <DayOfWeekCover>
+      <Day>Tuesday</Day>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>21</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>22</Shift>
+        <Preferred>3</Preferred>
+      </Cover>   
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>23</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>24</Shift>
+        <Preferred>5</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>25</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+    </DayOfWeekCover>
+    <DayOfWeekCover>
+    <Day>Wednesday</Day>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>21</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>22</Shift>
+        <Preferred>3</Preferred>
+      </Cover>   
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>33</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>34</Shift>
+        <Preferred>5</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>35</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+    </DayOfWeekCover>
+    <DayOfWeekCover>
+      <Day>Thursday</Day>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>21</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>22</Shift>
+        <Preferred>3</Preferred>
+      </Cover>   
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>33</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>34</Shift>
+        <Preferred>4</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>45</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>35</Shift>
+        <Preferred>5</Preferred>
+      </Cover>
+    </DayOfWeekCover>
+    <DayOfWeekCover>
+      <Day>Friday</Day>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>51</Shift>
+        <Preferred>1</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>22</Shift>
+        <Preferred>2</Preferred>
+      </Cover>   
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>34</Shift>
+        <Preferred>3</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>24</Shift>
+        <Preferred>4</Preferred>
+      </Cover>
+      <Cover>
+        <Skill>Nurse</Skill>
+        <Shift>35</Shift>
+        <Preferred>3</Preferred>
+      </Cover>
+    </DayOfWeekCover>
+  </CoverRequirements>
+  <DayOffRequests/>
+  <ShiftOffRequests/>
+</SchedulingPeriod>

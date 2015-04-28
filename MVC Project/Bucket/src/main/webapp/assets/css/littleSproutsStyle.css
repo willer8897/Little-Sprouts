@@ -1,0 +1,69 @@
+/* -------- Overall Settings --------*/
+
+html {webkit-text-size-adjust:100%;} 
+
+/* -------- Navigation Bar --------*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+/*  ---- test -----*/
+li {
+    float: left;
+}
+ 
+/*
+a:link, a:visited, button:LINK, button:VISITED {
+    display: block;
+    width: 150px;
+	height: 20px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #98bf21;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a:hover, a:active, button:HOVER, button:ACTIVE {
+    background-color: #7A991A;
+}
+*/
+
+/* -------- Login Page --------*/
+#MainLogo {
+	height:20%; width:20%; padding:10px;
+	display:block; position:center; margin-left: auto; margin-right: auto;
+}
+
+
+/* -------- Teacher Dashboard --------*/
+
+
+
+/* -------- Parent Dashboard --------*/
+
+
+
+/* -------- Management Dashboard --------*/
+
+
+
+/* -------- Management Accounts --------*/
+
+
+
+/* -------- Management Request View --------*/
+
+
+
+/* --------Forgot Password --------*/
+
+
+
+
+
+
