@@ -7,6 +7,14 @@ body {
 	background:#FFFFCC;
 }
 
+/* -------- Fixed-Ratio Resizing --------*/
+.frr-100 { 
+	max-width: 100%;
+	height: auto;
+	width: auto\9;
+}
+
+
 /* -------- Navigation Bar --------*/
 ul {
     list-style-type: none;
