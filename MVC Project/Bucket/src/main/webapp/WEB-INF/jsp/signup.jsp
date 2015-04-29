@@ -109,8 +109,8 @@
 	
 					<div>
 						<br />
-						<button class="btn btn-primary">Login</button>
-						<button class="btn btn-primary" href="<spring:url value="*/login.html"/>">Cancel</button>
+						<button class="btn btn-primary" name="action" value="login">Login</button>
+						<button class="btn btn-primary" name="action" value="cancel">Cancel</button>
 					</div>
 					<br /><br /><br />
 				</fieldset>
