@@ -38,7 +38,6 @@
 
 <body>
 
-
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -47,7 +46,6 @@
 	    <div>
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="pdashboard.html">Dashboard</a></li>
-	        <li><a href="pnews.html">News</a></li>
 	        <li><a href="prequests.html">Requests</a></li>
 	      </ul>
 	    </div>

@@ -46,8 +46,8 @@
 	    </div>
 	    <div>
 	      <ul class="nav navbar-nav">
-	       <li class="active"><a href="tdashboard.html">Dashboard</a></li>
-	        <li><a href="tavailability.html">Availability</a></li>
+	       <li><a href="tdashboard.html">Dashboard</a></li>
+	        <li class="active"><a href="tavailability.html">Availability</a></li>
 	        <li><a href="trequests.html">Requests</a></li>
 	      </ul>
 	    </div>
@@ -69,7 +69,7 @@
 		<br />
 		<table border="1" align="center" style="width:100%" class="table">
 			<tr>
-		        <td height="500" align="center" valign="middle" style="width:75%">Schedule</td>
+		        <td height="500" align="center" valign="middle" style="width:75%">Availability</td>
 		  </tr>
 		</table>
 	</div>

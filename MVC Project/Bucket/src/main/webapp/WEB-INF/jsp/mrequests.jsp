@@ -8,9 +8,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="utf-8">
+<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Little Sprouts Teacher Portal</title>
+	<title>Little Sprouts Management Portal</title>
 	<link href="assets/css/littleSproutsStyle.css" rel="stylesheet" type="text/css" />
 	<style>
 	.error {
@@ -39,16 +39,17 @@
 
 <body>
 
+
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Little Sprouts</a>
+	      <a class="navbar-brand" href="index.jsp">Little Sprouts</a>
 	    </div>
 	    <div>
 	      <ul class="nav navbar-nav">
-	       <li class="active"><a href="tdashboard.html">Dashboard</a></li>
-	        <li><a href="tavailability.html">Availability</a></li>
-	        <li><a href="trequests.html">Requests</a></li>
+	        <li><a href="mdashboard.html">Dashboard</a></li>
+	        <li class="active"><a href="mrequestshtml">Requests</a></li>
+	        <li><a href="maccounts.html">Accounts</a></li>
 	      </ul>
 	    </div>
 	  </div>
@@ -56,7 +57,7 @@
 
 	<div class="container-fluid" align="center">
 		<form action="login.html">
-		<input type="image" style="float:right" src="images/logout.jpg" width="50" height="50" alt="logout" />
+		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" />
 		</form>
 
 		<table border="1" align="right" style="width:25%">
@@ -67,9 +68,9 @@
 		    </tr>
 		</table>
 		<br />
-		<table border="1" align="center" style="width:100%" class="table">
+		<table border="1" align="center" style="width:100%">
 			<tr>
-		        <td height="500" align="center" valign="middle" style="width:75%">Schedule</td>
+		        <td height="500" align="center" valign="middle" style="wifth:75%">Requests</td>
 		  </tr>
 		</table>
 	</div>

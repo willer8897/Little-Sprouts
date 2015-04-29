@@ -39,7 +39,6 @@
 
 <body>
 
-
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -48,7 +47,6 @@
 	    <div>
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="mdashboard.html">Dashboard</a></li>
-	        <li><a href="mnews.html">News</a></li>
 	        <li><a href="mrequestshtml">Requests</a></li>
 	        <li><a href="maccounts.html">Accounts</a></li>
 	      </ul>
