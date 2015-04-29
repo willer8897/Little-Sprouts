@@ -2,6 +2,15 @@
 
 html {webkit-text-size-adjust:100%;} 
 
+body {
+ margin: 0;
+ background-image: url(http://www.wimbledonparkco-op.org.uk/wp-content/uploads/2013/08/green-white-background.jpg);
+ background-size:cover;
+ -moz-background-size:cover;
+ -webkit-background-size:cover;
+ background-repeat:no-repeat;
+}
+
 /* -------- Navigation Bar --------*/
 ul {
     list-style-type: none;
