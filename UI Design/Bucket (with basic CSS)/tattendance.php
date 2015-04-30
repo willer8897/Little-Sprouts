@@ -8,6 +8,23 @@
 </head>
 
 <body>
+<?php
+//$monday = strtotime('last monday', strtotime('tomorrow'));
+//echo 'monday = ',$monday;
+//mysql_connect('144.13.22.61:3306','sericatik4839','1t5n8o3f9E=]');
+//mysql_select_db('LS') or die( "Unable to select database");
+//
+//$query = "SELECT password,type FROM Availability WHERE account_type = 'C' AND week_start = '$monday'";
+////echo 'Query: ',$query;
+//$result = mysql_query($query) or die("Username does not exist" . mysql_error());
+//$row = mysql_fetch_row($result);
+//$storedpass = $row[0];
+//$acctype = $row[1];
+////echo 'Result: ',$storedpass; 
+////echo ' Acctype: ',$acctype; 
+//mysql_close();
+//
+?>
 
 <table class="frr-100"> 
 
@@ -33,7 +50,49 @@
 <br />
 <br />
 <br />
+<?php
+declare @body varchar(max)
 
+ 
+
+//Create the body
+
+set @body = cast( (
+
+select td = dbtable + '</td><td>' + cast( entities as varchar(30) ) + '</td><td>' + cast( rows as varchar(30) )
+
+from (
+
+      select dbtable  = object_name( object_id ),
+
+               entities = count( distinct name ),
+
+               rows           = count( * )
+
+      from sys.columns
+
+      group by object_name( object_id )
+
+      ) as d
+
+for xml path( 'tr' ), type ) as varchar(max) )
+
+ 
+
+set @body = '<table cellpadding="2" cellspacing="2" border="1">'
+
+              + '<tr><th>Database Table</th><th>Entity Count</th><th>Total Rows</th></tr>'
+
+              + replace( replace( @body, '&lt;', '<' ), '&gt;', '>' )
+
+              + '<table>'
+
+ 
+
+ 
+
+print @body
+?>
 
 <!-- Useless script for now 
 <script>
@@ -73,7 +132,7 @@
 </script>
 -->
 
-<!--<script>
+<script>
 function status() {
 	// get our table's td elements
 	var table = document.getElementById("statustable");
@@ -91,7 +150,7 @@ function status() {
 		document.cell.backgroundColor = "lightgreen";
 	}
 }
-</script>-->
+</script>
 
 
 
@@ -144,7 +203,7 @@ for (var i=0, len=tds.length; i<len; i++) {
 -->
 
 
-<!--<table>
+<table>
   <thead>
     <tr>
       <th>Name</th>
@@ -178,81 +237,7 @@ for (var i=0, len=tds.length; i<len; i++) {
       <td>13:00 - 16:00</td>
     </tr>
   </tbody>
-</table>-->
-
-CREATE PROCEDURE ConvertTableToHtml(
-      @SqlQuery AS NVARCHAR(4000),
-      @Html AS VARCHAR(MAX) OUTPUT
-)
-AS
-
-      DECLARE @Header AS NVARCHAR(MAX) = ''
-      DECLARE @Column AS NVARCHAR(MAX) = ''
-      DECLARE @Query AS NVARCHAR(MAX)
-      DECLARE @Css AS VARCHAR(MAX) = '
-            <style type="text/css">
-
-            table.gridtable {
-                font-family: verdana,arial,sans-serif;
-                font-size:11px;
-                color:#333333;
-                border-width: 1px;
-                border-color: #666666;
-                border-collapse: collapse;
-            }
-
-            table.gridtable th {
-                border-width: 1px;
-                padding: 8px;
-                border-style: solid;
-                border-color: #666666;
-                background-color: #dedede;
-            }
-
-            table.gridtable td {
-                border-width: 1px;
-                padding: 8px;
-                border-style: solid;
-                border-color: #666666;
-                background-color: #ffffff;
-            }
-
-            </style>
-            '
-BEGIN
-
-      SET @Query = 'SELECT * INTO ##columns FROM ( ' + @SqlQuery + ') Temp'
-      EXECUTE(@Query)
-
-      SELECT @Column = @Column + 'ISNULL(' + QUOTENAME(name) +' ,'' '')' + ' AS TD, '
-      FROM tempdb.SYs.columns
-      WHERE object_id = OBJECT_ID('tempdb..##columns')
-      
-      SET  @Column = LEFT(@Column,LEN(@Column)-1)
-
-      SELECT @Header = @Header + '<TH>' +  name + '</TH>'
-      FROM tempdb.SYs.columns
-      WHERE object_id = OBJECT_ID('tempdb..##columns')
-      
-      SET @Header = '<TR>' + @Header  + '</TR>'
-      
-      SET @Query = 'SET  @Html = (SELECT ' + @Column + ' FROM ( ' + @SqlQuery + ') AS TR
-       FOR XML AUTO ,ROOT(''TABLE''), ELEMENTS)'
-
-      EXECUTE SP_EXECUTESQL @Query,N'@Html VARCHAR(MAX) OUTPUT',@Html OUTPUT
-      SET  @Html = @Css + REPLACE(@Html,'<TABLE>' ,'<TABLE  class="gridtable">' + @Header)
-
-      DROP TABLE ##columns
-
-END
-
-
-DECLARE @Html AS VARCHAR(MAX)
-EXECUTE ConvertTableToHtml ' SELECT TOP(10) * FROM User ',@Html OUTPUT
-SELECT @Html 
-
-
-
+</table>
 
 </body>
 </html>

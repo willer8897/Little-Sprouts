@@ -9,7 +9,7 @@ public class UserLogin {
 	private String userName;
 		
 	@NotEmpty
-	@Size(min=4, max=30)
+	@Size(min=4, max=32)
 	private String password;
 	
 	public String getPassword() {
@@ -21,7 +21,8 @@ public class UserLogin {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Encrypt.encrypt(password);
+		//this.password = password;
 	}
 
 	public void setUserName(String userName) {

@@ -85,7 +85,7 @@ public class User {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Encrypt.encrypt(password);
 	}
 	public String getEmail() {
 		return email;
@@ -100,4 +100,6 @@ public class User {
 		this.phone = phone;
 	}
 }
+
+
 
