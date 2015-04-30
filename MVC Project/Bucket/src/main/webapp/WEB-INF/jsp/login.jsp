@@ -69,8 +69,8 @@
 						<br />
 	
 						<div>
-							<button class="btn btn-primary" name="action" value="login">Login</button>
-							<button class="btn btn-primary" name="action" value="cancel">Cancel</button>
+							<button class="btn btn-primary" name="login" value="login">Login</button>
+							<button class="btn btn-primary" name="login" value="cancel">Cancel</button>
 						</div>
 	
 					</fieldset>

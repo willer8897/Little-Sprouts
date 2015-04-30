@@ -42,7 +42,7 @@
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="/Bucket">Little Sprouts</a>
+	      <a class="navbar-brand" type="button" name="action", value="logout">Little Sprouts</a>
 	    </div>
 	    <div>
 	      <ul class="nav navbar-nav">
@@ -56,7 +56,7 @@
 
 	<div class="container-fluid" align="center">
 		<form action="login.html">
-		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" />
+		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" name="action", value="logout" />
 		</form>
 
 		<table border="1" align="right" style="width:25%">

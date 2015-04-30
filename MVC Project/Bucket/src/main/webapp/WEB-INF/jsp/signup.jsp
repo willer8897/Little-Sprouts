@@ -109,8 +109,8 @@
 	
 					<div>
 						<br />
-						<button class="btn btn-primary" name="action" value="login">Login</button>
-						<button class="btn btn-primary" name="action" value="cancel">Cancel</button>
+						<button class="btn btn-primary" name="signup" value="register">Register</button>
+						<button class="btn btn-primary" name="signup" value="cancel">Cancel</button>
 					</div>
 					<br /><br /><br />
 				</fieldset>

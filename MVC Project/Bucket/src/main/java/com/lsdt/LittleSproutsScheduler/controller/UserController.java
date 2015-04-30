@@ -23,6 +23,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	
+	// ------------------------------------------------------------ Sign up --------------------------------------------------
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String signup(Model model) {
 		User user = new User();
@@ -31,9 +33,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public String signup(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, @RequestParam String action) { 
+	public String signup(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, @RequestParam String signup) { 
 		
-		if(action.equals("cancel")){
+		if(signup.equals("cancel")){
 			return "redirect:/";
 		}else{
 			if(result.hasErrors()) {
@@ -54,6 +56,9 @@ public class UserController {
 		}
 	}
 	
+	// ------------------------------------------------------------ login--------------------------------------------------
+
+	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	  public String login(Model model) {          
 	      UserLogin userLogin = new UserLogin();     
@@ -62,24 +67,23 @@ public class UserController {
 	  }
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@Valid @ModelAttribute("userLogin") UserLogin userLogin, BindingResult result, Model model, @RequestParam String action) {
-		if(action.equals("cancel")){
+	public String login(@Valid @ModelAttribute("userLogin") UserLogin userLogin, BindingResult result, Model model, @RequestParam String login) {
+		if(login.equals("cancel")){
 			return "redirect:/";
 		}else{
-		
 			if (result.hasErrors()) {
 				return "login";
 			} else {
 				boolean found = userService.findByLogin(userLogin.getUserName(), userLogin.getPassword());
 				if (found) {  
 					User user = userService.findAndGetAttributes(userLogin.getUserName());
-					model.addAttribute("user", user.getUsername());
+					model.addAttribute("User", user.getUsername());
 					if(user.getType() == 'M')
-						return "redirect:/mdashboard/{user}";
+						return "redirect:mdashboard.html";
 					else if(user.getType() == 'T')
-						return "tdashboard";
+						return "redirect:tdashboard.html";
 					else
-						return "pdashboard";
+						return "redirect:pdashboard.html";
 				}else {                
 					return "failure";
 				}
@@ -87,4 +91,36 @@ public class UserController {
 		}
 	}
 	
+	// ------------------------------------------------------------ mdashboard --------------------------------------------------
+
+	@RequestMapping(value="/mdashboard", method=RequestMethod.GET)
+	public String mdashboard(Model model) {
+		
+		return "mdashboard";
+	}
+	
+	// ------------------------------------------------------------ tdashboard --------------------------------------------------
+	
+	@RequestMapping(value="/tdashboard", method=RequestMethod.GET)
+	public String tdashboard(Model model) {
+		
+		return "tdashboard";
+	}
+
+	// ------------------------------------------------------------ pdashboard --------------------------------------------------
+
+	@RequestMapping(value="/pdashboard", method=RequestMethod.GET)
+	public String pdashboard(Model model) {
+		
+		return "pdashboard";
+	}
+	
+	// ------------------------------------------------------------ Common Dashboard --------------------------------------------------
+
+	@RequestMapping(value= {"/mdashboard", "/tdashboard", "/pdashboard"}, method=RequestMethod.POST)
+	public String logout(Model model, @RequestParam String action) {
+			return "redirect:/";
+	}
 }
+
+
