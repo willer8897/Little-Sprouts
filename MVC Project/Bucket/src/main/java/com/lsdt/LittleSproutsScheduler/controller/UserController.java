@@ -62,7 +62,7 @@ public class UserController {
 	  }
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@Valid @ModelAttribute("userLogin") UserLogin userLogin, BindingResult result, @RequestParam String action) {
+	public String login(@Valid @ModelAttribute("userLogin") UserLogin userLogin, BindingResult result, Model model, @RequestParam String action) {
 		if(action.equals("cancel")){
 			return "redirect:/";
 		}else{
@@ -73,8 +73,9 @@ public class UserController {
 				boolean found = userService.findByLogin(userLogin.getUserName(), userLogin.getPassword());
 				if (found) {  
 					User user = userService.findAndGetAttributes(userLogin.getUserName());
+					model.addAttribute("user", user.getUsername());
 					if(user.getType() == 'M')
-						return "mdashboard";
+						return "redirect:/mdashboard/{user}";
 					else if(user.getType() == 'T')
 						return "tdashboard";
 					else

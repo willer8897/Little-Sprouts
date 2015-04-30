@@ -41,7 +41,7 @@
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Little Sprouts</a>
+	      <a class="navbar-brand" href="/Bucket">Little Sprouts</a>
 	    </div>
 	    <div>
 	      <ul class="nav navbar-nav">
