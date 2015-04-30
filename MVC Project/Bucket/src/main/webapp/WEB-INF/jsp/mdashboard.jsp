@@ -42,12 +42,12 @@
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" type="button" name="action", value="logout">Little Sprouts</a>
+	      <a class="navbar-brand" type="submit" name="action" value="logout">Little Sprouts</a>
 	    </div>
 	    <div>
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="mdashboard.html">Dashboard</a></li>
-	        <li><a href="mrequestshtml">Requests</a></li>
+	        <li class="active"><a href="#">Dashboard</a></li>
+	        <li><a href="mrequests.html">Requests</a></li>
 	        <li><a href="maccounts.html">Accounts</a></li>
 	      </ul>
 	    </div>
@@ -56,7 +56,7 @@
 
 	<div class="container-fluid" align="center">
 		<form action="login.html">
-		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" name="action", value="logout" />
+		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" name="action" value="logout" />
 		</form>
 
 		<table border="1" align="right" style="width:25%">

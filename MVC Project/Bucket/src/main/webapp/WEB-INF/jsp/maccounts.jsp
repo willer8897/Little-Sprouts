@@ -52,7 +52,7 @@
 		<div>
 			<ul class="nav navbar-nav">
 				<li><a href="mdashboard.html">Dashboard</a></li>
-				<li><a href="mrequestshtml">Requests</a></li>
+				<li><a href="mrequests.html">Requests</a></li>
 				<li class="active"><a href="maccounts.html">Accounts</a></li>
 			</ul>
 		</div>

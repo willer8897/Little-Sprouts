@@ -91,7 +91,7 @@ public class UserController {
 		}
 	}
 	
-	// ------------------------------------------------------------ mdashboard --------------------------------------------------
+	// ------------------------------------------------------------ Moderator --------------------------------------------------
 
 	@RequestMapping(value="/mdashboard", method=RequestMethod.GET)
 	public String mdashboard(Model model) {
@@ -99,21 +99,53 @@ public class UserController {
 		return "mdashboard";
 	}
 	
-	// ------------------------------------------------------------ tdashboard --------------------------------------------------
+	@RequestMapping(value="/mrequests", method=RequestMethod.GET)
+	public String mrequests(Model model) {
+
+		return "mrequests";
+	}
+	
+	@RequestMapping(value="/maccounts", method=RequestMethod.GET)
+	public String maccounts(Model model) {
+		
+		return "maccounts";
+	}
+	
+	// ------------------------------------------------------------ Teacher --------------------------------------------------
 	
 	@RequestMapping(value="/tdashboard", method=RequestMethod.GET)
 	public String tdashboard(Model model) {
 		
 		return "tdashboard";
 	}
+	
+	@RequestMapping(value="/tavailability", method=RequestMethod.GET)
+	public String taccounts(Model model) {
+		
+		return "tavailability";
+	}
+	
+	@RequestMapping(value="/trequests", method=RequestMethod.GET)
+	public String trequests(Model model) {
 
-	// ------------------------------------------------------------ pdashboard --------------------------------------------------
+		return "trequests";
+	}
+
+
+	// ------------------------------------------------------------ Parent --------------------------------------------------
 
 	@RequestMapping(value="/pdashboard", method=RequestMethod.GET)
 	public String pdashboard(Model model) {
 		
 		return "pdashboard";
 	}
+	
+	@RequestMapping(value="/prequests", method=RequestMethod.GET)
+	public String prequests(Model model) {
+		
+		return "prequests";
+	}
+	
 	
 	// ------------------------------------------------------------ Common Dashboard --------------------------------------------------
 
