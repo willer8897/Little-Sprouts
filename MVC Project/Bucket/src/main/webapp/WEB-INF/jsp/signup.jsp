@@ -35,6 +35,37 @@
 	
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
+	<script>
+	function checkPass()
+	{
+	    //Store the password field objects into variables ...
+	    var pass1 = document.getElementById('passwordInput');
+	    var pass2 = document.getElementById('passwordInputCheck');
+	    //Store the Confimation Message Object ...
+	    var message = document.getElementById('confirmMessage');
+	    //Set the colors we will be using ...
+	    var goodColor = "#66cc66";
+	    var badColor = "#ff6666";
+	    //Compare the values in the password field 
+	    //and the confirmation field
+	    if(pass1.value == pass2.value){
+	        //The passwords match. 
+	        //Set the color to the good color and inform
+	        //the user that they have entered the correct password 
+	        pass2.style.backgroundColor = goodColor;
+	        message.style.color = goodColor;
+	        message.innerHTML = "Passwords Match!"
+	    }else{
+	        //The passwords do not match.
+	        //Set the color to the bad color and
+	        //notify the user.
+	        pass2.style.backgroundColor = badColor;
+	        message.style.color = badColor;
+	        message.innerHTML = "Passwords Do Not Match!"
+	    }
+	}  	
+	</script>
 </head>
 
 <body>
@@ -57,9 +88,20 @@
 					<div align="left">
 						<label for="passwordInput">Password</label>
 						<div>
-							<form:input type="password" path="password"
+							<form:input type="password" path="password" name="password"
 								id="passwordInput" placeholder="Password" class="form-control"/>
 							<form:errors path="password" cssClass="error"/>
+						</div>
+					</div>
+					<br />
+					<div align="left">
+						<label for="passwordInputCheck">Confirm Password</label>
+						<div>
+							<form:input type="password" path="" name="passwordCheck"
+								id="passwordInputCheck" onkeyup="checkPass();return false;" placeholder="Password" class="form-control"/>
+							
+							<span id="confirmMessage" class="confirmMessage"></span>
+							<form:errors path="" cssClass="error"/>
 						</div>
 					</div>
 					<br />
@@ -102,7 +144,7 @@
 					<div align="left">
 						<label for="phoneInput">Phone</label>
 						<div>
-							<form:input type="text" path="phone" placeholder="Phone (#########)" class="form-control"/>
+							<form:input type="text" path="phone" placeholder="Phone (##########)" class="form-control"/>
 							<form:errors path="phone" cssClass="error"/>
 						</div>
 					</div>
@@ -120,4 +162,5 @@
 
 
 </body>
+
 </html>

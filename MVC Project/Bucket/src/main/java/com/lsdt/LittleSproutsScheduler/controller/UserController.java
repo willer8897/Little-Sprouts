@@ -33,7 +33,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public String signup(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, @RequestParam String signup) { 
+	public String signup(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, @RequestParam String signup, @RequestParam String password, @RequestParam String passwordCheck) { 
 		
 		if(signup.equals("cancel")){
 			return "redirect:/";
@@ -42,6 +42,9 @@ public class UserController {
 				return "signup";
 			} else if(userService.findByUserName(user.getUsername())) {
 				model.addAttribute("message", "User Name exists. Try another user name");
+				return "signup";
+			} else if(!password.equals(passwordCheck)){
+				model.addAttribute("message", "Passwords do not match.");
 				return "signup";
 			} else {
 				userService.save(user);

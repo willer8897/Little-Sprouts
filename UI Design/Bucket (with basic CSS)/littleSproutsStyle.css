@@ -41,7 +41,8 @@ a:link, a:visited {
 }
 
 a:hover, a:active {
-    background-color: #7A991A;
+	background-color: #7A991A;
+	font-size: 10px;
 }
 
 /* -------- Login Page --------*/
@@ -77,9 +78,3 @@ a:hover, a:active {
 
 
 /* --------Forgot Password --------*/
-
-
-
-
-
-
