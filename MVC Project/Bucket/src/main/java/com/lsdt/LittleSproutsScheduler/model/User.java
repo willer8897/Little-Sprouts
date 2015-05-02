@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.lsdt.LittleSproutsScheduler.Java.Encrypt;
+
 @Entity
 @Table(name="User")
 public class User {

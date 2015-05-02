@@ -1,4 +1,4 @@
-package com.lsdt.LittleSproutsScheduler.model;
+package com.lsdt.LittleSproutsScheduler.Java;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

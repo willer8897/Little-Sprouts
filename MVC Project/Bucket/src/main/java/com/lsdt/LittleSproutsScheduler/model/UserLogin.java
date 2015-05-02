@@ -1,15 +1,18 @@
 package com.lsdt.LittleSproutsScheduler.model;
 
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.lsdt.LittleSproutsScheduler.Java.Encrypt;
 
 public class UserLogin {
 	@NotEmpty
-	@Size(min=4, max=20)
+	@Size(min=1, max=20)
 	private String userName;
 		
 	@NotEmpty
-	@Size(min=4, max=32)
+	@Size(min=1, max=32)
 	private String password;
 	
 	public String getPassword() {
