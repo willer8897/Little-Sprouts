@@ -1,5 +1,7 @@
 package com.lsdt.LittleSproutsScheduler.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +42,11 @@ public class UserServiceImpl implements UserService {
 
 	public User findAndGetAttributes(String username) {
 		User stud = userRepository.findByUserName(username);
+		return stud;
+	}
+
+	public List<User> getUsers() {
+		List<User> stud = userRepository.getAllUsers();
 		return stud;
 	}
 

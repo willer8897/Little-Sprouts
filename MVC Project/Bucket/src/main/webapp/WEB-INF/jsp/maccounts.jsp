@@ -13,6 +13,7 @@
 		<title>Little Sprouts Management Portal</title>
 		<link href="assets/css/littleSproutsStyle.css" rel="stylesheet"
 			type="text/css" />
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
 		<style>
 .error {
 	color: #ff0000;
@@ -35,10 +36,69 @@
 			<!-- jQuery library -->
 			<script
 				src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+			<script type="text/javascript"
+				src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+				
 
 			<!-- Latest compiled JavaScript -->
 			<script
 				src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+			<script type="text/javascript">
+				//$.fn.dataTable.ext.errMode = 'throw';
+				jQuery.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
+					return {
+						"iStart" : oSettings._iDisplayStart,
+						"iEnd" : oSettings.fnDisplayEnd(),
+						"iLength" : oSettings._iDisplayLength,
+						"iTotal" : oSettings.fnRecordsTotal(),
+						"iFilteredTotal" : oSettings.fnRecordsDisplay(),
+						"iPage" : oSettings._iDisplayLength === -1 ? 0 : Math
+								.ceil(oSettings._iDisplayStart
+										/ oSettings._iDisplayLength),
+						"iTotalPages" : oSettings._iDisplayLength === -1 ? 0
+								: Math.ceil(oSettings.fnRecordsDisplay()
+										/ oSettings._iDisplayLength)
+					};
+				};
+
+				$(document).ready(function() {
+
+					$("#example").dataTable({
+						"bProcessing" : true,
+						"bServerSide" : true,
+						"sort" : "position",
+						//bStateSave variable you can use to save state on client cookies: set value "true" 
+						"bStateSave" : false,
+						//Default: Page display length
+						"iDisplayLength" : 10,
+						"iDisplayStart" : 0,
+						"fnDrawCallback" : function() {
+							//Get page numer on client. Please note: number start from 0 So
+							//for the first page you will see 0 second page 1 third page 2...
+							//Un-comment below alert to see page number
+							//alert("Current page number: "+this.fnPagingInfo().iPage);    
+						},
+						"sAjaxSource" : "springPaginationDataTables.html",
+						"aoColumns" : [ {
+							"mData" : "username"
+						}, {
+							"mData" : "email"
+						}, {
+							"mData" : "name_first"
+						}, {
+							"mData" : "name_last"
+						},{
+							"mData" : "type"
+						},{
+							"mData" : "phone"
+						}
+						]
+					  } );
+					 
+				} );
+			</script>
 </head>
 
 <body>
@@ -65,69 +125,25 @@
 				width="50" height="50" alt="logout" />
 		</form>
 
-		<table border="1" align="center" style="width: 100%" class="table">
-			<tr>
-				<td><div style="width: min-width">
-						<input type="text" />
-					</div></td>
-				<td><div style="width: min-width">
-						<select>
-							<option value="Name">Name</option>
-							<option value="Phone">Phone Number</option>
-							<option value="eMail Address">eMail Address</option>
-						</select>
-					</div></td>
-				<td><div style="width: min-width">
-						<button type="button">Search</button>
-					</div></td>
-			</tr>
-			<tr>
-				<table border="1" align="center" style="width: 100%" class="table">
-					<tr>
-						<td><h4>Name</h4></td>
-						<td><h4>Account Type</h4></td>
-						<td><h4>EMail Address</h4></td>
-						<td><h4>Phone Number</h4></td>
-						<td><h4>Added On</h4></td>
-					</tr>
-					<tr>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-					</tr>
-					<tr>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-					</tr>
-					<tr>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-					</tr>
-					<tr>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-					</tr>
-					<tr>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-						<td>Data</td>
-					</tr>
-				</table>
-			</tr>
-		</table>
+		<form:form action="" method="GET">
+		<h2 >User Accounts in System<br><br></h2>
+		<table width="70%" style="border: 3px;background: rgb(243, 244, 248);"><tr><td>
+			<table id="example" class="display" cellspacing="0" width="100%">
+		        <thead>
+		            <tr>
+		                <th>User Name</th>
+		     			<th>Email</th>
+		     			<th>First Name</th>
+		     			<th>Last Name</th>
+		     			<th>Type</th>
+		     			<th>Phone</th>
+		            </tr>
+		        </thead>       
+		    </table>
+		    </td></tr></table>
+		</form:form>
+
+
 	</div>
 
 </body>

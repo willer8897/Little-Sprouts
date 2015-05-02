@@ -90,6 +90,11 @@
     	<artifactId>hibernate-entitymanager</artifactId>
     	<version>4.1.9.Final</version>
     </dependency>
+    <dependency>
+    	<groupId>com.google.code.gson</groupId>
+    	<artifactId>gson</artifactId>
+    	<version>2.2.2</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>Bucket</finalName>
