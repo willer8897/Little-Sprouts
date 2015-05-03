@@ -8,7 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Little Sprouts Management Portal</title>
 		<link href="assets/css/littleSproutsStyle.css" rel="stylesheet"
@@ -34,15 +34,11 @@
 			href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 			<!-- jQuery library -->
-			<script
-				src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-			<script type="text/javascript"
-				src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+			<script type="text/javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
 				
-
 			<!-- Latest compiled JavaScript -->
-			<script
-				src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+			<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 
 			<script type="text/javascript">
@@ -80,7 +76,7 @@
 							//Un-comment below alert to see page number
 							//alert("Current page number: "+this.fnPagingInfo().iPage);    
 						},
-						"sAjaxSource" : "springPaginationDataTables.html",
+						"sAjaxSource" : "maccounts.html",
 						"aoColumns" : [ {
 							"mData" : "username"
 						}, {
@@ -92,8 +88,7 @@
 						},{
 							"mData" : "type"
 						},{
-							"mData" : "phone"
-						}
+							"mData" : "phone"},
 						]
 					  } );
 					 
@@ -142,8 +137,6 @@
 		    </table>
 		    </td></tr></table>
 		</form:form>
-
-
 	</div>
 
 </body>

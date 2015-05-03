@@ -120,14 +120,14 @@ public class UserController {
 		return "mrequests";
 	}
 	
-	@RequestMapping(value="/maccounts.html", method=RequestMethod.GET)
+	@RequestMapping(value="/maccounts", method=RequestMethod.GET)
 	public String maccounts(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 		
 		return "maccounts";
 	}
 	
-	@RequestMapping(value = "/springPaginationDataTables.html", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody String springPaginationDataTables(HttpServletRequest  request) throws IOException {
+	@RequestMapping(value = "/maccounts", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public @ResponseBody String accountDataTable(HttpServletRequest  request) throws IOException {
 		
     	//Fetch the page number from client
     	Integer pageNumber = 0;
@@ -192,16 +192,8 @@ public class UserController {
 	
 	private List<User> createPaginationData(Integer pageDisplayLength) {
 		List<User> usersList = new ArrayList<User>();
-		//usersList = userService.getUsers();
-		for(int i =0; i < pageDisplayLength; i++) {
-		User person2 = new User();
-        person2.setName_first("bob");
-        person2.setEmail("mail@mail");
-        person2.setName_last("last name :)");
-        person2.setType('T');
-        person2.setPhone("999999999");
+		usersList = userService.getUsers();
 
-        usersList.add(person2); }
 		return usersList;
 	}
 	
