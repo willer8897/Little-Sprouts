@@ -65,4 +65,11 @@ public class Schedule {
 	public void setTime_end(String time_end) {
 		this.time_end = time_end;
 	}
+	
+	@Override
+	public String toString() {
+		return "Schedule [account_id=" + account_id + ", date=" + date
+				+ ", room_id=" + room_id + ", time_start=" + time_start
+				+ ", time_end=" + time_end + "]";
+	}
 }

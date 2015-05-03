@@ -76,6 +76,16 @@ public class Request {
 	public void setRequest_note(String request_note) {
 		this.request_note = request_note;
 	}
+	
+	@Override
+	public String toString() {
+		return "Request [request_id=" + request_id + ", request_requestDate="
+				+ request_requestDate + ", request_requestedStart="
+				+ request_requestedStart + ", request_requestedEnd="
+				+ request_requestedEnd + ", Availability_availability_id="
+				+ Availability_availability_id + ", request_note="
+				+ request_note + "]";
+	}
 
 
 }

@@ -101,6 +101,14 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", type=" + type + ", username=" + username
+				+ ", password=" + password + ", email=" + email
+				+ ", name_first=" + name_first + ", name_last=" + name_last
+				+ ", phone=" + phone + "]";
+	}
 }
 
 

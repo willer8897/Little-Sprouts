@@ -59,10 +59,6 @@
 		</form>
 		
 		<br />
-		<br />
-		<br />
-		<br />
-		<br />
 		<table border="1" align="right" style="width:25%">
 			<tr>
 		    	<td>**/** - **/**</td>

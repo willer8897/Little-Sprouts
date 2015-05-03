@@ -79,4 +79,12 @@ public class Child {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+	
+	@Override
+	public String toString() {
+		return "Child [id=" + id + ", name_first=" + name_first
+				+ ", name_mid_initial=" + name_mid_initial + ", name_last="
+				+ name_last + ", parent_id=" + parent_id + ", birthday="
+				+ birthday + "]";
+	}
 }

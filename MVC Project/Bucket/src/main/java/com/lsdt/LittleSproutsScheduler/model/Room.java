@@ -35,4 +35,9 @@ public class Room {
 	public void setCap(int cap) {
 		this.cap = cap;
 	}
+	
+	@Override
+	public String toString() {
+		return "Room [id=" + id + ", cap=" + cap + "]";
+	}
 }

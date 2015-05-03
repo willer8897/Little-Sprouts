@@ -79,4 +79,12 @@ public class Availability {
 	public void setFrihours(String frihours) {
 		this.frihours = frihours;
 	}
+	
+	@Override
+	public String toString() {
+		return "Availability [id=" + id + ", weekstart=" + weekstart
+				+ ", monhours=" + monhours + ", tuehours=" + tuehours
+				+ ", wedhours=" + wedhours + ", thuhours=" + thuhours
+				+ ", frihours=" + frihours + "]";
+	}
 }

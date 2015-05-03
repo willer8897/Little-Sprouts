@@ -59,13 +59,6 @@
 		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" />
 		</form>
 
-		<table border="1" align="right" style="width:25%">
-			<tr>
-		    	<td>**/** - **/**</td>
-		        <td><input type="image" src="assets/img/leftarrow.jpg" name="leftarrow" width="20px" height="20px"  /></td>
-		        <td><input type="image" src="assets/img/rightarrow.png" width="20" height="20" alt="rightarrow" /></td>
-		    </tr>
-		</table>
 		<br />
 		<table border="1" align="center" style="width:100%" class="table">
 			<tr>

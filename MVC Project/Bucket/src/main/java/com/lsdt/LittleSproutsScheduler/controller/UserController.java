@@ -227,6 +227,7 @@ public class UserController {
 
 	@RequestMapping(value= {"/mdashboard", "/tdashboard", "/pdashboard"}, method=RequestMethod.POST)
 	public String logout(Model model, @RequestParam String action) {
+			
 			return "redirect:/";
 	}
 }
