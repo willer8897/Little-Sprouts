@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%><
 
-!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,7 +56,7 @@
 	<div class="container-fluid" align="center">
 
 		<form action="login.html">
-		<input type="image" style="float:right" src="images/logout.jpg" width="50" height="50" alt="logout" />
+		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" />
 		</form>
 		
 		<table border="1" align="right" style="width:25%">

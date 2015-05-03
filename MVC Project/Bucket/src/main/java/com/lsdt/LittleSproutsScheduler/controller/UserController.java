@@ -146,10 +146,11 @@ public class UserController {
 		//Search functionality: Returns filtered list based on search parameter
 		usersList = getListBasedOnSearchParameter(searchParameter,usersList);
 		
-		
 		UserJsonObject userJsonObject = new UserJsonObject();
+		
 		//Set Total display record
 		userJsonObject.setiTotalDisplayRecords(usersList.size());
+		
 		//Set Total record
 		userJsonObject.setiTotalRecords(usersList.size());
 		userJsonObject.setAaData(usersList);

@@ -56,7 +56,7 @@
 
 	<div class="container-fluid" align="center">
 		<form action="login.html">
-		<input type="image" style="float:right" src="images/logout.jpg" width="50" height="50" alt="logout" />
+		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" />
 		</form>
 
 		<table border="1" align="right" style="width:25%">
