@@ -40,9 +40,7 @@
 			<!-- Latest compiled JavaScript -->
 			<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-
 			<script type="text/javascript">
-				//$.fn.dataTable.ext.errMode = 'throw';
 				jQuery.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
 					return {
 						"iStart" : oSettings._iDisplayStart,
@@ -61,21 +59,13 @@
 
 				$(document).ready(function() {
 
-					$("#example").dataTable({
+					$("#accounts").dataTable({
 						"bProcessing" : true,
 						"bServerSide" : true,
-						"sort" : "position",
-						//bStateSave variable you can use to save state on client cookies: set value "true" 
+						"sort" : "position", 
 						"bStateSave" : false,
-						//Default: Page display length
 						"iDisplayLength" : 10,
 						"iDisplayStart" : 0,
-						"fnDrawCallback" : function() {
-							//Get page numer on client. Please note: number start from 0 So
-							//for the first page you will see 0 second page 1 third page 2...
-							//Un-comment below alert to see page number
-							//alert("Current page number: "+this.fnPagingInfo().iPage);    
-						},
 						"sAjaxSource" : "maccounts.html",
 						"aoColumns" : [ {
 							"mData" : "username"
@@ -97,7 +87,6 @@
 </head>
 
 <body>
-
 
 	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
@@ -121,17 +110,17 @@
 		</form>
 
 		<form:form action="" method="GET">
-		<h2 >User Accounts in System<br><br></h2>
-		<table width="70%" style="border: 3px;background: rgb(243, 244, 248);"><tr><td>
-			<table id="example" class="display" cellspacing="0" width="100%">
+		<legend>User Accounts in Little Sprouts Scheduler<br><br></legend>
+		<table width="70%" style="border: 3px;background: rgb(230, 244, 230);"><tr><td>
+			<table id="accounts" class="display" cellspacing="0" width="100%">
 		        <thead>
 		            <tr>
 		                <th>User Name</th>
 		     			<th>Email</th>
 		     			<th>First Name</th>
 		     			<th>Last Name</th>
-		     			<th>Type</th>
-		     			<th>Phone</th>
+		     			<th>Account Type</th>
+		     			<th>Phone Number</th>
 		            </tr>
 		        </thead>       
 		    </table>

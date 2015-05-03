@@ -143,26 +143,15 @@ public class UserController {
     	//Create page list data
     	List<User> usersList = createPaginationData(pageDisplayLength);
 		
-		//Here is server side pagination logic. Based on the page number you could make call 
-		//to the data base create new list and send back to the client. For demo I am shuffling 
-		//the same list to show data randomly
-		//if (pageNumber == 1) {
-			//Collections.shuffle(personsList);
-		//}else if (pageNumber == 2) {
-			//Collections.shuffle(personsList);
-		//}else {
-			//Collections.shuffle(personsList);
-		//}
-		
 		//Search functionality: Returns filtered list based on search parameter
 		usersList = getListBasedOnSearchParameter(searchParameter,usersList);
 		
 		
 		UserJsonObject userJsonObject = new UserJsonObject();
 		//Set Total display record
-		userJsonObject.setiTotalDisplayRecords(500);
+		userJsonObject.setiTotalDisplayRecords(usersList.size());
 		//Set Total record
-		userJsonObject.setiTotalRecords(500);
+		userJsonObject.setiTotalRecords(usersList.size());
 		userJsonObject.setAaData(usersList);
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
