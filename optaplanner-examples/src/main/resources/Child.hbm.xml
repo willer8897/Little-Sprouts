@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="org.lsdt.optaplannerLittleSprouts.Child" table="Child">
+      <meta attribute="class-description">
+         This class contains the user details. 
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="name_first" column="name_first" type="string"/>
+      <property name="name_mid_initial" column="name_mid_initial" type="string"/>
+      <property name="name_last" column="name_last" type="string"/>
+      <property name="parentid" column="parent_id" type="int"/>
+      <property name="birthday" column="birthday" type="date"/>
+   </class>
+</hibernate-mapping>

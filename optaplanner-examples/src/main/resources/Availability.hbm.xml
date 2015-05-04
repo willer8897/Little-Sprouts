@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="org.lsdt.optaplannerLittleSprouts.Availability" table="Availability">
+      <meta attribute="class-description">
+         This class contains the Availability details. 
+      </meta>
+      <id name="id" type="int" column="account_id">
+         <generator class="native"/>
+      </id>
+      <property name="weekstart" column="week_start" type="date"/>
+      <property name="monhours" column="0hours" type="string"/>
+      <property name="tuehours" column="1hours" type="string"/>
+      <property name="wedhours" column="2hours" type="string"/>
+      <property name="thuhours" column="3hours" type="string"/>
+      <property name="frihours" column="4hours" type="string"/>
+      <property name="is_child" column="is_child" type="int"/>
+   </class>
+</hibernate-mapping>
