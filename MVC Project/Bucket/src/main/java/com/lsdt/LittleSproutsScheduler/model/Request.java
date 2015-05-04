@@ -37,9 +37,9 @@ public class Request {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date request_requestedEnd;
 	
-	@Target(Availability.class)
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="account_id", updatable=false, insertable=false)
+	//@Target(Availability.class)
+	//@ManyToOne(fetch=FetchType.EAGER)
+	//@JoinColumn(name="account_id", updatable=false, insertable=false)
 	private int Availability_availability_id;
 	
 	private String request_note;
