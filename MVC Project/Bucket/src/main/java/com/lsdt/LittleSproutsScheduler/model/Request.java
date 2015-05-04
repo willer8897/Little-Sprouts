@@ -3,12 +3,18 @@ package com.lsdt.LittleSproutsScheduler.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Target;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="Request")
@@ -19,15 +25,21 @@ public class Request {
 	private int request_id;
 	
 	@NotNull
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="MM.dd.yyyy")
 	private Date request_requestDate;
 
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date request_requestedStart;
 
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date request_requestedEnd;
-
-	@NotNull
+	
+	@Target(Availability.class)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="account_id", updatable=false, insertable=false)
 	private int Availability_availability_id;
 	
 	private String request_note;

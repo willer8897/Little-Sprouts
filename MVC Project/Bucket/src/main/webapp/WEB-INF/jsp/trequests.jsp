@@ -32,6 +32,7 @@
 	
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="datepicker/js/bootstrap-datepicker.js">
 	
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -59,19 +60,47 @@
 		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" />
 		</form>
 
-		<table border="1" align="right" style="width:25%">
-			<tr>
-		    	<td>**/** - **/**</td>
-		        <td><input type="image" src="assets/img/leftarrow.jpg" name="leftarrow" width="20px" height="20px"  /></td>
-		        <td><input type="image" src="assets/img/rightarrow.png" width="20" height="20" alt="rightarrow" /></td>
-		    </tr>
-		</table>
-		<br />
-		<table border="1" align="center" style="width:100%" class="table">
-			<tr>
-		        <td height="500" align="center" valign="middle" style="width:75%">Requests</td>
-		  </tr>
-		</table>
+		<div style="width: 20%">
+				<form:form id="myForm" method="post" modelAttribute="request">
+					<fieldset>
+						<legend>Teacher Request Form</legend>
+						<div align="left">
+							<label for="requestDateInput">Requested Date</label>
+							<div>
+								<div class="date form_date col-lg-9" data-date-format="mm/dd/yyyy" data-date-viewmode="years">
+										<form:input type="text" class="form-control"											
+											path="request_requestDate" id="dateInput"
+											placeholder="Requested Date" />
+										<form:errors path="request_requestDate" cssClass="error" />
+								</div>
+							</div>
+						</div>
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Request Start Time</label>
+							<div>
+								<form:input type="text" path="request_requestedStart" id="dateInput"
+									placeholder="Password" class="form-control" />
+								<form:errors path="request_requestedStart" cssClass="error" />
+							</div>
+						</div>
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Request End Time</label>
+							<div>
+								<form:input type="text" path="request_requestedEnd" id="dateInput"
+									placeholder="Password" class="form-control" />
+								<form:errors path="request_requestedEnd" cssClass="error" />
+							</div>
+						</div>
+	
+						<div>
+							<button class="btn btn-primary">Submit Request</button>
+						</div>
+	
+					</fieldset>
+				</form:form>
+			</div>
 	</div>
 
 </body>

@@ -1,6 +1,8 @@
 package com.lsdt.LittleSproutsScheduler.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,10 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,9 +28,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.lsdt.LittleSproutsScheduler.model.Request;
 import com.lsdt.LittleSproutsScheduler.model.User;
 import com.lsdt.LittleSproutsScheduler.model.UserLogin;
 import com.lsdt.LittleSproutsScheduler.service.UserService;
+import com.lsdt.LittleSproutsScheduler.service.RequestService;
 
 @Controller
 @SessionAttributes("user")
@@ -34,6 +41,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private RequestService requestService;
 	
 	// ------------------------------------------------------------ Sign up --------------------------------------------------
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -196,16 +205,35 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/tavailability", method=RequestMethod.GET)
-	public String taccounts(Model model) {
+	public String tavailability(Model model) {
 		
 		return "tavailability";
 	}
 	
 	@RequestMapping(value="/trequests", method=RequestMethod.GET)
 	public String trequests(Model model) {
-
+		Request request = new Request();     
+	    model.addAttribute("request", request);
 		return "trequests";
 	}
+	
+	@RequestMapping(value="/trequests", method=RequestMethod.POST)
+	public String trequests(@Valid @ModelAttribute("request") Request request, BindingResult result, Model model) {
+	
+		if (result.hasErrors()) {
+			return "trequests";
+		} else {
+			requestService.save(request);
+			return "trequests";
+		}
+	}
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+    }
 
 
 	// ------------------------------------------------------------ Parent --------------------------------------------------
