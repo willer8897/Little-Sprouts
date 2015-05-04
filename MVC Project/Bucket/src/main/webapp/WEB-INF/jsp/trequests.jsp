@@ -65,35 +65,60 @@
 					<fieldset>
 						<legend>Teacher Request Form</legend>
 						<div align="left">
-							<label for="requestDateInput">Requested Date</label>
+							<label for="requestTimeStartInput">Monday Hours</label>
 							<div>
-								<div class="date form_date col-lg-9" data-date-format="mm/dd/yyyy" data-date-viewmode="years">
-										<form:input type="text" class="form-control"											
-											path="request_requestDate" id="dateInput"
-											placeholder="Requested Date" />
-										<form:errors path="request_requestDate" cssClass="error" />
-								</div>
+								<form:input type="text" path="monhours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="monhours" cssClass="error" />
 							</div>
 						</div>
 						<br />
 						<div align="left">
-							<label for="requestTimeStartInput">Request Start Time</label>
+							<label for="requestTimeStartInput">Tuesday Hours</label>
 							<div>
-								<form:input type="text" path="request_requestedStart" id="dateInput"
-									placeholder="Password" class="form-control" />
-								<form:errors path="request_requestedStart" cssClass="error" />
+								<form:input type="text" path="tuehours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="tuehours" cssClass="error" />
 							</div>
 						</div>
 						<br />
 						<div align="left">
-							<label for="requestTimeStartInput">Request End Time</label>
+							<label for="requestTimeStartInput">Wednesday Hours</label>
 							<div>
-								<form:input type="text" path="request_requestedEnd" id="dateInput"
-									placeholder="Password" class="form-control" />
-								<form:errors path="request_requestedEnd" cssClass="error" />
+								<form:input type="text" path="wedhours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="wedhours" cssClass="error" />
 							</div>
 						</div>
-	
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Thursday Hours</label>
+							<div>
+								<form:input type="text" path="thuhours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="thuhours" cssClass="error" />
+							</div>
+						</div>
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Friday Hours</label>
+							<div>
+								<form:input type="text" path="frihours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="frihours" cssClass="error" />
+							</div>
+						</div>
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Note</label>
+							<div>
+								<form:textarea
+								 type="text" path="request_note" id="dateInput"
+									placeholder="Note" class="form-control" />
+								<form:errors path="request_note" cssClass="error" />
+							</div>
+						</div>
+						<br />
 						<div>
 							<button class="btn btn-primary">Submit Request</button>
 						</div>

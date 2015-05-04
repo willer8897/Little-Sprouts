@@ -2,54 +2,126 @@ package com.lsdt.LittleSproutsScheduler.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.Target;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="Request")
 public class Request {
+
+	private int account_id;
+	
+	private Date week_start;
+	
+	@Size(max=50)
+	@NotEmpty
+	@Column(name="0hours")
+	private String monhours;
+	
+	@Size(max=50)
+	@NotEmpty
+	@Column(name="1hours")
+	private String tuehours;
+	
+	@Size(max=50)
+	@NotEmpty
+	@Column(name="2hours")
+	private String wedhours;
+	
+	@Size(max=50)
+	@NotEmpty
+	@Column(name="3hours")
+	private String thuhours;
+	
+	@Size(max=50)
+	@NotEmpty
+	@Column(name="4hours")
+	private String frihours;
+	
+	@Column(name="is_Child", columnDefinition = "bit")
+	//@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean isChild;
+	
+	@Size(max=45)
+	@Column(name="request_note")
+	private String request_note;
 	
 	@Id
 	@GeneratedValue
 	private int request_id;
-	
-	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="MM.dd.yyyy")
-	private Date request_requestDate;
-
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date request_requestedStart;
-
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date request_requestedEnd;
-	
-	//@Target(Availability.class)
-	//@ManyToOne(fetch=FetchType.EAGER)
-	//@JoinColumn(name="account_id", updatable=false, insertable=false)
-	private int Availability_availability_id;
-	
-	private String request_note;
 
 	public Request() {}
-	public Request(Date request_requestDate, Date request_requestedStart, Date request_requestedEnd, int Availability_availability_id, String request_note) {
-		this.request_requestDate = request_requestDate;
-		this.request_requestedStart = request_requestedStart;
-		this.request_requestedEnd = request_requestedEnd;
-		this.Availability_availability_id = Availability_availability_id;
+	public Request(String monhours, String tuehours, String wedhours, String thuhours, String frihours, boolean isChild, String request_note) {
+		this.monhours = monhours;
+		this.tuehours = tuehours;
+		this.wedhours = wedhours;
+		this.thuhours =thuhours;
+		this.frihours = frihours;
+		this.request_note = request_note;
+	}
+	public int getAccount_id() {
+		return account_id;
+	}
+	public void setAccount_id(int account_id) {
+		this.account_id = account_id;
+	}
+	public Date getWeek_start() {
+		return week_start;
+	}
+	public void setWeek_start(Date week_start) {
+		this.week_start = week_start;
+	}
+	public String getMonhours() {
+		return monhours;
+	}
+	public void setMonhours(String monhours) {
+		this.monhours = monhours;
+	}
+	public String getTuehours() {
+		return tuehours;
+	}
+	public void setTuehours(String tuehours) {
+		this.tuehours = tuehours;
+	}
+	public String getWedhours() {
+		return wedhours;
+	}
+	public void setWedhours(String wedhours) {
+		this.wedhours = wedhours;
+	}
+	public String getThuhours() {
+		return thuhours;
+	}
+	public void setThuhours(String thuhours) {
+		this.thuhours = thuhours;
+	}
+	public String getFrihours() {
+		return frihours;
+	}
+	public void setFrihours(String frihours) {
+		this.frihours = frihours;
+	}
+	public boolean getIsChild() {
+		return isChild;
+	}
+	public void setIsChild(boolean isChild) {
+		this.isChild = isChild;
+	}
+	public String getRequest_note() {
+		return request_note;
+	}
+	public void setRequest_note(String request_note) {
 		this.request_note = request_note;
 	}
 	public int getRequest_id() {
@@ -58,46 +130,15 @@ public class Request {
 	public void setRequest_id(int request_id) {
 		this.request_id = request_id;
 	}
-	public Date getRequest_requestDate() {
-		return request_requestDate;
-	}
-	public void setRequest_requestDate(Date request_requestDate) {
-		this.request_requestDate = request_requestDate;
-	}
-	public Date getRequest_requestedStart() {
-		return request_requestedStart;
-	}
-	public void setRequest_requestedStart(Date request_requestedStart) {
-		this.request_requestedStart = request_requestedStart;
-	}
-	public Date getRequest_requestedEnd() {
-		return request_requestedEnd;
-	}
-	public void setRequest_requestedEnd(Date request_requestedEnd) {
-		this.request_requestedEnd = request_requestedEnd;
-	}
-	public int getAvailability_availability_id() {
-		return Availability_availability_id;
-	}
-	public void setAvailability_availability_id(int availability_availability_id) {
-		Availability_availability_id = availability_availability_id;
-	}
-	public String getRequest_note() {
-		return request_note;
-	}
-	public void setRequest_note(String request_note) {
-		this.request_note = request_note;
-	}
-	
 	@Override
 	public String toString() {
-		return "Request [request_id=" + request_id + ", request_requestDate="
-				+ request_requestDate + ", request_requestedStart="
-				+ request_requestedStart + ", request_requestedEnd="
-				+ request_requestedEnd + ", Availability_availability_id="
-				+ Availability_availability_id + ", request_note="
-				+ request_note + "]";
+		return "Request [account_id=" + account_id + ", week_start="
+				+ week_start + ", monhours=" + monhours + ", tuehours="
+				+ tuehours + ", wedhours=" + wedhours + ", thuhours="
+				+ thuhours + ", frihours=" + frihours + ", isChild=" + isChild
+				+ ", request_note=" + request_note + "]";
 	}
+
 
 
 }
