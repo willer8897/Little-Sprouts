@@ -228,16 +228,6 @@ public class UserController {
 		}
 	}
 	
-	/*
-	@InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
-        sdf.setLenient(true);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-    }
-    */
-
-
 	// ------------------------------------------------------------ Parent --------------------------------------------------
 
 	@RequestMapping(value="/pdashboard", method=RequestMethod.GET)
@@ -248,8 +238,20 @@ public class UserController {
 	
 	@RequestMapping(value="/prequests", method=RequestMethod.GET)
 	public String prequests(Model model) {
-		
+		Request request = new Request();     
+	    model.addAttribute("request", request);
 		return "prequests";
+	}
+	
+	@RequestMapping(value="/prequests", method=RequestMethod.POST)
+	public String prequests(@Valid @ModelAttribute("request") Request request, BindingResult result, Model model) {
+	
+		if (result.hasErrors()) {
+			return "prequests";
+		} else {
+			requestService.save(request);
+			return "prequests";
+		}
 	}
 	
 	
@@ -260,6 +262,13 @@ public class UserController {
 			
 			return "redirect:/";
 	}
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+    }
 }
 
 

@@ -59,19 +59,72 @@
 		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" />
 		</form>
 		
-		<table border="1" align="right" style="width:25%">
-			<tr>
-		    	<td>**/** - **/**</td>
-		        <td><input type="image" src="assets/img/leftarrow.jpg" name="leftarrow" width="20px" height="20px"  /></td>
-		        <td><input type="image" src="assets/img/rightarrow.png" width="20" height="20" alt="rightarrow" /></td>
-		    </tr>
-		</table>
-		<br />
-		<table border="1" align="center" style="width:100%">
-			<tr>
-		        <td height="500" align="center" valign="middle" style="wifth:75%">Requests</td>
-		  </tr>
-		</table>
+		<div style="width: 20%">
+				<form:form id="myForm" method="post" modelAttribute="request">
+					<fieldset>
+						<legend>Parent Request Form</legend>
+						<div align="left">
+							<label for="requestTimeStartInput">Monday Hours</label>
+							<div>
+								<form:input type="text" path="monhours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="monhours" cssClass="error" />
+							</div>
+						</div>
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Tuesday Hours</label>
+							<div>
+								<form:input type="text" path="tuehours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="tuehours" cssClass="error" />
+							</div>
+						</div>
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Wednesday Hours</label>
+							<div>
+								<form:input type="text" path="wedhours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="wedhours" cssClass="error" />
+							</div>
+						</div>
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Thursday Hours</label>
+							<div>
+								<form:input type="text" path="thuhours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="thuhours" cssClass="error" />
+							</div>
+						</div>
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Friday Hours</label>
+							<div>
+								<form:input type="text" path="frihours" id="dateInput"
+									placeholder="Time" class="form-control" />
+								<form:errors path="frihours" cssClass="error" />
+							</div>
+						</div>
+						<br />
+						<div align="left">
+							<label for="requestTimeStartInput">Note</label>
+							<div>
+								<form:textarea
+								 type="text" path="request_note" id="dateInput"
+									placeholder="Note" class="form-control" />
+								<form:errors path="request_note" cssClass="error" />
+							</div>
+						</div>
+						<br />
+						<div>
+							<button class="btn btn-primary">Submit Request</button>
+						</div>
+	
+					</fieldset>
+				</form:form>
+			</div>
 	</div>
 
 </body>
