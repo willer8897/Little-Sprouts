@@ -127,6 +127,7 @@ public class SolverAndPersistenceFrame extends JFrame {
     private ArrayList<String> fridayShifts = new ArrayList<String>();
     private String weekStart = "";
     private HashMap assignmentMap = new HashMap();
+    private HashMap shiftDescriptionMap = new HashMap();
     
     
 
@@ -343,7 +344,9 @@ public class SolverAndPersistenceFrame extends JFrame {
         try {
             
         	System.out.println("Doing the stuff");
-            File fXmlFile = new File("C://2015-04-06solution.xml");
+        	String fileString = "C://" + weekStart + "solution.xml";
+            //File fXmlFile = new File("C://2015-04-06solution.xml");
+        	File fXmlFile = new File(fileString);
         	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         	org.w3c.dom.Document doc = dBuilder.parse(fXmlFile);
@@ -542,7 +545,28 @@ public class SolverAndPersistenceFrame extends JFrame {
             		
             		Schedule s = new Schedule();
             		s.setId(Integer.parseInt(employee));
-            		s.setRoom(0);
+            		
+            		//String ageGroup = ;
+            		//TODO: put em in rooms
+            		
+            		String description = shiftDescriptionMap.get(Integer.parseInt(shift)).toString();
+            		
+            		if(description.compareTo("Baby") == 0)
+            			s.setRoom(1);
+            		else if(description.compareTo("Mini") == 0)
+            			s.setRoom(2);
+            		else if(description.compareTo("Peewee") == 0)
+            			s.setRoom(3);
+            		else if(description.compareTo("Mighty") == 0)
+            			s.setRoom(4);
+            		else if(description.compareTo("Halfpint") == 0)
+            			s.setRoom(5);
+            		else if(description.compareTo("Junior") == 0)
+            			s.setRoom(6);
+            		else if(description.compareTo("Senior") == 0)
+            			s.setRoom(7);
+            		else
+            			s.setRoom(11);
             		
             		//get the time start and end
             		Integer shiftId = Integer.parseInt(shift);
@@ -585,10 +609,10 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		delimIndex = newWeekStart.indexOf("-");
                 		String dateMonth = newWeekStart.substring(0, delimIndex);
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
-                		
+                		System.out.println("Date Month is " + dateMonth);
                 		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
-                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
-                		//System.out.println(date.getTime());
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth)- 1, Integer.parseInt(dateDay));
+                		System.out.println(date.getTime());
                 		s.setDate(date.getTime());
             		}
             		else if(shiftId < 300)
@@ -632,7 +656,7 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
                 		
                 		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
-                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth) - 1, Integer.parseInt(dateDay));
                 		date.add(Calendar.DAY_OF_MONTH, +1);
                 		//System.out.println(date.getTime());
                 		s.setDate(date.getTime());
@@ -678,7 +702,7 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
                 		
                 		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
-                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth) - 1, Integer.parseInt(dateDay));
                 		date.add(Calendar.DAY_OF_MONTH, +2);
                 		//System.out.println(date.getTime());
                 		s.setDate(date.getTime());
@@ -724,7 +748,7 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
                 		
                 		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
-                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth) - 1, Integer.parseInt(dateDay));
                 		date.add(Calendar.DAY_OF_MONTH, +3);
                 		//System.out.println(date.getTime());
                 		s.setDate(date.getTime());
@@ -770,7 +794,7 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
                 		
                 		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
-                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth) - 1, Integer.parseInt(dateDay));
                 		date.add(Calendar.DAY_OF_MONTH, +4);
                 		//System.out.println(date.getTime());
                 		s.setDate(date.getTime());
@@ -836,10 +860,6 @@ public class SolverAndPersistenceFrame extends JFrame {
                 
                 //TODO:
                 //run heathers code here
-
-                //processOutput();
-             
-            
             
                 //TOO:
                 //display a success screen
@@ -849,6 +869,8 @@ public class SolverAndPersistenceFrame extends JFrame {
                 	String st = weekStart + "solution.xml";
                 	solutionBusiness.saveSolution(new File("C:\\", st));
                 	
+                	processOutput();
+                	
                 	Object[] options = {"OK"};
                 	int n = JOptionPane.showOptionDialog(null,
                 			"Schedule Computed Successfully","Success!",
@@ -857,8 +879,6 @@ public class SolverAndPersistenceFrame extends JFrame {
                 			null,
                 			options,
                 			options[0]);
-
-                	//dispose on confirmation
 
                 	dispose();
                 }
@@ -926,7 +946,14 @@ public class SolverAndPersistenceFrame extends JFrame {
     {
     	weekStart = week;
     	System.out.println("Passed weekstart " + weekStart);
-    	processOutput();
+    	//processOutput();
+    }
+    
+    public void getDescriptionMap(HashMap map)
+    {
+    	shiftDescriptionMap = map;
+    	System.out.println("Passed description map with " + shiftDescriptionMap.size() + " mappings");
+    	//processOutput();
     }
     
 
@@ -1059,7 +1086,9 @@ public class SolverAndPersistenceFrame extends JFrame {
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
                     //solutionBusiness.importSolution(fileChooser.getSelectedFile());
-                	solutionBusiness.importSolution(new File("C:\\2015-04-06.xml"));
+                	String fileString = "C:\\" + weekStart + ".xml";
+                	//solutionBusiness.importSolution(new File("C:\\2015-04-06.xml"));
+                	solutionBusiness.importSolution(new File(fileString));
                     setSolutionLoaded();
                 } finally {
                     setCursor(Cursor.getDefaultCursor());
@@ -1073,7 +1102,9 @@ public class SolverAndPersistenceFrame extends JFrame {
     {	
     	try {
             //solutionBusiness.importSolution(fileChooser.getSelectedFile());
-        	solutionBusiness.importSolution(new File("C:\\2015-04-06.xml"));
+        	//solutionBusiness.importSolution(new File("C:\\2015-04-06.xml"));
+    		String fileString = "C:\\" + weekStart + ".xml";
+    		solutionBusiness.importSolution(new File(fileString));
             setSolutionLoaded();
         } finally {
             setCursor(Cursor.getDefaultCursor());

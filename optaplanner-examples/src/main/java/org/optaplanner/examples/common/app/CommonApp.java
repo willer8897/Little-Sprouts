@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -89,14 +90,14 @@ public abstract class CommonApp extends LoggingMain {
     }
 
     public void init() {
-        init(null, true, null, null, null, null, null, null);
+        init(null, true, null, null, null, null, null, null, null);
     }
 
     public void init(Component centerForComponent, boolean exitOnClose, ArrayList<String> mondayShifts, ArrayList<String> tuesdayShifts, ArrayList<String> wednesdayShifts
-    		,ArrayList<String> thursdayShifts, ArrayList<String> fridayShifts, String weekStart) {
+    		,ArrayList<String> thursdayShifts, ArrayList<String> fridayShifts, String weekStart, HashMap map) {
         solutionBusiness = createSolutionBusiness();
         solverAndPersistenceFrame = new SolverAndPersistenceFrame(
-                solutionBusiness, createSolutionPanel(), "Little Sprouts");
+                solutionBusiness, createSolutionPanel(), "Little Sprout!s");
         solverAndPersistenceFrame.setDefaultCloseOperation(exitOnClose ? WindowConstants.EXIT_ON_CLOSE : WindowConstants.DISPOSE_ON_CLOSE);
         solverAndPersistenceFrame.init(centerForComponent);
         solverAndPersistenceFrame.setVisible(true);
@@ -108,6 +109,7 @@ public abstract class CommonApp extends LoggingMain {
         solverAndPersistenceFrame.getThursdayShifts(thursdayShifts);
         solverAndPersistenceFrame.getFridayShifts(fridayShifts);
         solverAndPersistenceFrame.getWeekStart(weekStart);
+        solverAndPersistenceFrame.getDescriptionMap(map);
         
         solverAndPersistenceFrame.doTheDeed();
     }

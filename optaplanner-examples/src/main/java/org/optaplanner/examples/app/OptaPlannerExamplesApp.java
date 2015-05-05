@@ -115,7 +115,7 @@ public class OptaPlannerExamplesApp extends JFrame {
         optaPlannerExamplesApp.setLocationRelativeTo(null);
         optaPlannerExamplesApp.setVisible(true);
         
-        generateXMLFile();
+        //generateXMLFile();
     }
     
     public static void generateXMLFile()
@@ -144,7 +144,7 @@ public class OptaPlannerExamplesApp extends JFrame {
     	Transaction tx = null;
     	try{
     		tx = session.beginTransaction();
-    		ArrayList<User> users = (ArrayList<User>) session.createQuery("FROM User").list(); 
+    		ArrayList<User> users = (ArrayList<User>) session.createQuery("FROM User WHERE type = 'T'").list(); 
     		ArrayList<Child> children = (ArrayList<Child>) session.createQuery("FROM Child").list(); 
     		ArrayList<Availability> childAvailabilities = (ArrayList<Availability>) session.createQuery("FROM Availability WHERE is_child = 1").list(); 
     		ArrayList<Availability> teacherAvailabilities = (ArrayList<Availability>) session.createQuery("FROM Availability WHERE is_child = 0").list();
@@ -153,8 +153,8 @@ public class OptaPlannerExamplesApp extends JFrame {
     		KING.retrieveChildAvailabilityData(childAvailabilities);
     		KING.retrieveTeacherAvailabilityData(teacherAvailabilities);
     		KING.retrieveChildData(children);
-
-    		KING.doItAll("2015-04-06");
+    		
+    		KING.doItAll(box.getSelectedItem().toString());
 
     		tx.commit();
     	}catch (HibernateException e) {
@@ -263,9 +263,9 @@ public class OptaPlannerExamplesApp extends JFrame {
         
         
         box = new JComboBox();
-        box.addItem("2015-04-06");
-        box.addItem("2015-04-13");
-        box.addItem("2015-04-20");
+        box.addItem("2014-04-06");
+        box.addItem("2014-04-13");
+        box.addItem("2014-04-20");
         panel.add(new JLabel("Select The Week"));
         panel.add(box).setLocation(1, 1);
         
@@ -283,9 +283,11 @@ public class OptaPlannerExamplesApp extends JFrame {
         JButton button = new JButton(new AbstractAction("Generate Schedule") {
             public void actionPerformed(ActionEvent e) {
             	System.out.println("Generating");
-            	KING.setWeekStart(box.getSelectedItem().toString());
+            	//KING.setWeekStart(box.getSelectedItem().toString());
+            	//KING.doItAll(box.getSelectedItem().toString());
             	contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                commonApp.init(OptaPlannerExamplesApp.this, false, KING.getMondayShifts(), KING.getTuesdayShfits() , KING.getWednesdayShfits() , KING.getThursdayShfits() , KING.getFridayShfits(), KING.getWeekStart() );
+            	generateXMLFile();
+                commonApp.init(OptaPlannerExamplesApp.this, false, KING.getMondayShifts(), KING.getTuesdayShfits() , KING.getWednesdayShfits() , KING.getThursdayShfits() , KING.getFridayShfits(), KING.getWeekStart(), KING.getDescriptionMap() );
                 contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
         });
@@ -319,7 +321,7 @@ public class OptaPlannerExamplesApp extends JFrame {
             	
             	KING.doItAll(box.getSelectedItem().toString());
             	
-                commonApp.init(OptaPlannerExamplesApp.this, false, null, null, null, null, null, null);
+                commonApp.init(OptaPlannerExamplesApp.this, false, null, null, null, null, null, null, null);
             }
         });
         button.setHorizontalAlignment(JButton.LEFT);

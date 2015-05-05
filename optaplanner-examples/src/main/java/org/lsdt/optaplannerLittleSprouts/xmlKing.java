@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.io.File;
 import java.math.BigInteger;
 
@@ -17,6 +19,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
  
+
+
+
 
 
 
@@ -98,6 +103,13 @@ public class xmlKing
 	ArrayList<String> fridayShiftsJunior = new ArrayList<String>();
 	ArrayList<String> fridayShiftsSenior = new ArrayList<String>();
 	
+	HashMap ids2AgeGroup = new HashMap();
+	ArrayList<String> mondayShiftDescriptions = new ArrayList<String>();
+	ArrayList<String> tuesdayShiftDescriptions = new ArrayList<String>();
+	ArrayList<String> weddayShiftDescriptions = new ArrayList<String>();
+	ArrayList<String> thursdayShiftDescriptions = new ArrayList<String>();
+	ArrayList<String> fridayShiftDescriptions = new ArrayList<String>();
+	
 	//Global XML writing stuff
 	DocumentBuilderFactory docFactory;
 	DocumentBuilder docBuilder;
@@ -107,7 +119,7 @@ public class xmlKing
 	
 	//the children stored in the database
 	ArrayList<Child> children = new ArrayList<Child>();
-	ArrayList<User> users = new ArrayList<User>();
+	ArrayList<User> teachers = new ArrayList<User>();
 	//availabilty starts at 6:00AM
 	//it is still stored as 30 minute blocks
 	ArrayList<Availability> availability = new ArrayList<Availability>();
@@ -130,9 +142,9 @@ public class xmlKing
 	//get passed the user data
 	public void retrieveUserData(ArrayList<User> user)
 	{
-		users.addAll(user);
+		teachers.addAll(user);
 		
-		System.out.println("Successfully passed " + users.size() + " users to the KING");
+		System.out.println("Successfully passed " + teachers.size() + " teachers to the KING");
 	}
 	
 	//get passed the availability data
@@ -140,7 +152,7 @@ public class xmlKing
 	{
 		childAvailability.addAll(avail);
 		
-		System.out.println("Successfully passed " + childAvailability.size() + " child availability data chunk to the KING");
+		System.out.println("Successfully passed " + childAvailability.size() + " child availability data chunks to the KING");
 		
 	}
 	
@@ -148,7 +160,7 @@ public class xmlKing
 	{
 		teacherAvailability.addAll(avail);
 		
-		System.out.println("Successfully passed " + teacherAvailability.size() + " teacher availability data chunk to the KING");
+		System.out.println("Successfully passed " + teacherAvailability.size() + " teacher availability data chunks to the KING");
 		
 	}
 	
@@ -195,16 +207,46 @@ public class xmlKing
 		return weekStartString;
 	}
 	
+	public HashMap getDescriptionMap()
+	{
+		return ids2AgeGroup;
+	}
+	
 	public void doItAll(String weekStart)
 	{
-		//weekStartString = weekStart;
-		weekStartString = "2015-04-06";
+		weekStartString = weekStart;
+		//weekStartString = "2015-04-06";
 		
+		int delimIndex = weekStart.indexOf("-");
+		String dateYear = weekStart.substring(0, delimIndex);
+		String newWeekStart = weekStart.substring(delimIndex + 1);
+		delimIndex = newWeekStart.indexOf("-");
+		String dateMonth = newWeekStart.substring(0, delimIndex);
+		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
+		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+		date.add(Calendar.DAY_OF_MONTH, + 7);
+		
+		int dateMonthInt = date.get(Calendar.MONTH);
+		String dateMonthString = new Integer(dateMonthInt).toString();
+		if(dateMonthString.length() < 2)
+		{
+			System.out.println("fixing the date month");
+			dateMonthString = "0" + dateMonthString;
+		}
+		
+		int dateDayInt = date.get(Calendar.DAY_OF_MONTH);
+		String dateDayString = new Integer(dateDayInt).toString();
+		if(dateDayString.length() < 2)
+			dateDayString = "0" + dateDayString;
+		
+		weekEndString = date.get(Calendar.YEAR) + "-" + dateMonthString + "-" + dateDayString;
+		
+		System.out.println(weekEndString);
 		
 		//get the most recent availability object for each teacher
-		
-		
+		//TODO: retrieve actual availabilities based on weekstart
 		//remove all availabilities that are not for the week we want
+		/*
 		ArrayList<Availability> availabilitiesToRemove = new ArrayList<Availability>();
 		for(Availability a : teacherAvailability)
 		{
@@ -215,7 +257,9 @@ public class xmlKing
 			}
 		}
 		teacherAvailability.removeAll(availabilitiesToRemove);
-		
+		*/
+		//TODO: is this needed?
+		/*
 		if(!teacherAvailability.isEmpty())
 		{
 			weekStartString = teacherAvailability.get(0).getWeekstart().toString();
@@ -226,6 +270,7 @@ public class xmlKing
 			System.out.println("End date is " + weekEndDate.toString() );
 			
 		}
+		*/
 		
 		//get everything read for XML writing
 		calculateNeededTeachers();
@@ -1093,8 +1138,8 @@ public class xmlKing
 			//add the start/end date child
 			Element startDate = doc.createElement("StartDate");
 			Element endDate = doc.createElement("EndDate");
-			startDate.appendChild(doc.createTextNode("2015-04-06"));
-			endDate.appendChild(doc.createTextNode("2015-04-13"));
+			startDate.appendChild(doc.createTextNode(weekStartString));
+			endDate.appendChild(doc.createTextNode(weekEndString));
 			schedulingPeriod.appendChild(startDate);
 			schedulingPeriod.appendChild(endDate);
 			
@@ -1172,7 +1217,9 @@ public class xmlKing
 				//if ID = 119, then mondayShifts[19]
 				Integer shiftID = 100 + counter;
 				counter++;
-				System.out.println("Shift ID: " + shiftID);
+				
+				System.out.println("Mapping shift id " + shiftID + " to " + description);
+				ids2AgeGroup.put(shiftID, description);
 
 				//create the shift xml
 				Element shift = doc.createElement("Shift");
@@ -1273,7 +1320,9 @@ public class xmlKing
 				//if ID = 208, then tuesdayShifts[8]
 				Integer shiftID = 200 + counter;
 				counter++;
-				System.out.println("Shift ID: " + shiftID);
+				
+				System.out.println("Mapping shift id " + shiftID + " to " + description);
+				ids2AgeGroup.put(shiftID, description);
 
 				//create the shift xml
 				Element shift = doc.createElement("Shift");
@@ -1375,8 +1424,10 @@ public class xmlKing
 				//if ID = 312, then wednesdayShifts[12]
 				Integer shiftID = 300 + counter;
 				counter++;
-				System.out.println("Shift ID: " + shiftID);
-
+				
+				System.out.println("Mapping shift id " + shiftID + " to " + description);
+				ids2AgeGroup.put(shiftID, description);
+				
 				//create the shift xml
 				Element shift = doc.createElement("Shift");
 				shift.setAttribute("ID", shiftID.toString());
@@ -1477,8 +1528,10 @@ public class xmlKing
 				//if ID = 400, then thursdayShifts[0]
 				Integer shiftID = 400 + counter;
 				counter++;
-				System.out.println("Shift ID: " + shiftID);
-
+				
+				System.out.println("Mapping shift id " + shiftID + " to " + description);
+				ids2AgeGroup.put(shiftID, description);
+				
 				//create the shift xml
 				Element shift = doc.createElement("Shift");
 				shift.setAttribute("ID", shiftID.toString());
@@ -1578,7 +1631,9 @@ public class xmlKing
 				//if ID = 517, then fridayShifts[17]
 				Integer shiftID = 500 + counter;
 				counter++;
-				System.out.println("Shift ID: " + shiftID);
+				
+				System.out.println("Mapping shift id " + shiftID + " to " + description);
+				ids2AgeGroup.put(shiftID, description);
 
 				//create the shift xml
 				Element shift = doc.createElement("Shift");
@@ -1850,10 +1905,11 @@ public class xmlKing
 		//make a unique contract for each employee
 		//this is probably overkill as some contracts could be reused
 		//I don't care though
-		for(int i = 0; i < users.size(); i++)
+		for(int i = 0; i < teachers.size(); i++)
 		{
-			Integer intI = i;
-			User u = users.get(i);
+			
+			User u = teachers.get(i);
+			Integer intI = u.getId();
 			Element contract = doc.createElement("Contract");
 			contract.setAttribute("ID", intI.toString());
 			
@@ -2019,10 +2075,12 @@ public class xmlKing
 		schedulingPeriod.appendChild(Employees);
 		
 		//TODO: use the employee id as eventually employee id = contract id
-		for(int i = 0; i < users.size(); i++)
+		//are the ids here correct?
+		for(int i = 0; i < teachers.size(); i++)
 		{
-			Integer IntI = i;
-			User u = users.get(i);
+			
+			User u = teachers.get(i);
+			Integer IntI = u.getId();
 			Element Employee = doc.createElement("Employee");
 			Employee.setAttribute("ID", IntI.toString());
 			Employees.appendChild(Employee);
@@ -2212,9 +2270,11 @@ public class xmlKing
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
 			String weekStart = teacherAvailability.get(0).getWeekstart().toString();
-			String filePath = "D:\\Student Data\\Desktop\\optaplanner-distribution-6.1.0.Final\\examples\\data\\nurserostering\\unsolved\\" + weekStart + ".xml";
+			//String filePath = "D:\\Student Data\\Desktop\\optaplanner-distribution-6.1.0.Final\\examples\\data\\nurserostering\\unsolved\\" + weekStart + ".xml";
 			//StreamResult result = new StreamResult(new File(filePath));
-			StreamResult result = new StreamResult(new File("C:\\2015-04-06.xml"));
+			String filePath = "C:\\" + weekStartString + ".xml";
+			//StreamResult result = new StreamResult(new File("C:\\2015-04-06.xml"));
+			StreamResult result = new StreamResult(new File(filePath));
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 			transformer.transform(source, result);
