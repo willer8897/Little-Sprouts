@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +28,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lsdt.LittleSproutsScheduler.model.Request;
+import com.lsdt.LittleSproutsScheduler.model.Schedule;
 import com.lsdt.LittleSproutsScheduler.model.User;
 import com.lsdt.LittleSproutsScheduler.model.UserLogin;
+import com.lsdt.LittleSproutsScheduler.service.ScheduleService;
 import com.lsdt.LittleSproutsScheduler.service.UserService;
 import com.lsdt.LittleSproutsScheduler.service.RequestService;
 
@@ -43,6 +44,9 @@ public class UserController {
 	
 	@Autowired
 	private RequestService requestService;
+	
+	@Autowired
+	private ScheduleService scheduleService;
 	
 	// ------------------------------------------------------------ Sign up --------------------------------------------------
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -123,6 +127,65 @@ public class UserController {
 		return "mdashboard";
 	}
 	
+	@RequestMapping(value = "/mdashboard", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public @ResponseBody String mScheduleDataTable(HttpServletRequest  request) throws IOException {
+		
+    	//Fetch the page number from client
+    	Integer pageNumber = 0;
+    	if (null != request.getParameter("iDisplayStart"))
+    		pageNumber = (Integer.valueOf(request.getParameter("iDisplayStart"))/10)+1;		
+    	
+    	//Fetch search parameter
+    	String searchParameter = request.getParameter("sSearch");
+    	
+    	//Fetch Page display length
+    	Integer pageDisplayLength = Integer.valueOf(request.getParameter("iDisplayLength"));
+    	
+    	//Create page list data
+    	List<Schedule> schedulesList = mCreateSchedulePaginationData(pageDisplayLength);
+		
+		//Search functionality: Returns filtered list based on search parameter
+		schedulesList = mGetScheduleListBasedOnSearchParameter(searchParameter,schedulesList);
+		
+		ScheduleJsonObject scheduleJsonObject = new ScheduleJsonObject();
+		
+		//Set Total display record
+		scheduleJsonObject.setiTotalDisplayRecords(schedulesList.size());
+		
+		//Set Total record
+		scheduleJsonObject.setiTotalRecords(schedulesList.size());
+		scheduleJsonObject.setAaData(schedulesList);
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json2 = gson.toJson(scheduleJsonObject);
+	
+		return json2;
+    }
+	
+	private List<Schedule> mGetScheduleListBasedOnSearchParameter(String searchParameter,List<Schedule> schedulesList) {
+		
+		if (null != searchParameter && !searchParameter.equals("")) {
+			List<Schedule> schedulesListForSearch = new ArrayList<Schedule>();
+			searchParameter = searchParameter.toUpperCase();
+			for (Schedule schedule : schedulesList) {
+				if (schedule.getTime_start().indexOf(searchParameter)!= -1 || schedule.getTime_end().toUpperCase().indexOf(searchParameter)!= -1) {
+					schedulesListForSearch.add(schedule);					
+				}
+				
+			}
+			schedulesList = schedulesListForSearch;
+			schedulesListForSearch = null;
+		}
+		return schedulesList;
+	}
+	
+	private List<Schedule> mCreateSchedulePaginationData(Integer pageDisplayLength) {
+		List<Schedule> schedulesList = new ArrayList<Schedule>();
+		schedulesList = scheduleService.getSchedules();
+
+		return schedulesList;
+	}
+	
 	@RequestMapping(value="/mrequests", method=RequestMethod.GET)
 	public String mrequests(Model model) {
 
@@ -150,10 +213,10 @@ public class UserController {
     	Integer pageDisplayLength = Integer.valueOf(request.getParameter("iDisplayLength"));
     	
     	//Create page list data
-    	List<User> usersList = createPaginationData(pageDisplayLength);
+    	List<User> usersList = createAccountPaginationData(pageDisplayLength);
 		
 		//Search functionality: Returns filtered list based on search parameter
-		usersList = getListBasedOnSearchParameter(searchParameter,usersList);
+		usersList = getAccountListBasedOnSearchParameter(searchParameter,usersList);
 		
 		UserJsonObject userJsonObject = new UserJsonObject();
 		
@@ -170,7 +233,7 @@ public class UserController {
 		return json2;
     }
 	
-	private List<User> getListBasedOnSearchParameter(String searchParameter,List<User> usersList) {
+	private List<User> getAccountListBasedOnSearchParameter(String searchParameter,List<User> usersList) {
 		
 		if (null != searchParameter && !searchParameter.equals("")) {
 			List<User> usersListForSearch = new ArrayList<User>();
@@ -189,7 +252,7 @@ public class UserController {
 		return usersList;
 	}
 	
-	private List<User> createPaginationData(Integer pageDisplayLength) {
+	private List<User> createAccountPaginationData(Integer pageDisplayLength) {
 		List<User> usersList = new ArrayList<User>();
 		usersList = userService.getUsers();
 
