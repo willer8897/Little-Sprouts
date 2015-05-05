@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.lsdt.LittleSproutsScheduler.json.ScheduleJsonObject;
+import com.lsdt.LittleSproutsScheduler.json.UserJsonObject;
 import com.lsdt.LittleSproutsScheduler.model.Request;
 import com.lsdt.LittleSproutsScheduler.model.Schedule;
 import com.lsdt.LittleSproutsScheduler.model.User;

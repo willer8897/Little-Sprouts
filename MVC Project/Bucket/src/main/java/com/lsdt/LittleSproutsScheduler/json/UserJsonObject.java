@@ -1,10 +1,10 @@
-package com.lsdt.LittleSproutsScheduler.controller;
+package com.lsdt.LittleSproutsScheduler.json;
 
 import java.util.List;
 
-import com.lsdt.LittleSproutsScheduler.model.Schedule;
+import com.lsdt.LittleSproutsScheduler.model.User;
 
-public class ScheduleJsonObject {
+public class UserJsonObject {
 	int iTotalRecords;
 	 
     int iTotalDisplayRecords;
@@ -13,7 +13,7 @@ public class ScheduleJsonObject {
  
     String sColumns;
  
-    List<Schedule> aaData;
+    List<User> aaData;
  
     public int getiTotalRecords() {
 	return iTotalRecords;
@@ -47,11 +47,11 @@ public class ScheduleJsonObject {
 	this.sColumns = sColumns;
     }
  
-    public List<Schedule> getAaData() {
+    public List<User> getAaData() {
         return aaData;
     }
  
-    public void setAaData(List<Schedule> aaData) {
+    public void setAaData(List<User> aaData) {
         this.aaData = aaData;
     }
 }

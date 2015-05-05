@@ -4,7 +4,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.lsdt.LittleSproutsScheduler.Java.Encrypt;
+import com.lsdt.LittleSproutsScheduler.java.Encrypt;
 
 public class UserLogin {
 	@NotEmpty
