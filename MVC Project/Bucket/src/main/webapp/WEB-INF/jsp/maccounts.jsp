@@ -78,8 +78,20 @@
 						},{
 							"mData" : "type"
 						},{
-							"mData" : "phone"},
-						]
+							"mData" : "phone"
+						},{ "mData" : null,
+							"sClass" : "center",
+							"sDefaultContent" : '<a href="" class="editor_remove">Delete</a>'}
+						],
+						"fnServerData" : function(sSource, aoData, fnCallback){
+						$.ajax({
+							"dataType" : 'json',
+							"type": "GET",
+							"url" : sSource,
+							"data" : aoData,
+							"success" : fnCallback
+						});
+						},
 					  } );
 					 
 				} );
@@ -121,6 +133,7 @@
 		     			<th>Last Name</th>
 		     			<th>Account Type</th>
 		     			<th>Phone Number</th>
+		     			<th>Delete</th>
 		            </tr>
 		        </thead>       
 		    </table>

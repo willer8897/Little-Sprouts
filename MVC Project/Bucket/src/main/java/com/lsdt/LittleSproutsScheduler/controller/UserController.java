@@ -265,8 +265,68 @@ public class UserController {
 	
 	@RequestMapping(value="/tdashboard", method=RequestMethod.GET)
 	public String tdashboard(Model model) {
-		
+		User user = new User();
+		model.addAttribute("user", user);
 		return "tdashboard";
+	}
+	
+	@RequestMapping(value = "/tdashboard", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public @ResponseBody String tScheduleDataTable(HttpServletRequest  request) throws IOException {
+		
+    	//Fetch the page number from client
+    	Integer pageNumber = 0;
+    	if (null != request.getParameter("iDisplayStart"))
+    		pageNumber = (Integer.valueOf(request.getParameter("iDisplayStart"))/10)+1;		
+    	
+    	//Fetch search parameter
+    	String searchParameter = request.getParameter("sSearch");
+    	
+    	//Fetch Page display length
+    	Integer pageDisplayLength = Integer.valueOf(request.getParameter("iDisplayLength"));
+    	
+    	//Create page list data
+    	List<Schedule> schedulesList = tCreateSchedulePaginationData(pageDisplayLength);
+		
+		//Search functionality: Returns filtered list based on search parameter
+		schedulesList = tGetScheduleListBasedOnSearchParameter(searchParameter,schedulesList);
+		
+		ScheduleJsonObject scheduleJsonObject = new ScheduleJsonObject();
+		
+		//Set Total display record
+		scheduleJsonObject.setiTotalDisplayRecords(schedulesList.size());
+		
+		//Set Total record
+		scheduleJsonObject.setiTotalRecords(schedulesList.size());
+		scheduleJsonObject.setAaData(schedulesList);
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json2 = gson.toJson(scheduleJsonObject);
+	
+		return json2;
+    }
+	
+	private List<Schedule> tGetScheduleListBasedOnSearchParameter(String searchParameter,List<Schedule> schedulesList) {
+		
+		if (null != searchParameter && !searchParameter.equals("")) {
+			List<Schedule> schedulesListForSearch = new ArrayList<Schedule>();
+			searchParameter = searchParameter.toUpperCase();
+			for (Schedule schedule : schedulesList) {
+				if (schedule.getTime_start().indexOf(searchParameter)!= -1 || schedule.getTime_end().toUpperCase().indexOf(searchParameter)!= -1) {
+					schedulesListForSearch.add(schedule);					
+				}
+				
+			}
+			schedulesList = schedulesListForSearch;
+			schedulesListForSearch = null;
+		}
+		return schedulesList;
+	}
+	
+	private List<Schedule> tCreateSchedulePaginationData(Integer pageDisplayLength) {
+		List<Schedule> schedulesList = new ArrayList<Schedule>();
+		schedulesList = scheduleService.getSchedules();
+
+		return schedulesList;
 	}
 	
 	@RequestMapping(value="/tavailability", method=RequestMethod.GET)
