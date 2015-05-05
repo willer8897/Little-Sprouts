@@ -37,44 +37,137 @@
 </head>
 
 <script>
-function toStraaang()
+function processInput(){
+	toStraaang(
+			document.getElementById('monCheck1'),
+			document.getElementById('monCheck2'),
+			document.getElementById('monErr1'),
+			document.getElementById('monErr2'),
+			document.getElementById('monErr3'),
+			document.getElementById('monErr4'),
+			document.getElementById('monhr1'),
+			document.getElementById('monhr2'),
+			document.getElementById('monhr3'),
+			document.getElementById('monhr4'),
+			document.getElementById('monmin1'),
+			document.getElementById('monmin2'),
+			document.getElementById('monmin3'),
+			document.getElementById('monmin4'),
+			document.getElementById('monpm1'),
+			document.getElementById('monpm2'),
+			document.getElementById('monpm3'),
+			document.getElementById('monpm4'));
+	toStraaang(
+			document.getElementById('tueCheck1'),
+			document.getElementById('tueCheck2'),
+			document.getElementById('tueErr1'),
+			document.getElementById('tueErr2'),
+			document.getElementById('tueErr3'),
+			document.getElementById('tueErr4'),
+			document.getElementById('tuehr1'),
+			document.getElementById('tuehr2'),
+			document.getElementById('tuehr3'),
+			document.getElementById('tuehr4'),
+			document.getElementById('tuemin1'),
+			document.getElementById('tuemin2'),
+			document.getElementById('tuemin3'),
+			document.getElementById('tuemin4'),
+			document.getElementById('tuepm1'),
+			document.getElementById('tuepm2'),
+			document.getElementById('tuepm3'),
+			document.getElementById('tuepm4'));
+	toStraaang(
+			document.getElementById('wedCheck1'),
+			document.getElementById('wedCheck2'),
+			document.getElementById('wedErr1'),
+			document.getElementById('wedErr2'),
+			document.getElementById('wedErr3'),
+			document.getElementById('wedErr4'),
+			document.getElementById('wedhr1'),
+			document.getElementById('wedhr2'),
+			document.getElementById('wedhr3'),
+			document.getElementById('wedhr4'),
+			document.getElementById('wedmin1'),
+			document.getElementById('wedmin2'),
+			document.getElementById('wedmin3'),
+			document.getElementById('wedmin4'),
+			document.getElementById('wedpm1'),
+			document.getElementById('wedpm2'),
+			document.getElementById('wedpm3'),
+			document.getElementById('wedpm4'));
+	toStraaang(
+			document.getElementById('thuCheck1'),
+			document.getElementById('thuCheck2'),
+			document.getElementById('thuErr1'),
+			document.getElementById('thuErr2'),
+			document.getElementById('thuErr3'),
+			document.getElementById('thuErr4'),
+			document.getElementById('thuhr1'),
+			document.getElementById('thuhr2'),
+			document.getElementById('thuhr3'),
+			document.getElementById('thuhr4'),
+			document.getElementById('thumin1'),
+			document.getElementById('thumin2'),
+			document.getElementById('thumin3'),
+			document.getElementById('thumin4'),
+			document.getElementById('thupm1'),
+			document.getElementById('thupm2'),
+			document.getElementById('thupm3'),
+			document.getElementById('thupm4'));
+	toStraaang(
+			document.getElementById('friCheck1'),
+			document.getElementById('friCheck2'),
+			document.getElementById('friErr1'),
+			document.getElementById('friErr2'),
+			document.getElementById('friErr3'),
+			document.getElementById('friErr4'),
+			document.getElementById('frihr1'),
+			document.getElementById('frihr2'),
+			document.getElementById('frihr3'),
+			document.getElementById('frihr4'),
+			document.getElementById('frimin1'),
+			document.getElementById('frimin2'),
+			document.getElementById('frimin3'),
+			document.getElementById('frimin4'),
+			document.getElementById('fripm1'),
+			document.getElementById('fripm2'),
+			document.getElementById('fripm3'),
+			document.getElementById('fripm4'));
+}
+
+function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, min3, min4, pm1, pm2, pm3, pm4)
 {	
-	var monStart1 = 0;
-	var monEnd1 = 0;
-	var monStart2 = 0;
-	var monEnd2 = 0;
+	var errorHighlight = "#ff6666";
 	var temp = 0;
-	var emon = false;
+	var err = false;
+	var start1 = 0;
+	var end1 = 0;
+	var start2 = 0;
+	var end2 = 0;
 	
-	// Process Monday's second shift if it's set
-	var mon1 = document.getElementById('monCheck1');
-	if (mon1.checked) {
+	// Process day's second shift if it's set
+	if (day1.checked) {
 		// Find the array position of the beginning of the first shift
-		temp = document.getElementById('monhr1');
-		monStart1 = parseInt(temp.options[temp.selectedIndex].value);
-		monStart1 = monStart1*4;
-		temp =  document.getElementById('monmin1');
-		monStart1 += parseInt(temp.options[temp.selectedIndex].value);
-		temp = document.getElementById('monpm1');
-		monStart1 += parseInt(temp.options[temp.selectedIndex].value);
-		monStart1 -= 24;
+		temp = hr1;
+		start1 = parseInt(temp.options[temp.selectedIndex].value);
+		start1 = start1*4;
+		temp =  min1;
+		start1 += parseInt(temp.options[temp.selectedIndex].value);
+		temp = pm1;
+		start1 += parseInt(temp.options[temp.selectedIndex].value);
+		start1 -= 24;
 		
 		// Find the array position of the ending of the first shift
-		temp = document.getElementById('monhr2');
-		monEnd1 = parseInt(temp.options[temp.selectedIndex].value);
-		monEnd1 = monEnd1*4;
-		temp =  document.getElementById('monmin2');
-		monEnd1 += parseInt(temp.options[temp.selectedIndex].value);
-		temp = document.getElementById('monpm2');
-		monEnd1 += parseInt(temp.options[temp.selectedIndex].value);
-		monEnd1 -= 24;
+		temp = hr2;
+		end1 = parseInt(temp.options[temp.selectedIndex].value);
+		end1 = end1*4;
+		temp =  min2;
+		end1 += parseInt(temp.options[temp.selectedIndex].value);
+		temp = pm2;
+		end1 += parseInt(temp.options[temp.selectedIndex].value);
+		end1 -= 24;
 		
-		// Store the error report objects and color
-		var e1 = document.getElementById('monErr1');
-		var e2 = document.getElementById('monErr2');
-		var e3 = document.getElementById('monErr3');
-		var e4 = document.getElementById('monErr4');
-	    var errorHighlight = "#ff6666";
+		// Set the error report objects and color
 	    e1.style.color = errorHighlight;
 	    e2.style.color = errorHighlight;
 	    e3.style.color = errorHighlight;
@@ -85,90 +178,89 @@ function toStraaang()
 	    e3.innerHTML = "";
 	    e4.innerHTML = "";
 	    
-	    // Check Monday's first shift start and end for validity
-	    if (monStart1 === monEnd1) {
+	    // Check day's first shift start and end for validity
+	    if (start1 === end1) {
 	    	e1.innerHTML = "No span of time selected.";
-	    	emon=true;
+	    	err=true;
 	    	return;
 	    }
-	    else if (monStart1 > monEnd1) {
+	    else if (start1 > end1) {
 			e1.innerHTML = "Start time is after End time.";
-			emon=true;
+			err=true;
 			return;
 	    }
-		else if (monStart1 < 0 || monStart1 > 48) {
+		else if (start1 < 0 || start1 > 48) {
 			e1.innerHTML = "Invalid Start time."
-			emon=true;
+			err=true;
 		}
 		else
 			e1.innerHTML = ""
-		if (monEnd1 < 0 || monEnd1 > 48){
+		if (end1 < 0 || end1 > 48){
 			e2.innerHTML = "Invalid End time."
-			emon=true;
+			err=true;
 		}
 		else 
 			e2.innerHTML = ""
 	    
-		// Process Monday's second shift if it's set
-		var mon2 = document.getElementById('monCheck2');
-		if (mon2.checked) {
+		// Process day's second shift if it's set
+		if (day2.checked) {
 			// Find the array position of the beginning of the second shift
-			temp = document.getElementById('monhr3');
-			monStart2 = parseInt(temp.options[temp.selectedIndex].value);
-			monStart2 = monStart2*4;
-			temp =  document.getElementById('monmin3');
-			monStart2 += parseInt(temp.options[temp.selectedIndex].value);
-			temp = document.getElementById('monpm3');
-			monStart2 += parseInt(temp.options[temp.selectedIndex].value);
-			monStart2 -= 24;
+			temp = hr3;
+			start2 = parseInt(temp.options[temp.selectedIndex].value);
+			start2 = start2*4;
+			temp =  min3;
+			start2 += parseInt(temp.options[temp.selectedIndex].value);
+			temp = pm3;
+			start2 += parseInt(temp.options[temp.selectedIndex].value);
+			start2 -= 24;
 			
 			// Find the array position of the ending of the second shift
-			temp = document.getElementById('monhr4');
-			monEnd2 = parseInt(temp.options[temp.selectedIndex].value);
-			monEnd2 = monEnd2*4;
-			temp =  document.getElementById('monmin4');
-			monEnd2 += parseInt(temp.options[temp.selectedIndex].value);
-			temp = document.getElementById('monpm4');
-			monEnd2 += parseInt(temp.options[temp.selectedIndex].value);
-			monEnd2 -= 24;
+			temp = hr4;
+			end2 = parseInt(temp.options[temp.selectedIndex].value);
+			end2 = end2*4;
+			temp =  min4;
+			end2 += parseInt(temp.options[temp.selectedIndex].value);
+			temp = pm4;
+			end2 += parseInt(temp.options[temp.selectedIndex].value);
+			end2 -= 24;
 			
-			if(monStart1 > monStart2 && monStart1 < monEnd2) {
+			if(start1 > start2 && start1 < end2) {
 				e2.innerHTML = "Overlapping times"
-				emon=true;
+				err=true;
 			}
-			if(monEnd1 > monStart2 && monEnd1 < monEnd2) {
+			if(end1 > start2 && end1 < end2) {
 				e2.innerHTML = "Overlapping times"
-				emon=true;
+				err=true;
 			}
-			if(monStart2 > monStart1 && monStart2 < monEnd1) {
+			if(start2 > start1 && start2 < end1) {
 				e2.innerHTML = "Overlapping times"
-				emon=true;
+				err=true;
 			}
-			if(monEnd2 > monStart1 && monEnd2 < monEnd1) {
+			if(end2 > start1 && end2 < end1) {
 				e2.innerHTML = "Overlapping times"
-				emon=true;
+				err=true;
 			}
 			
-		    // Check Monday's second shift start and end for validity
-			if (monStart2 === monEnd2) {
+		    // Check day's second shift start and end for validity
+			if (start2 === end2) {
 		    	e3.innerHTML = "No span of time selected.";
-		    	emon=true;
+		    	err=true;
 		    	return;
 		    }
-		    else if (monStart2 > monEnd2) {
+		    else if (start2 > end2) {
 				e3.innerHTML = "Start time is after End time.";
-				emon=true;
+				err=true;
 				return;
 		    }
-			else if (monStart2 < 0 || monStart2 > 48) {
+			else if (start2 < 0 || start2 > 48) {
 				e3.innerHTML = "Invalid Start time."
-				emon=true;
+				err=true;
 			}
 			else
 				e3.innerHTML = ""
-			if (monEnd2 < 0 || monEnd2 > 48){
+			if (end2 < 0 || end2 > 48){
 				e4.innerHTML = "Invalid End time."
-				emon=true;
+				err=true;
 			}
 			else 
 				e4.innerHTML = ""
@@ -176,71 +268,51 @@ function toStraaang()
 	}
 	
 	// If there's no error in Monday hours
-	if (emon === false) {
-		// Process Monday hours to storage array
-		var monFinal = [];
-		// If there are two spans for Monday
-		if (mon2.checked){
+	if (err === false) {
+		// Process hours to storage array
+		var finalHours = [];
+		// If there are two spans for the day
+		if (day2.checked){
 			// and span 2 starts before span 1
-			if (monStart2 < monStart1){
+			if (start2 < start1){
 				// Put them in chronological order
-				temp = monStart1;
-				monStart1=monStart2;
-				monStart2=temp;
-				temp = monEnd1;
-				monEnd1=monEnd2;
-				monEnd2=temp;
-				monEnd1--;
-				monEnd2--;
+				temp = start1;
+				start1 = start2;
+				start2 = temp;
+				temp = end1;
+				end1 = end2;
+				end2 = temp;
 			}
 		}
 		
-		window.alert(monStart1+"  "+monEnd1+"  "+monStart2+"  "+monEnd2);
+		window.alert(start1+"  "+end1+"  "+start2+"  "+end2);
 		
 		// Step through the array and set hours
 		for (i=0;i<50;i++){
-			if(i<monStart1)
-				monFinal[i]=0;
-			else if(i<monEnd1)
-				monFinal[i]=1;
-			else if(monStart2>0){
-				if(i<monStart2)
-					monFinal[i]=0;
-				else if(i<monEnd2)
-					monFinal[i]=1;
+			if(i<start1)
+				finalHours[i]=0;
+			else if(i<end1)
+				finalHours[i]=1;
+			else if(start2>0){
+				if(i<start2)
+					finalHours[i]=0;
+				else if(i<end2)
+					finalHours[i]=1;
 				else
-					monFinal[i]=0;
+					finalHours[i]=0;
 			}
 			else
-				monFinal[i]=0;
+				finalHours[i]=0;
 		}
 		
 		var printout = "";
 		for(i=0;i<50;i++){
-			printout += monFinal[i];
+			printout += finalHours[i];
 		}
-		window.alert(printout);
-		
-		
+		// Debug processed output\
+		//window.alert(printout);
 	}
-	
-	
-	
-}  	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 </script>
 
 <body>
@@ -387,41 +459,485 @@ function toStraaang()
 								</select><span id="monErr4" class="errorMessage"></span>
 								<form:errors path="monhours" cssClass="error" />
 							</div>
-							<button onclick="toStraaang()" >TEST THAT SHIT</button>
 						</div>
 						<br />
 						<div align="left">
+							<input type="checkbox" id="tueCheck1" checked="true" onclick="document.getElementById('tue1').style.visibility=this.checked ? 'visible' : 'hidden';document.getElementById('tue2').style.visibility=(this.checked && document.getElementById('tueCheck2').checked) ? 'visible' : 'hidden'"></input>
 							<label for="requestTimeStartInput">Tuesday Hours</label>
-							<div>
-								<form:input type="text" path="tuehours" id="dateInput"
-									placeholder="Time" class="form-control" />
+							<input type="checkbox" id="tueCheck2" onclick="document.getElementById('tue2').style.visibility=(this.checked && document.getElementById('tueCheck1').checked) ? 'visible' : 'hidden'">Additional</input>
+							<div id='tue1'>
+							Start:
+								<select name="tuehr1" id="tuehr1">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="tuemin1" id="tuemin1">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="tuepm1" id="tuepm1">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="tueErr1" class="errorMessage"></span>
+								</br>
+							End :
+								<select name="tuehr2" id="tuehr2">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="tuemin2" id="tuemin2">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="tuepm2" id="tuepm2">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="tueErr2" class="errorMessage"></span>
+								<form:errors path="tuehours" cssClass="error" />
+							</div>
+							</br>
+							<div id='tue2' style="visibility:hidden">
+							Start:
+								<select name="tuehr3" id="tuehr3">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="tuemin3" id="tuemin3">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="tuepm3" id="tuepm3">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="tueErr3" class="errorMessage"></span>
+								</br>
+							End :
+								<select name="tuehr4" id="tuehr4">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="tuemin4" id="tuemin4">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="tuepm4" id="tuepm4">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="tueErr4" class="errorMessage"></span>
 								<form:errors path="tuehours" cssClass="error" />
 							</div>
 						</div>
 						<br />
 						<div align="left">
+							<input type="checkbox" id="wedCheck1" checked="true" onclick="document.getElementById('wed1').style.visibility=this.checked ? 'visible' : 'hidden';document.getElementById('wed2').style.visibility=(this.checked && document.getElementById('wedCheck2').checked) ? 'visible' : 'hidden'"></input>
 							<label for="requestTimeStartInput">Wednesday Hours</label>
-							<div>
-								<form:input type="text" path="wedhours" id="dateInput"
-									placeholder="Time" class="form-control" />
+							<input type="checkbox" id="wedCheck2" onclick="document.getElementById('wed2').style.visibility=(this.checked && document.getElementById('wedCheck1').checked) ? 'visible' : 'hidden'">Additional</input>
+							<div id='wed1'>
+							Start:
+								<select name="wedhr1" id="wedhr1">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="wedmin1" id="wedmin1">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="wedpm1" id="wedpm1">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="wedErr1" class="errorMessage"></span>
+								</br>
+							End :
+								<select name="wedhr2" id="wedhr2">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="wedmin2" id="wedmin2">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="wedpm2" id="wedpm2">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="wedErr2" class="errorMessage"></span>
+								<form:errors path="wedhours" cssClass="error" />
+							</div>
+							</br>
+							<div id='wed2' style="visibility:hidden">
+							Start:
+								<select name="wedhr3" id="wedhr3">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="wedmin3" id="wedmin3">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="wedpm3" id="wedpm3">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="wedErr3" class="errorMessage"></span>
+								</br>
+							End :
+								<select name="wedhr4" id="wedhr4">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="wedmin4" id="wedmin4">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="wedpm4" id="wedpm4">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="wedErr4" class="errorMessage"></span>
+								</br>
 								<form:errors path="wedhours" cssClass="error" />
 							</div>
 						</div>
 						<br />
 						<div align="left">
+							<input type="checkbox" id="thuCheck1" checked="true" onclick="document.getElementById('thu1').style.visibility=this.checked ? 'visible' : 'hidden';document.getElementById('thu2').style.visibility=(this.checked && document.getElementById('thuCheck2').checked) ? 'visible' : 'hidden'"></input>
 							<label for="requestTimeStartInput">Thursday Hours</label>
-							<div>
-								<form:input type="text" path="thuhours" id="dateInput"
-									placeholder="Time" class="form-control" />
+							<input type="checkbox" id="thuCheck2" onclick="document.getElementById('thu2').style.visibility=(this.checked && document.getElementById('thuCheck1').checked) ? 'visible' : 'hidden'">Additional</input>
+							<div id='thu1'>
+							Start:
+								<select name="thuhr1" id="thuhr1">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="thumin1" id="thumin1">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="thupm1" id="thupm1">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="thuErr1" class="errorMessage"></span>
+								</br>
+							End :
+								<select name="thuhr2" id="thuhr2">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="thumin2" id="thumin2">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="thupm2" id="thupm2">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="thuErr2" class="errorMessage"></span>
+								</br>
+								<form:errors path="thuhours" cssClass="error" />
+							</div>
+							</br>
+							<div id='thu2' style="visibility:hidden">
+							Start:
+								<select name="thuhr3" id="thuhr3">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="thumin3" id="thumin3">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="thupm3" id="thupm3">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="thuErr3" class="errorMessage"></span>
+								</br>
+							End :
+								<select name="thuhr4" id="thuhr4">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="thumin4" id="thumin4">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="thupm4" id="thupm4">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="thuErr4" class="errorMessage"></span>
+								</br>
 								<form:errors path="thuhours" cssClass="error" />
 							</div>
 						</div>
 						<br />
 						<div align="left">
+							<input type="checkbox" id="friCheck1" checked="true" onclick="document.getElementById('fri1').style.visibility=this.checked ? 'visible' : 'hidden';document.getElementById('fri2').style.visibility=(this.checked && document.getElementById('friCheck2').checked) ? 'visible' : 'hidden'"></input>
 							<label for="requestTimeStartInput">Friday Hours</label>
-							<div>
-								<form:input type="text" path="frihours" id="dateInput"
-									placeholder="Time" class="form-control" />
+							<input type="checkbox" id="friCheck2" onclick="document.getElementById('fri2').style.visibility=(this.checked && document.getElementById('friCheck1').checked) ? 'visible' : 'hidden'">Additional</input>
+							<div id='fri1'>
+							Start:
+								<select name="frihr1" id="frihr1">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="frimin1" id="frimin1">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="fripm1" id="fripm1">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="friErr1" class="errorMessage"></span>
+								</br>
+							End :
+								<select name="frihr2" id="frihr2">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="frimin2" id="frimin2">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="fripm2" id="fripm2">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="friErr2" class="errorMessage"></span>
+								</br>
+								<form:errors path="frihours" cssClass="error" />
+							</div>
+							</br>
+							<div id='fri2' style="visibility:hidden">
+							Start:
+								<select name="frihr3" id="frihr3">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="frimin3" id="frimin3">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="fripm3" id="fripm3">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="friErr3" class="errorMessage"></span>
+								</br>
+							End :
+								<select name="frihr4" id="frihr4">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="0">12</option>
+								</select>
+								:
+								<select name="frimin4" id="frimin4">
+									<option value="0">00</option>
+									<option value="1">15</option>
+									<option value="2">30</option>
+									<option value="3">45</option>
+								</select>
+								<select name="fripm4" id="fripm4">
+									<option value="0">am</option>
+									<option value="48">pm</option>
+								</select><span id="friErr4" class="errorMessage"></span>
+								</br>
 								<form:errors path="frihours" cssClass="error" />
 							</div>
 						</div>
@@ -437,7 +953,7 @@ function toStraaang()
 						</div>
 						<br />
 						<div>
-							<button class="btn btn-primary">Submit Request</button>
+							<button class="btn btn-primary" onclick="processInput()">Submit Request</button>
 						</div>
 	
 					</fieldset>

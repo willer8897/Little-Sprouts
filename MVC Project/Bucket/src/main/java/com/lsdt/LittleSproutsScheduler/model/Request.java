@@ -48,7 +48,7 @@ public class Request {
 	//@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean isChild;
 	
-	@Size(max=45)
+	@Size(max=255)
 	@Column(name="request_note")
 	private String request_note;
 	
