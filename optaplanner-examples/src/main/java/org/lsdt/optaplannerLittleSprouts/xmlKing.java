@@ -413,11 +413,9 @@ public class xmlKing
 				break;
 			case 1:
 				specificTeachersNeeded = miniSproutTeachersNeeded;
-				System.out.println("Creating shifts for mini sprouts");
 				break;
 			case 2:
 				specificTeachersNeeded = peeweeSproutTeachersNeeded;
-				System.out.println("Creating shifts for peewee sprouts");
 				break;
 			case 3:
 				specificTeachersNeeded = mightySproutTeachersNeeded;
@@ -461,15 +459,12 @@ public class xmlKing
 					for(int wow = 0; wow < maxNumberToAdd; wow++)
 					{
 						String shift = startIndex.toString() + "-" + endIndex.toString();
-						tempShifts[i].add(shift);
 					}
 
 					//System.out.println("Adding " + maxNumberToAdd + " 6 hour shifts from " + startIndex.toString() + " to " + endIndex.toString() + " on day " + i);
 
 					for(int cow = j; cow >= j-24; cow--)
 						specificTeachersNeeded[i][cow] -= maxNumberToAdd;
-					
-					System.out.println(j);
 				}
 				else
 				{
@@ -539,9 +534,9 @@ public class xmlKing
 					continue;
 			}
 		
-		System.out.println("The shfits for monday before balacing:");
-		for(int i = 0; i < tempShifts[0].size(); i++)
-			System.out.println(tempShifts[0].get(i));
+			System.out.println("The shifts for monday group " + group + " before balacing:");
+			for(int i = 0; i < tempShifts[0].size(); i++)
+				System.out.println(tempShifts[0].get(i));
 		
 		ArrayList<String> shiftsToAdd = new ArrayList<String>();
 		ArrayList<String> shiftsToDestroy = new ArrayList<String>();
@@ -554,14 +549,13 @@ public class xmlKing
 				//parse out the start and end time
 				String stubShift = (String) tempShifts[dayIndex].get(fixIndex);
 				int delimIndex = stubShift.indexOf('-');
-				int startTimeFix = Integer.parseInt(stubShift.substring(0, delimIndex));
-				int endTimeFix = Integer.parseInt(stubShift.substring(delimIndex+1));
+				Integer startTimeFix = Integer.parseInt(stubShift.substring(0, delimIndex));
+				Integer endTimeFix = Integer.parseInt(stubShift.substring(delimIndex+1));
 				
 				//do we have a stub?
 				if(startTimeFix == endTimeFix)
 				{
-					if(dayIndex == 0)
-						System.out.println("We have found a stub: " + stubShift);
+					System.out.println("We have found a stub: " + stubShift);
 					
 					boolean done = false;
 					
@@ -571,8 +565,7 @@ public class xmlKing
 						if(stealIndex == fixIndex || done)
 							continue;
 						
-						if(dayIndex == 0)
-							System.out.println("We are trying to fix the stub " + stubShift + " at index " + stealIndex);
+						System.out.println("We are trying to fix the stub " + stubShift + " at index " + stealIndex);
 						
 						//parse out the start and end time
 						String stealShift = (String) tempShifts[dayIndex].get(stealIndex);
@@ -612,7 +605,16 @@ public class xmlKing
 							done = true;
 						}
 						
+						if(!done)
+						{
+							System.out.println("We are unable to fix the stub due to whatever reasons. Dropping it.");
+							shiftsToDestroy.add(stubShift);
+						}
+						
 					}
+					
+					
+					
 				}
 				else
 				{
@@ -651,17 +653,18 @@ public class xmlKing
 				int endTimeFix = Integer.parseInt(shift.substring(delimIndex+1));
 
 				//check if the shift is shorter than 2 hours
-				//skip the fragmented shifts fo the form x-x as we handle this specifically later on
+				//skip the fragmented shifts of the form x-x as we handle this specifically later on
 				if((endTimeFix-startTimeFix) < 8 && (endTimeFix-startTimeFix != 0))
 				{
 					//if(dayIndex == 0)
 						//System.out.println("The shift " + shift + " is going to get balanced as it is length " + (endTimeFix-startTimeFix));
 					boolean done = false;
+					System.out.println("We are trying to fix the shift " + startTimeFix + "-" + endTimeFix + " on day " + dayIndex + " group " + group);
 					
 					//get the amount of time needed to make it 2 hours
 					int quarterHoursNeeded = 8 - (endTimeFix-startTimeFix);
 					
-					//check if there is a shift adjacent that can lose the quarterHoursNeeded and still be longer than 2 hours
+					//check if there is a shift that overlaps that can lose the quarterHoursNeeded and still be longer than 2 hours
 					for(int stealIndex = 0; stealIndex < tempShifts[dayIndex].size(); stealIndex++)
 					{
 						//skip the shift we are working on
@@ -674,14 +677,39 @@ public class xmlKing
 						int startTimeSteal = Integer.parseInt(shiftSteal.substring(0, delimIndexSteal));
 						int endTimeSteal = Integer.parseInt(shiftSteal.substring(delimIndexSteal + 1));
 						
-						//is the shift adjacent?
+						boolean beforeAdjacent = false;
+						boolean afterAdjacent = false;
+						boolean overlapping = false;
+						
+						//is the shift overlapping or adjacent?
+						/*
 						if(!(endTimeSteal == startTimeFix || endTimeFix == startTimeSteal))
 						{
 							//System.out.println(endTimeSteal + "!=" + startTimeFix + " and " + endTimeFix + "!=" + startTimeSteal);
 							continue;
 						}
+						*/
+						if(endTimeSteal+1 == startTimeFix)
+						{
+							System.out.println("Trying to fix with a beforeadjacent");
+							beforeAdjacent = true;
+						}
+						else if(startTimeSteal == endTimeFix+1)
+						{
+							System.out.println("Trying to fix with a afteradjacent");
+							afterAdjacent = true;
+						}
+						else if((startTimeSteal < startTimeFix) && (endTimeFix < endTimeSteal))
+						{
+							System.out.println("Trying to fix with a overlap");
+							overlapping = true;
+						}
 						
-						//System.out.println("Maybe we have found a valid victim to steal from: " + shiftSteal);
+						if(!beforeAdjacent && !afterAdjacent && !overlapping)
+						{
+							System.out.println("Cannot steal from " + startTimeSteal + "-" + endTimeSteal);
+							continue;
+						}
 						
 						//can we steal the quarterHoursNeeded?
 						if((endTimeSteal - startTimeSteal) >= (8 + quarterHoursNeeded))
@@ -689,7 +717,7 @@ public class xmlKing
 							//System.out.println("We have found a valid victim to steal from: " + shiftSteal);
 							
 							//are we stealing hours from the end of the shift?
-							if(endTimeSteal == startTimeFix)
+							if(beforeAdjacent)
 							{
 								//steal the quarterHoursNeeded
 								int newTimeIndex = endTimeSteal - quarterHoursNeeded;
@@ -712,11 +740,13 @@ public class xmlKing
 								//tempShifts[dayIndex].add(newFix);
 								shiftsToAdd.add(newFix);
 								
+								System.out.println("We have fixed with a before adjacent");
+								
 								done = true;
 							}
 							
 							//are we stealing hours from the start of the shift?
-							if(startTimeSteal == endTimeFix)
+							if(afterAdjacent)
 							{
 								//steal the quarterHoursNeeded
 								int newTimeIndex = startTimeSteal + quarterHoursNeeded;
@@ -738,9 +768,35 @@ public class xmlKing
 								//tempShifts[dayIndex].add(newFix);
 								shiftsToAdd.add(newFix);
 								
+								System.out.println("We have fixed with an after adjacent");
+								
 								done = true;
 							}
 						}
+						//are we trying to steal the hours from an overlapping shift?
+						if(overlapping)
+						{
+							//what window are we looking at?
+							int overallStart = startTimeSteal;
+							int overallEnd  = endTimeSteal;
+							int changeOver = (overallStart + overallEnd) / 2;
+							
+							shiftsToDestroy.add((String) tempShifts[dayIndex].get(stealIndex));
+							shiftsToDestroy.add((String) tempShifts[dayIndex].get(fixIndex));
+							
+							Integer overallStartInt = overallStart;
+							Integer overallEndInt = overallEnd;
+							Integer changeOverInt = changeOver;
+							
+							shiftsToAdd.add(overallStartInt.toString() + "-" + changeOverInt.toString());
+							shiftsToAdd.add(changeOverInt.toString() + "-" + overallEndInt.toString());
+							
+							System.out.println("We have fixed with an overlap");
+							
+							done = true;
+						}
+						
+						
 						//we cannot steal the quarterHoursNeeded, try the next shift
 						else
 							continue;

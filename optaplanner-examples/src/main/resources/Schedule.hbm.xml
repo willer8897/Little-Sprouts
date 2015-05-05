@@ -9,7 +9,7 @@
          This class contains the schedule details. 
       </meta>
       <id name="id" type="int" column="account_id">
-         <generator class="native"/>
+         <generator class="assigned"/>
       </id>
       <property name="date" column="date" type="date"/>
       <property name="room" column="room_id" type="int"/>

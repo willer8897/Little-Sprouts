@@ -30,7 +30,10 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -123,7 +126,8 @@ public class SolverAndPersistenceFrame extends JFrame {
     private ArrayList<String> thursdayShifts = new ArrayList<String>();
     private ArrayList<String> fridayShifts = new ArrayList<String>();
     private String weekStart = "";
-    private HashMap employeeIDMap = new HashMap();
+    private HashMap assignmentMap = new HashMap();
+    
     
 
     public SolverAndPersistenceFrame(SolutionBusiness solutionBusiness, SolutionPanel solutionPanel,
@@ -138,7 +142,7 @@ public class SolverAndPersistenceFrame extends JFrame {
         registerListeners();
         constraintMatchesDialog = new ConstraintMatchesDialog(this, solutionBusiness);
         
-        
+        //processOutput();
     }
 
     private void registerListeners() {
@@ -333,6 +337,469 @@ public class SolverAndPersistenceFrame extends JFrame {
         }
 
     }
+    
+    public void processOutput()
+    {
+        try {
+            
+        	System.out.println("Doing the stuff");
+            File fXmlFile = new File("C://2015-04-06solution.xml");
+        	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        	org.w3c.dom.Document doc = dBuilder.parse(fXmlFile);
+         
+        	//optional, but recommended
+        	//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+        	doc.getDocumentElement().normalize();
+         
+        	System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+         
+        	NodeList nList = doc.getElementsByTagName("Employee");
+         
+        	System.out.println("----------------------------");
+        	
+        	//maps employee ids to employee ids in the DB
+        	HashMap employeeMap = new HashMap();
+        	
+        	//maps shift reference ids to a genuine shift id
+        	HashMap shiftMap = new HashMap();
+        	
+        	//
+        	HashMap id2typeMap = new HashMap();
+         
+        	for (int temp = 0; temp < nList.getLength(); temp++) {
+         
+        		Node nNode = nList.item(temp);
+         
+        		//System.out.println("\nCurrent Element :" + nNode.getNodeName());
+         
+        		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+         
+        			Element eElement = (Element) nNode;
+        			//System.out.println("Hello from " + eElement.getAttribute("id"));
+         
+        			//System.out.println("Actual ID : " + eElement.getElementsByTagName("code").item(0).getTextContent());
+        			employeeMap.put(eElement.getAttribute("id").toString(), eElement.getElementsByTagName("code").item(0).getTextContent());
+        			System.out.println("Mapping employee reference id " + eElement.getAttribute("id") + " to " + eElement.getElementsByTagName("code").item(0).getTextContent());
+         
+        		}
+        	}
+        	
+        	NodeList shiftTypeList = doc.getElementsByTagName("shiftType");
+        	for (int temp = 0; temp < shiftTypeList.getLength(); temp++)
+        	{
+        		Node nNode = shiftTypeList.item(temp);
+        		
+        		if(nNode.getNodeType() == Node.ELEMENT_NODE)
+        		{
+        			Element shiftType = (Element) nNode;
+        			
+        			//make sure it is a shift type declaration
+        			NodeList list = shiftType.getElementsByTagName("code");
+        			if(list.getLength() == 0)
+        				continue;
+        			
+        			shiftMap.put(shiftType.getAttribute("id"), list.item(0).getTextContent());
+        			System.out.println("Mapping shift type " + shiftType.getAttribute("id") + " to " + list.item(0).getTextContent());
+        			
+        			Integer wut = Integer.parseInt(shiftType.getAttribute("id"))-1;
+        			System.out.println("Mapping shift type " + wut + " to " + list.item(0).getTextContent());
+        			shiftMap.put(wut, list.item(0).getTextContent());
+        		}
+        	}
+        	
+        	NodeList shiftList = doc.getElementsByTagName("Shift");
+        	for (int temp = 0; temp < shiftList.getLength(); temp++)
+        	{
+        		Node nNode = shiftList.item(temp);
+        		
+        		if(nNode.getNodeType() == Node.ELEMENT_NODE)
+        		{
+        			Element shift = (Element) nNode;
+        			
+        			//make sure it has a shift type declaration
+        			NodeList list = shift.getElementsByTagName("shiftType");
+        			if(list.getLength() == 0)
+        				continue;
+        			
+        			if(list.item(0).getNodeType() != Node.ELEMENT_NODE)
+        				continue;
+        			
+        			Element shiftType = (Element) list.item(0);
+        			
+        			if(shiftType.hasAttribute("reference"))
+        			{
+        				id2typeMap.put(shift.getAttribute("id"), shiftType.getAttribute("reference"));
+            			
+            			System.out.println("Mapping shift id " + shift.getAttribute("id") + " to type id " + shiftType.getAttribute("reference"));
+        			}
+        			else
+        			{
+        				NodeList codeList = shiftType.getElementsByTagName("code");
+        				
+        				if(codeList.getLength() == 0)
+        					continue;
+        				if(codeList.item(0).getNodeType() == Node.ELEMENT_NODE)
+        				{
+        					Element codeElement = (Element) codeList.item(0);
+        					
+        					id2typeMap.put(shift.getAttribute("id"), codeElement.getTextContent());
+        					
+        					System.out.println("Mapping shift id " + shift.getAttribute("id") + " to type id " + codeElement.getTextContent());
+        				}
+        			}
+        			
+        			
+        			
+        		}
+        	}
+        	
+        	NodeList assignmentList = doc.getElementsByTagName("ShiftAssignment");
+        	for(int temp = 0; temp < assignmentList.getLength(); temp ++)
+        	{
+        		Node nNode = assignmentList.item(temp);
+        		
+        		if(nNode.getNodeType() == Node.ELEMENT_NODE)
+        		{
+        			Element assignment = (Element) nNode;
+        			
+        			NodeList list1 = assignment.getElementsByTagName("shift");
+        			NodeList list2 = assignment.getElementsByTagName("employee");
+        			if(list1.getLength() == 0 || list2.getLength() == 0)
+        				continue;
+        			
+        			if(list1.item(0).getNodeType() != Node.ELEMENT_NODE || list2.item(0).getNodeType() != Node.ELEMENT_NODE)
+        				continue;
+        			
+        			Element shift = (Element) list1.item(0);
+        			Element employee = (Element) list2.item(0);
+        			
+        			//System.out.println("The employee id " + employee.getAttribute("reference") + " maps to " + employeeMap.get(employee.getAttribute("reference")));
+        			
+        			//System.out.println("The shift reference ID is " + shift.getAttribute("reference"));
+        			String shiftReference = shift.getAttribute("reference");
+        			String shiftType = id2typeMap.get(shiftReference).toString();
+        			
+        			//System.out.println("The shiftType ID " + shiftType + " maps to " + shiftMap.get(id2typeMap.get(shiftReference)));
+
+        			if(shiftMap.get(shiftType) == null)
+        				continue;
+        			
+        			int shiftTypeInt = Integer.parseInt(shiftType);
+        			//System.out.println("shift type int is " + shiftTypeInt);
+        			
+        			if(shiftMap.get(shiftType) != null)
+        			{	
+            			//now retrieve that actual employee and shift id
+            			//System.out.println("Employee " + employeeMap.get(employee.getAttribute("reference")) + " is working the shift " + shiftMap.get(shiftType));
+            		
+            			//if(assignmentMap.containsValue(shiftMap.get(shiftType)))
+            				//assignmentMap.values().remove(shiftMap.get(shiftType));
+            			
+            			assignmentMap.put(shiftMap.get(shiftType), employeeMap.get(employee.getAttribute("reference")));
+        			}
+
+        		}
+        	}
+        	
+        	Iterator it = assignmentMap.keySet().iterator();
+        	
+        	while(it.hasNext())
+        	{
+        		String shift = (String) it.next();
+        		
+        		String employee = assignmentMap.get(shift).toString();
+        		
+        		System.out.println(" Employee " + employee + " is working " + shift);
+        		
+        		
+        		//Now write that garbage to the DB
+        		
+            	//Test DB connectivity
+            	String hibernatePropsFilePath = "D:\\Student Data\\Desktop\\optaplanner-distribution-6.1.0.Final\\examples\\sources\\src\\main\\resources\\hibernate.cfg.xml";
+            	File hibernatePropsFile = new File(hibernatePropsFilePath);
+
+            	Configuration configuration = new Configuration();
+            	configuration.configure(hibernatePropsFile);
+
+            	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+            			configuration.getProperties()).build();
+
+        		
+        		try{
+            		factory = configuration.buildSessionFactory(serviceRegistry);
+            	}catch (Throwable ex) { 
+            		System.err.println("Failed to create sessionFactory object." + ex);
+            		throw new ExceptionInInitializerError(ex); 
+            	}
+            	//Print all users
+            	Session session = factory.openSession();
+            	Transaction tx = null;
+            	try{
+            		//tx = session.beginTransaction();
+            		session.beginTransaction();
+            		
+            		
+            		Schedule s = new Schedule();
+            		s.setId(Integer.parseInt(employee));
+            		s.setRoom(0);
+            		
+            		//get the time start and end
+            		Integer shiftId = Integer.parseInt(shift);
+            		if(shiftId < 200)
+            		{
+            			//get monday shift
+            			int shiftKey = shiftId - 100;
+            			String mondayShift = mondayShifts.get(shiftKey);
+            			
+            			int delimIndex = mondayShift.indexOf("-");
+            			int startIndex = Integer.parseInt(mondayShift.substring(0, delimIndex));
+            			int endIndex = Integer.parseInt(mondayShift.substring(delimIndex + 1));
+            			
+            			//System.out.println("start index " + startIndex);
+            			//System.out.println("end index" + endIndex);
+            			
+            			//convert to proper time format
+            			
+            			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
+            			Integer startMinute = (startIndex%4)*15;
+            			Integer startTimeInteger = startHour + startMinute;
+            			String startTime = startTimeInteger.toString();
+            			
+            			Integer endHour = 600 + (Math.floorDiv(endIndex, 4)*100);
+            			Integer endMinutes = (endIndex%4)*15;
+            			Integer endTimeInteger = endHour + endMinutes;
+            			String endTime = endTimeInteger.toString();
+            			
+            			if(startTime.length() < 4)
+            				startTime = "0" + startTime;
+            			
+            			s.setTime_start(startTime);
+            			s.setTime_end(endTime);
+            			
+            			//set the proper date
+                		//System.out.println("Our weekstart is " + weekStart);
+                		delimIndex = weekStart.indexOf("-");
+                		String dateYear = weekStart.substring(0, delimIndex);
+                		String newWeekStart = weekStart.substring(delimIndex + 1);
+                		delimIndex = newWeekStart.indexOf("-");
+                		String dateMonth = newWeekStart.substring(0, delimIndex);
+                		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
+                		
+                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+                		//System.out.println(date.getTime());
+                		s.setDate(date.getTime());
+            		}
+            		else if(shiftId < 300)
+            		{
+            			//get tuesday shift
+            			int shiftKey = shiftId - 200;
+            			String tuesdayShift = tuesdayShifts.get(shiftKey);
+            			
+            			int delimIndex = tuesdayShift.indexOf("-");
+            			int startIndex = Integer.parseInt(tuesdayShift.substring(0, delimIndex));
+            			int endIndex = Integer.parseInt(tuesdayShift.substring(delimIndex + 1));
+            			
+            			//System.out.println("start index " + startIndex);
+            			//System.out.println("end index" + endIndex);
+            			
+            			//convert to proper time format
+            			
+            			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
+            			Integer startMinute = (startIndex%4)*15;
+            			Integer startTimeInteger = startHour + startMinute;
+            			String startTime = startTimeInteger.toString();
+            			
+            			Integer endHour = 600 + (Math.floorDiv(endIndex, 4)*100);
+            			Integer endMinutes = (endIndex%4)*15;
+            			Integer endTimeInteger = endHour + endMinutes;
+            			String endTime = endTimeInteger.toString();
+            			
+            			if(startTime.length() < 4)
+            				startTime = "0" + startTime;
+            			
+            			s.setTime_start(startTime);
+            			s.setTime_end(endTime);
+            			
+            			//set the proper date
+                		//System.out.println("Our weekstart is " + weekStart);
+                		delimIndex = weekStart.indexOf("-");
+                		String dateYear = weekStart.substring(0, delimIndex);
+                		String newWeekStart = weekStart.substring(delimIndex + 1);
+                		delimIndex = newWeekStart.indexOf("-");
+                		String dateMonth = newWeekStart.substring(0, delimIndex);
+                		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
+                		
+                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+                		date.add(Calendar.DAY_OF_MONTH, +1);
+                		//System.out.println(date.getTime());
+                		s.setDate(date.getTime());
+            		}
+            		else if(shiftId < 400)
+            		{
+            			//get wednesday shift
+            			int shiftKey = shiftId - 300;
+            			String wednesdayShift = wednesdayShifts.get(shiftKey);
+            			
+            			int delimIndex = wednesdayShift.indexOf("-");
+            			int startIndex = Integer.parseInt(wednesdayShift.substring(0, delimIndex));
+            			int endIndex = Integer.parseInt(wednesdayShift.substring(delimIndex + 1));
+            			
+            			//System.out.println("start index " + startIndex);
+            			//System.out.println("end index" + endIndex);
+            			
+            			//convert to proper time format
+            			
+            			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
+            			Integer startMinute = (startIndex%4)*15;
+            			Integer startTimeInteger = startHour + startMinute;
+            			String startTime = startTimeInteger.toString();
+            			
+            			Integer endHour = 600 + (Math.floorDiv(endIndex, 4)*100);
+            			Integer endMinutes = (endIndex%4)*15;
+            			Integer endTimeInteger = endHour + endMinutes;
+            			String endTime = endTimeInteger.toString();
+            			
+            			if(startTime.length() < 4)
+            				startTime = "0" + startTime;
+            			
+            			s.setTime_start(startTime);
+            			s.setTime_end(endTime);
+            			
+            			//set the proper date
+                		//System.out.println("Our weekstart is " + weekStart);
+                		delimIndex = weekStart.indexOf("-");
+                		String dateYear = weekStart.substring(0, delimIndex);
+                		String newWeekStart = weekStart.substring(delimIndex + 1);
+                		delimIndex = newWeekStart.indexOf("-");
+                		String dateMonth = newWeekStart.substring(0, delimIndex);
+                		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
+                		
+                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+                		date.add(Calendar.DAY_OF_MONTH, +2);
+                		//System.out.println(date.getTime());
+                		s.setDate(date.getTime());
+            		}
+            		else if(shiftId < 500)
+            		{
+            			//get thursday shift
+            			int shiftKey = shiftId - 400;
+            			String thursdayShift = thursdayShifts.get(shiftKey);
+            			
+            			int delimIndex = thursdayShift.indexOf("-");
+            			int startIndex = Integer.parseInt(thursdayShift.substring(0, delimIndex));
+            			int endIndex = Integer.parseInt(thursdayShift.substring(delimIndex + 1));
+            			
+            			//System.out.println("start index " + startIndex);
+            			//System.out.println("end index" + endIndex);
+            			
+            			//convert to proper time format
+            			
+            			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
+            			Integer startMinute = (startIndex%4)*15;
+            			Integer startTimeInteger = startHour + startMinute;
+            			String startTime = startTimeInteger.toString();
+            			
+            			Integer endHour = 600 + (Math.floorDiv(endIndex, 4)*100);
+            			Integer endMinutes = (endIndex%4)*15;
+            			Integer endTimeInteger = endHour + endMinutes;
+            			String endTime = endTimeInteger.toString();
+            			
+            			if(startTime.length() < 4)
+            				startTime = "0" + startTime;
+            			
+            			s.setTime_start(startTime);
+            			s.setTime_end(endTime);
+            			
+            			//set the proper date
+                		//System.out.println("Our weekstart is " + weekStart);
+                		delimIndex = weekStart.indexOf("-");
+                		String dateYear = weekStart.substring(0, delimIndex);
+                		String newWeekStart = weekStart.substring(delimIndex + 1);
+                		delimIndex = newWeekStart.indexOf("-");
+                		String dateMonth = newWeekStart.substring(0, delimIndex);
+                		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
+                		
+                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+                		date.add(Calendar.DAY_OF_MONTH, +3);
+                		//System.out.println(date.getTime());
+                		s.setDate(date.getTime());
+            		}
+            		else
+            		{
+            			//get friday shift
+            			int shiftKey = shiftId - 500;
+            			String fridayShift = fridayShifts.get(shiftKey);
+            			
+            			int delimIndex = fridayShift.indexOf("-");
+            			int startIndex = Integer.parseInt(fridayShift.substring(0, delimIndex));
+            			int endIndex = Integer.parseInt(fridayShift.substring(delimIndex + 1));
+            			
+            			//System.out.println("start index " + startIndex);
+            			//System.out.println("end index" + endIndex);
+            			
+            			//convert to proper time format
+            			
+            			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
+            			Integer startMinute = (startIndex%4)*15;
+            			Integer startTimeInteger = startHour + startMinute;
+            			String startTime = startTimeInteger.toString();
+            			
+            			Integer endHour = 600 + (Math.floorDiv(endIndex, 4)*100);
+            			Integer endMinutes = (endIndex%4)*15;
+            			Integer endTimeInteger = endHour + endMinutes;
+            			String endTime = endTimeInteger.toString();
+            			
+            			if(startTime.length() < 4)
+            				startTime = "0" + startTime;
+            			
+            			s.setTime_start(startTime);
+            			s.setTime_end(endTime);
+            			
+            			//set the proper date
+                		//System.out.println("Our weekstart is " + weekStart);
+                		delimIndex = weekStart.indexOf("-");
+                		String dateYear = weekStart.substring(0, delimIndex);
+                		String newWeekStart = weekStart.substring(delimIndex + 1);
+                		delimIndex = newWeekStart.indexOf("-");
+                		String dateMonth = newWeekStart.substring(0, delimIndex);
+                		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
+                		
+                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
+                		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+                		date.add(Calendar.DAY_OF_MONTH, +4);
+                		//System.out.println(date.getTime());
+                		s.setDate(date.getTime());
+            		}
+            		
+            		
+            		
+            		
+            		session.save(s);
+            		
+            		
+            		session.getTransaction().commit();
+            		//tx.commit();
+            	}catch (HibernateException e) {
+            		if (tx!=null) tx.rollback();
+            		e.printStackTrace(); 
+            	}finally {
+            		session.close(); 
+            	}
+        		
+        		
+        		
+        	}
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+        }
+    }
 
     protected class SolveWorker extends SwingWorker<Solution, Void> {
 
@@ -369,7 +836,8 @@ public class SolverAndPersistenceFrame extends JFrame {
                 
                 //TODO:
                 //run heathers code here
-               
+
+                //processOutput();
              
             
             
@@ -450,11 +918,15 @@ public class SolverAndPersistenceFrame extends JFrame {
     	}
     	
     	System.out.println("Solver and PErsistence has received " + fridayShifts.size() + " shifts for friday");
+    	
+    	//processOutput();
     }
     
     public void getWeekStart(String week)
     {
     	weekStart = week;
+    	System.out.println("Passed weekstart " + weekStart);
+    	processOutput();
     }
     
 
