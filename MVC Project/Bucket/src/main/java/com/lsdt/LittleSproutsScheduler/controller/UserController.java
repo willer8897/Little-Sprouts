@@ -106,7 +106,7 @@ public class UserController {
 				boolean found = userService.findByLogin(userLogin.getUserName(), userLogin.getPassword());
 				if (found) {  
 					User user = userService.findAndGetAttributes(userLogin.getUserName());
-					model.addAttribute("User", user.getUsername());
+					model.addAttribute("user", user.getUsername());
 					if(user.getType() == 'M')
 						return "redirect:mdashboard.html";
 					else if(user.getType() == 'T')
@@ -124,8 +124,7 @@ public class UserController {
 
 	@RequestMapping(value="/mdashboard", method=RequestMethod.GET)
 	public String mdashboard(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
+		
 		return "mdashboard";
 	}
 	
@@ -215,10 +214,10 @@ public class UserController {
     	Integer pageDisplayLength = Integer.valueOf(request.getParameter("iDisplayLength"));
     	
     	//Create page list data
-    	List<User> usersList = createAccountPaginationData(pageDisplayLength);
+    	List<User> usersList = mCreateAccountPaginationData(pageDisplayLength);
 		
 		//Search functionality: Returns filtered list based on search parameter
-		usersList = getAccountListBasedOnSearchParameter(searchParameter,usersList);
+		usersList = mGetAccountListBasedOnSearchParameter(searchParameter,usersList);
 		
 		UserJsonObject userJsonObject = new UserJsonObject();
 		
@@ -235,7 +234,7 @@ public class UserController {
 		return json2;
     }
 	
-	private List<User> getAccountListBasedOnSearchParameter(String searchParameter,List<User> usersList) {
+	private List<User> mGetAccountListBasedOnSearchParameter(String searchParameter,List<User> usersList) {
 		
 		if (null != searchParameter && !searchParameter.equals("")) {
 			List<User> usersListForSearch = new ArrayList<User>();
@@ -254,7 +253,7 @@ public class UserController {
 		return usersList;
 	}
 	
-	private List<User> createAccountPaginationData(Integer pageDisplayLength) {
+	private List<User> mCreateAccountPaginationData(Integer pageDisplayLength) {
 		List<User> usersList = new ArrayList<User>();
 		usersList = userService.getUsers();
 
@@ -265,8 +264,7 @@ public class UserController {
 	
 	@RequestMapping(value="/tdashboard", method=RequestMethod.GET)
 	public String tdashboard(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
+		
 		return "tdashboard";
 	}
 	
