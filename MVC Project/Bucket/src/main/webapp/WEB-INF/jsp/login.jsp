@@ -10,7 +10,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Little Sprouts Login</title> <
+	<title>Little Sprouts Login</title>
 	<link href="assets/css/littleSproutsStyle.css" rel="stylesheet"
 		type="text/css" />
 	<style>
