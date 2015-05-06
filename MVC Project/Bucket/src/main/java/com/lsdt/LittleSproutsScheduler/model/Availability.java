@@ -1,28 +1,27 @@
 package com.lsdt.LittleSproutsScheduler.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Id;
 
-@Embeddable
+@Entity
 @Table(name="Availability")
-public class Availability implements Serializable {
+public class Availability {
 
-	private static final long serialVersionUID = -4669795199326917656L;
-
-	@OneToOne(fetch=FetchType.EAGER, targetEntity=Request.class)
-	@JoinColumn(name="account_id")
+	@Id
+	@GeneratedValue
+	private int availability_id;
+	
 	@NotEmpty
 	private int account_id;
 	
@@ -53,16 +52,10 @@ public class Availability implements Serializable {
 	@NotEmpty
 	@Column(name="4hours")
 	private String frihours;
-	
-	@OneToOne(fetch=FetchType.EAGER, targetEntity=Request.class)
-	@JoinColumn(name="is_Child")
-	@Column(name="isChild", columnDefinition = "bit")
+
+	@Column(name="is_Child", columnDefinition = "bit")
 	//@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean isChild;
-	
-	@Id
-	@GeneratedValue
-	private int availability_id;
 	
 	public Availability(){}
 	public Availability(Date weekstart, String monhours, String tuehours, String wedhours, String thuhours, String frihours, boolean isChild){
@@ -148,69 +141,5 @@ public class Availability implements Serializable {
 				+ ", monhours=" + monhours + ", tuehours=" + tuehours
 				+ ", wedhours=" + wedhours + ", thuhours=" + thuhours
 				+ ", frihours=" + frihours + "]";
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + account_id;
-		result = prime * result
-				+ ((frihours == null) ? 0 : frihours.hashCode());
-		result = prime * result
-				+ ((monhours == null) ? 0 : monhours.hashCode());
-		result = prime * result
-				+ ((thuhours == null) ? 0 : thuhours.hashCode());
-		result = prime * result
-				+ ((tuehours == null) ? 0 : tuehours.hashCode());
-		result = prime * result
-				+ ((wedhours == null) ? 0 : wedhours.hashCode());
-		result = prime * result
-				+ ((week_start == null) ? 0 : week_start.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Availability other = (Availability) obj;
-		if (account_id != other.account_id)
-			return false;
-		if (frihours == null) {
-			if (other.frihours != null)
-				return false;
-		} else if (!frihours.equals(other.frihours))
-			return false;
-		if (isChild != other.isChild)
-			return false;
-		if (monhours == null) {
-			if (other.monhours != null)
-				return false;
-		} else if (!monhours.equals(other.monhours))
-			return false;
-		if (thuhours == null) {
-			if (other.thuhours != null)
-				return false;
-		} else if (!thuhours.equals(other.thuhours))
-			return false;
-		if (tuehours == null) {
-			if (other.tuehours != null)
-				return false;
-		} else if (!tuehours.equals(other.tuehours))
-			return false;
-		if (wedhours == null) {
-			if (other.wedhours != null)
-				return false;
-		} else if (!wedhours.equals(other.wedhours))
-			return false;
-		if (week_start == null) {
-			if (other.week_start != null)
-				return false;
-		} else if (!week_start.equals(other.week_start))
-			return false;
-		return true;
 	}
 }
