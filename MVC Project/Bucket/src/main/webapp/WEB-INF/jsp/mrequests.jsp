@@ -72,7 +72,7 @@
 						}, {
 							"mData" : "monhours"
 						}, {
-							"mData" : "tueshours"
+							"mData" : "tuehours"
 						},{
 							"mData" : "wedhours"
 						},{
