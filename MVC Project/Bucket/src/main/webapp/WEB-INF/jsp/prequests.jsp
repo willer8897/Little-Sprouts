@@ -310,7 +310,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 			printout += finalHours[i];
 		}
 		// Debug processed output\
-		//window.alert(printout);
+		window.alert(printout);
 	}
 }
 </script>
@@ -400,7 +400,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="monErr2" class="errorMessage"></span>
-								<form:errors path="monhours" cssClass="error" />
+<%-- 								<form:errors path="monhours" cssClass="error" /> --%>
 							</div>
 							</br>
 							<div id='mon2' style="visibility:hidden">
@@ -457,7 +457,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="monErr4" class="errorMessage"></span>
-								<form:errors path="monhours" cssClass="error" />
+<%-- 								<form:errors path="monhours" cssClass="error" /> --%>
 							</div>
 						</div>
 						<br />
@@ -519,7 +519,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="tueErr2" class="errorMessage"></span>
-								<form:errors path="tuehours" cssClass="error" />
+<%-- 								<form:errors path="tuehours" cssClass="error" /> --%>
 							</div>
 							</br>
 							<div id='tue2' style="visibility:hidden">
@@ -576,7 +576,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="tueErr4" class="errorMessage"></span>
-								<form:errors path="tuehours" cssClass="error" />
+<%-- 								<form:errors path="tuehours" cssClass="error" /> --%>
 							</div>
 						</div>
 						<br />
@@ -638,7 +638,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="wedErr2" class="errorMessage"></span>
-								<form:errors path="wedhours" cssClass="error" />
+<%-- 								<form:errors path="wedhours" cssClass="error" /> --%>
 							</div>
 							</br>
 							<div id='wed2' style="visibility:hidden">
@@ -695,8 +695,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="wedErr4" class="errorMessage"></span>
-								</br>
-								<form:errors path="wedhours" cssClass="error" />
+<%-- 								<form:errors path="wedhours" cssClass="error" /> --%>
 							</div>
 						</div>
 						<br />
@@ -758,8 +757,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="thuErr2" class="errorMessage"></span>
-								</br>
-								<form:errors path="thuhours" cssClass="error" />
+<%-- 								<form:errors path="thuhours" cssClass="error" /> --%>
 							</div>
 							</br>
 							<div id='thu2' style="visibility:hidden">
@@ -816,8 +814,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="thuErr4" class="errorMessage"></span>
-								</br>
-								<form:errors path="thuhours" cssClass="error" />
+<%-- 								<form:errors path="thuhours" cssClass="error" /> --%>
 							</div>
 						</div>
 						<br />
@@ -879,8 +876,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="friErr2" class="errorMessage"></span>
-								</br>
-								<form:errors path="frihours" cssClass="error" />
+<%-- 								<form:errors path="frihours" cssClass="error" /> --%>
 							</div>
 							</br>
 							<div id='fri2' style="visibility:hidden">
@@ -937,8 +933,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="friErr4" class="errorMessage"></span>
-								</br>
-								<form:errors path="frihours" cssClass="error" />
+<%-- 								<form:errors path="frihours" cssClass="error" /> --%>
 							</div>
 						</div>
 						<br />
@@ -953,7 +948,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 						</div>
 						<br />
 						<div>
-							<button class="btn btn-primary" onclick="processInput()">Submit Request</button>
+							<button type="button" class="btn btn-primary" onclick="processInput()">Submit Request</button>
 						</div>
 	
 					</fieldset>
