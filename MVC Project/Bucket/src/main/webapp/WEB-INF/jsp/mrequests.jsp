@@ -62,7 +62,7 @@
 						"bStateSave" : false,
 						"iDisplayLength" : 10,
 						"iDisplayStart" : 0,
-						"sAjaxSource" : "mdashboard.html",
+						"sAjaxSource" : "mrequests.html",
 						"aoColumns" : [ {
 							"mData" : "account_id"
 						}, {
