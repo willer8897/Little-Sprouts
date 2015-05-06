@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.lsdt.LittleSproutsScheduler.json.RequestJsonObject;
 import com.lsdt.LittleSproutsScheduler.json.ScheduleJsonObject;
 import com.lsdt.LittleSproutsScheduler.json.UserJsonObject;
 import com.lsdt.LittleSproutsScheduler.model.Request;
@@ -191,6 +192,67 @@ public class UserController {
 	public String mrequests(Model model) {
 
 		return "mrequests";
+	}
+	
+	@RequestMapping(value = "/mrequests", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public @ResponseBody String mRequestDataTable(HttpServletRequest  request) throws IOException {
+		
+    	//Fetch the page number from client
+    	Integer pageNumber = 0;
+    	if (null != request.getParameter("iDisplayStart"))
+    		pageNumber = (Integer.valueOf(request.getParameter("iDisplayStart"))/10)+1;		
+    	
+    	//Fetch search parameter
+    	String searchParameter = request.getParameter("sSearch");
+    	
+    	//Fetch Page display length
+    	Integer pageDisplayLength = Integer.valueOf(request.getParameter("iDisplayLength"));
+    	
+    	//Create page list data
+    	List<Request> requestsList = mCreateRequestPaginationData(pageDisplayLength);
+		
+		//Search functionality: Returns filtered list based on search parameter
+		requestsList = mGetRequestListBasedOnSearchParameter(searchParameter,requestsList);
+		
+		RequestJsonObject requestJsonObject = new RequestJsonObject();
+		
+		//Set Total display record
+		requestJsonObject.setiTotalDisplayRecords(requestsList.size());
+		
+		//Set Total record
+		requestJsonObject.setiTotalRecords(requestsList.size());
+		requestJsonObject.setAaData(requestsList);
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json2 = gson.toJson(requestJsonObject);
+	
+		return json2;
+    }
+	
+	private List<Request> mGetRequestListBasedOnSearchParameter(String searchParameter,List<Request> requestsList) {
+		
+		if (null != searchParameter && !searchParameter.equals("")) {
+			List<Request> requestsListForSearch = new ArrayList<Request>();
+			searchParameter = searchParameter.toUpperCase();
+			for (Request request : requestsList) {
+				if (request.getMonhours().toUpperCase().indexOf(searchParameter)!= -1 || request.getTuehours().toUpperCase().indexOf(searchParameter)!= -1
+						|| request.getWedhours().toUpperCase().indexOf(searchParameter)!= -1 || request.getThuhours().toUpperCase().indexOf(searchParameter)!= -1
+						|| request.getFrihours().toUpperCase().indexOf(searchParameter)!= -1 || request.getRequest_note().toUpperCase().indexOf(searchParameter)!= -1) {
+					requestsListForSearch.add(request);					
+				}
+				
+			}
+			requestsList = requestsListForSearch;
+			requestsListForSearch = null;
+		}
+		return requestsList;
+	}
+	
+	private List<Request> mCreateRequestPaginationData(Integer pageDisplayLength) {
+		List<Request> requestsList = new ArrayList<Request>();
+		requestsList = requestService.getRequests();
+
+		return requestsList;
 	}
 	
 	@RequestMapping(value="/maccounts", method=RequestMethod.GET)
