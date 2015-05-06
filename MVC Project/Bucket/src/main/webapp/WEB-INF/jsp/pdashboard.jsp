@@ -31,9 +31,55 @@
 	
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
 	
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+				jQuery.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
+					return {
+						"iStart" : oSettings._iDisplayStart,
+						"iEnd" : oSettings.fnDisplayEnd(),
+						"iLength" : oSettings._iDisplayLength,
+						"iTotal" : oSettings.fnRecordsTotal(),
+						"iFilteredTotal" : oSettings.fnRecordsDisplay(),
+						"iPage" : oSettings._iDisplayLength === -1 ? 0 : Math
+								.ceil(oSettings._iDisplayStart
+										/ oSettings._iDisplayLength),
+						"iTotalPages" : oSettings._iDisplayLength === -1 ? 0
+								: Math.ceil(oSettings.fnRecordsDisplay()
+										/ oSettings._iDisplayLength)
+					};
+				};
+
+				$(document).ready(function() {
+
+					$("#schedules").dataTable({
+						"bProcessing" : true,
+						"bServerSide" : true,
+						"sort" : "position", 
+						"bStateSave" : false,
+						"iDisplayLength" : 10,
+						"iDisplayStart" : 0,
+						"sAjaxSource" : "mdashboard.html",
+						"aoColumns" : [ {
+							"mData" : "account_id"
+						}, {
+							"mData" : "date"
+						}, {
+							"mData" : "room_id"
+						}, {
+							"mData" : "time_start"
+						},{
+							"mData" : "time_end"
+						},
+						]
+					  } );
+				} );
+			</script>
+	
 </head>
 
 <body>
@@ -53,25 +99,27 @@
 	</nav>
 
 	<div class="container-fluid" align="center">
-
 		<form action="login.html">
-		<input type="image" style="float:right" src="assets/img/logout.jpg" width="50" height="50" alt="logout" />
+			<input type="image" style="float: right" src="assets/img/logout.jpg"
+				width="50" height="50" alt="logout" />
 		</form>
-		
-		<br />
-		<table border="1" align="right" style="width:25%">
-			<tr>
-		    	<td>**/** - **/**</td>
-		        <td><input type="image" src="assets/img/leftarrow.jpg" name="leftarrow" width="20px" height="20px"  /></td>
-		        <td><input type="image" src="assets/img/rightarrow.png" width="20" height="20" alt="rightarrow" /></td>
-		    </tr>
-		</table>
-		<br />
-		<table border="1" align="center" style="width:100%">
-			<tr>
-		        <td height="500" align="center" valign="middle" style="wifth:75%">Schedule</td>
-		  </tr>
-		</table>
+
+		<form:form action="" method="GET">
+		<legend>Little Sprouts Schedules<br><br></legend>
+		<table width="70%" style="border: 3px;background: rgb(230, 244, 230);"><tr><td>
+			<table id="schedules" class="display" cellspacing="0" width="100%">
+		        <thead>
+		            <tr>
+		                <th>Account Id</th>
+		     			<th>Date</th>
+		     			<th>Room</th>
+		     			<th>Time Start</th>
+		     			<th>Time End</th>
+		            </tr>
+		        </thead>       
+		    </table>
+		</td></tr></table>
+		</form:form>
 	</div>
 
 </body>
