@@ -428,6 +428,10 @@ public class UserController {
 		
 		//Set Total record
 		availabilityJsonObject.setiTotalRecords(availabilitiesList.size());
+		
+		//Convert binary to readable time
+		availabilitiesList = tDataConvertBinaryToTime(availabilitiesList);
+		
 		availabilityJsonObject.setAaData(availabilitiesList);
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -458,6 +462,137 @@ public class UserController {
 		availabilitesList = availabilityService.getAvailabilities();
 
 		return availabilitesList;
+	}
+	
+	private List<Availability> tDataConvertBinaryToTime(List<Availability> availabilitiesList){
+		for (Availability availability : availabilitiesList) {
+			availability.setMonhours(convertBinaryToTime(availability.getMonhours()));
+			availability.setTuehours(convertBinaryToTime(availability.getTuehours()));
+			availability.setWedhours(convertBinaryToTime(availability.getWedhours()));
+			availability.setThuhours(convertBinaryToTime(availability.getThuhours()));
+			availability.setFrihours(convertBinaryToTime(availability.getFrihours()));
+		}
+		return availabilitiesList;
+	}
+	
+	private String convertBinaryToTime(String str){
+		//6:00 start time; 15min increments
+		boolean shift = false;
+		boolean second = false;
+		int start1 = -1;
+		int end1 = -1;
+		int start2 = -1;
+		int end2 = -1;
+		int mins = 0;
+		String temp = ""; 
+		
+		// Step through the string
+		for(int i=0;i<50;i++){
+			if(i==49) {
+				if(shift==true){
+					if(second==true){
+						end2 = 50;
+						break;
+					}
+					end1 = 50;
+					break;
+				}
+			}
+			// Found beginning of a shift
+			if(str.charAt(i)=='1' && shift==false){
+				// We're on shift now
+				shift=true;
+				// First shift of the day
+				if(second==false){
+					start1=i;
+				}
+				// Second shift of the day
+				else 
+					start2=i;
+			}
+			// Not on a shift
+			else if(str.charAt(i)=='0'){
+				// We were just on a shift
+				if(shift==true){
+					// Second shift of the day
+					if(second==true){
+						end2=i;
+						// No more to see here
+						break;
+					}
+					// First shift of the day
+					end1=i;
+					second=true;
+				}
+				shift=false;
+			}
+		}
+		if(start1 >= 0){
+			// Translate the first shift 
+			start1 += 24;
+			mins = start1 % 4;
+			start1 = (start1-mins)/4;
+			if(start1 > 12)
+				start1 -= 12;
+			if(start1 < 10)
+				temp+="0";
+			temp+=(Integer.toString(start1));
+			temp+=(translate(mins));
+			end1 += 24;
+			mins = end1 % 4;
+			end1 = (end1-mins)/4;
+			if(end1 > 12)
+				end1 -= 12;
+			if(end1 < 10)
+				temp+="0";
+			temp+=(Integer.toString(end1));
+			temp+=(translate(mins));
+			
+			// If there's a second shift
+			if(start2 > 0){
+				start2 += 24;
+				mins = start2 % 4;
+				start2 = (start2-mins)/4;
+				if(start2 > 12)
+					start2 -= 12;
+				if(start2 < 10)
+					temp+="0";
+				temp+=(Integer.toString(start2));
+				temp+=(translate(mins));
+				end2 += 24;
+				mins = end2 % 4;
+				end2 = (end2-mins)/4;
+				if(end2 > 12)
+					end2 -= 12;
+				if(end2 < 10)
+					temp+="0";
+				temp+=(Integer.toString(end2));
+				temp+=(translate(mins));
+			}
+			// Format the times
+			for(int i=0;i<temp.length()/4-1;i++){
+				temp = temp.substring(0,5*i+2)+":"+temp.substring(5*i+2);
+			}
+			temp = temp.substring(0,temp.length()-2)+":"+temp.substring(temp.length()-2);
+			temp = temp.substring(0,5)+"-"+temp.substring(5);
+			if(start2 > 0)
+				temp = temp.substring(0,11)+"\n"+temp.substring(11,16)+"-"+temp.substring(16);
+	
+			
+			String stud = temp;
+			return stud;
+		}
+		return "Not Available";
+	}
+	
+	private String translate(int minutes) {
+		if(minutes==0)
+			return "00";
+		else if(minutes==2)
+			return "30";
+		else if(minutes==1)
+			return "15";
+		return "45";
 	}
 	
 	@RequestMapping(value="/trequests", method=RequestMethod.GET)
