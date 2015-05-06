@@ -26,11 +26,17 @@
 		margin: 16px;
 	}
 	</style>
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+  
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	
 	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 	
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -461,6 +467,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 							</div>
 						</div>
 						<br />
+						<br />
 						<div align="left">
 							<input type="checkbox" id="tueCheck1" checked="true" onclick="document.getElementById('tue1').style.visibility=this.checked ? 'visible' : 'hidden';document.getElementById('tue2').style.visibility=(this.checked && document.getElementById('tueCheck2').checked) ? 'visible' : 'hidden'"></input>
 							<label for="requestTimeStartInput">Tuesday Hours</label>
@@ -579,6 +586,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 <%-- 								<form:errors path="tuehours" cssClass="error" /> --%>
 							</div>
 						</div>
+						<br />
 						<br />
 						<div align="left">
 							<input type="checkbox" id="wedCheck1" checked="true" onclick="document.getElementById('wed1').style.visibility=this.checked ? 'visible' : 'hidden';document.getElementById('wed2').style.visibility=(this.checked && document.getElementById('wedCheck2').checked) ? 'visible' : 'hidden'"></input>
@@ -699,6 +707,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 							</div>
 						</div>
 						<br />
+						<br />
 						<div align="left">
 							<input type="checkbox" id="thuCheck1" checked="true" onclick="document.getElementById('thu1').style.visibility=this.checked ? 'visible' : 'hidden';document.getElementById('thu2').style.visibility=(this.checked && document.getElementById('thuCheck2').checked) ? 'visible' : 'hidden'"></input>
 							<label for="requestTimeStartInput">Thursday Hours</label>
@@ -818,6 +827,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 							</div>
 						</div>
 						<br />
+						<br />
 						<div align="left">
 							<input type="checkbox" id="friCheck1" checked="true" onclick="document.getElementById('fri1').style.visibility=this.checked ? 'visible' : 'hidden';document.getElementById('fri2').style.visibility=(this.checked && document.getElementById('friCheck2').checked) ? 'visible' : 'hidden'"></input>
 							<label for="requestTimeStartInput">Friday Hours</label>
@@ -936,6 +946,13 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 <%-- 								<form:errors path="frihours" cssClass="error" /> --%>
 							</div>
 						</div>
+						<script>
+							$(function() {
+								$( "#datepicker" ).datepicker({minDate:0,altField: "#dateSelected",altFormat: "yy-mm-dd"});
+							});
+						</script>
+						Date Effective: <div id="datepicker"></div><input id="dateSelected" type="hidden"></input>
+						<br />
 						<br />
 						<div align="left">
 							<label for="requestTimeStartInput">Note</label>
@@ -955,6 +972,8 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 				</form:form>
 			</div>
 	</div>
-
+<br />
+<br />
+<br />
 </body>
 </html>
