@@ -115,14 +115,11 @@ public class OptaPlannerExamplesApp extends JFrame {
         optaPlannerExamplesApp.pack();
         optaPlannerExamplesApp.setLocationRelativeTo(null);
         optaPlannerExamplesApp.setVisible(true);
-        
-        //generateXMLFile();
     }
     
     public static void generateXMLFile()
     {
     	KING = new xmlKing();
-
 
     	//Test DB connectivity
     	String hibernatePropsFilePath = "D:\\Student Data\\Desktop\\optaplanner-distribution-6.1.0.Final\\examples\\sources\\src\\main\\resources\\hibernate.cfg.xml";
@@ -193,7 +190,6 @@ public class OptaPlannerExamplesApp extends JFrame {
         examplesScrollPane.getHorizontalScrollBar().setUnitIncrement(20);
         examplesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
         contentPane.add(examplesScrollPane, BorderLayout.CENTER);
-        //contentPane.add(createDescriptionPanel(), BorderLayout.SOUTH);
         return contentPane;
     }
 
@@ -202,18 +198,12 @@ public class OptaPlannerExamplesApp extends JFrame {
         examplesPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         GroupLayout layout = new GroupLayout(examplesPanel);
         examplesPanel.setLayout(layout);
-        //JPanel basicExamplesPanel = createBasicExamplesPanel();
-        //JPanel realExamplesPanel = createRealExamplesPanel();
         JPanel difficultExamplesPanel = createDifficultExamplesPanel();
         layout.setHorizontalGroup(layout.createSequentialGroup()
-                //.addComponent(basicExamplesPanel)
                 .addGap(10)
-                //.addComponent(realExamplesPanel)
                 .addGap(10)
                 .addComponent(difficultExamplesPanel));
         layout.setVerticalGroup(layout.createParallelGroup()
-                //.addComponent(basicExamplesPanel)
-                //.addComponent(realExamplesPanel)
                 .addComponent(difficultExamplesPanel));
         return examplesPanel;
     }
@@ -221,15 +211,6 @@ public class OptaPlannerExamplesApp extends JFrame {
     private JPanel createBasicExamplesPanel() {
    
         JPanel panel = new JPanel(new GridLayout(5, 1, 5, 5));
-        //TitledBorder titledBorder = BorderFactory.createTitledBorder("Basic examples");
-        //titledBorder.setTitleColor(TangoColorFactory.CHAMELEON_3);
-        //panel.setBorder(BorderFactory.createCompoundBorder(titledBorder,
-                //BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        //panel.add(createExampleButton(new NQueensApp()));
-       // panel.add(createExampleButton(new CloudBalancingApp()));
-        //panel.add(createExampleButton(new TspApp()));
-        //panel.add(createExampleButton(new DinnerPartyApp()));
-        //panel.add(createExampleButton(new TennisApp()));
         return panel;
         
         
@@ -238,31 +219,12 @@ public class OptaPlannerExamplesApp extends JFrame {
     private JPanel createRealExamplesPanel() {
     	
         JPanel panel = new JPanel(new GridLayout(5, 1, 5, 5));
-        /*
-        TitledBorder titledBorder = BorderFactory.createTitledBorder("Real examples");
-        titledBorder.setTitleColor(TangoColorFactory.BUTTER_3);
-        panel.setBorder(BorderFactory.createCompoundBorder(titledBorder,
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        panel.add(createExampleButton(new CurriculumCourseApp()));
-        panel.add(createExampleButton(new MachineReassignmentApp()));
-        panel.add(createExampleButton(new VehicleRoutingApp()));
-        panel.add(createExampleButton(new ProjectJobSchedulingApp()));
-        panel.add(createExampleButton(new PatientAdmissionScheduleApp()));
-        */
         return panel;
         
     }
 
     private JPanel createDifficultExamplesPanel() {
         JPanel panel = new JPanel(new GridLayout(3, 2, 5, 5));
-        //TitledBorder titledBorder = BorderFactory.createTitledBorder("Difficult examples");
-        //titledBorder.setTitleColor(TangoColorFactory.SCARLET_3);
-        //panel.setBorder(BorderFactory.createCompoundBorder(titledBorder,
-                //BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        //panel.add(createExampleButton(new ExaminationApp()));
-        
-        
-        
         box = new JComboBox();
         box.addItem("2015-03-30");
         box.addItem("2015-04-06");
@@ -274,13 +236,8 @@ public class OptaPlannerExamplesApp extends JFrame {
         box.addItem("2015-05-18");
         panel.add(new JLabel("Select The Week"));
         panel.add(box).setLocation(1, 1);
-        
-        //panel.add(createExampleButton(new NurseRosteringApp()));
-        //panel.add(createExampleButton(new TravelingTournamentApp()));
-        
         panel.add(createGenerateButton(new NurseRosteringApp()));
         panel.add(createExitButton());
-        
         panel.add(new JPanel());
         return panel;
     }

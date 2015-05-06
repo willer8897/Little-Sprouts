@@ -142,8 +142,6 @@ public class SolverAndPersistenceFrame extends JFrame {
         solutionPanel.setSolverAndPersistenceFrame(this);
         registerListeners();
         constraintMatchesDialog = new ConstraintMatchesDialog(this, solutionBusiness);
-        
-        //processOutput();
     }
 
     private void registerListeners() {
@@ -183,14 +181,10 @@ public class SolverAndPersistenceFrame extends JFrame {
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, quickOpenPanel, mainPanel);
         splitPane.setOneTouchExpandable(true);
         splitPane.setResizeWeight(0.2);
-        //return slitPane
-        
-        
         return mainPanel;
     }
     
     private JComponent createImageOverlay() {
-    	//TODO: make this work to make things look nice
     	JLabel label = new JLabel("The schedule is being computed. This can take up to 20 minutes.");
     	return label;
     }
@@ -198,12 +192,6 @@ public class SolverAndPersistenceFrame extends JFrame {
     private JComponent createQuickOpenPanel() {
         JPanel quickOpenPanel = new JPanel(new BorderLayout());
         quickOpenPanel.add(new JLabel("Quick open"), BorderLayout.NORTH);
-        //JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-          //      createQuickOpenUnsolvedPanel(), createQuickOpenSolvedPanel());
-        //splitPane.setResizeWeight(0.8);
-        //splitPane.setBorder(null);
-        //quickOpenPanel.add(splitPane, BorderLayout.CENTER);
-        //return createQuickOpenUnsolvedPanel();
         return quickOpenPanel;
     }
 
@@ -211,8 +199,7 @@ public class SolverAndPersistenceFrame extends JFrame {
         quickOpenUnsolvedPanel = new JPanel();
         
         quickOpenUnsolvedActionList = new ArrayList<Action>();
-        //return quickOpenUnsolvedPanel;
-        
+
         List<File> unsolvedFileList = solutionBusiness.getUnsolvedFileList();
         
         return createQuickOpenPanel(quickOpenUnsolvedPanel, "Unsolved (XStream XML)", quickOpenUnsolvedActionList,
@@ -231,11 +218,9 @@ public class SolverAndPersistenceFrame extends JFrame {
 
     private JComponent createQuickOpenPanel(JPanel panel, String title, List<Action> quickOpenActionList, List<File> fileList) {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-       // refreshQuickOpenPanel(panel, quickOpenActionList, fileList);
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(25);
         scrollPane.setMinimumSize(new Dimension(100, 80));
-        // Size fits into screen resolution 1024*768
         scrollPane.setPreferredSize(new Dimension(180, 200));
         JPanel titlePanel = new JPanel(new BorderLayout());
         titlePanel.add(scrollPane, BorderLayout.CENTER);
@@ -253,12 +238,7 @@ public class SolverAndPersistenceFrame extends JFrame {
             panel.add(noneLabel);
         } else {
             for (File file : fileList) {
-                //Action quickOpenAction = new QuickOpenAction(file);
-                //quickOpenActionList.add(quickOpenAction);
-                //JButton quickOpenButton = new JButton(quickOpenAction);
-                //quickOpenButton.setHorizontalAlignment(SwingConstants.LEFT);
-                //quickOpenButton.setMargin(new Insets(0, 0, 0, 0));
-                //panel.add(quickOpenButton);
+            	//do nothing yo
             }
         }
     }
@@ -275,9 +255,7 @@ public class SolverAndPersistenceFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
-            	//TODO: is this even kosher?
                 solutionBusiness.openSolution(file);
-            	//solutionBusiness.openSolution(new File("C:\\2015-04-06.xml"));
                 setSolutionLoaded();
             } finally {
                 setCursor(Cursor.getDefaultCursor());
@@ -292,16 +270,12 @@ public class SolverAndPersistenceFrame extends JFrame {
 
         importAction = new ImportAction();
         importAction.setEnabled(solutionBusiness.hasImporter());
-        //toolBar.add(new JButton(importAction));
         openAction = new OpenAction();
         openAction.setEnabled(true);
-        //toolBar.add(new JButton(openAction));
         saveAction = new SaveAction();
         saveAction.setEnabled(false);
-        //toolBar.add(new JButton(saveAction));
         exportAction = new ExportAction();
         exportAction.setEnabled(false);
-        //toolBar.add(new JButton(exportAction));
         toolBar.addSeparator();
 
         progressBar = new JProgressBar(0, 100);
@@ -345,14 +319,11 @@ public class SolverAndPersistenceFrame extends JFrame {
             
         	System.out.println("Doing the stuff");
         	String fileString = "C://" + weekStart + "solution.xml";
-            //File fXmlFile = new File("C://2015-04-06solution.xml");
         	File fXmlFile = new File(fileString);
         	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         	org.w3c.dom.Document doc = dBuilder.parse(fXmlFile);
-         
-        	//optional, but recommended
-        	//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+
         	doc.getDocumentElement().normalize();
          
         	System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
@@ -373,18 +344,13 @@ public class SolverAndPersistenceFrame extends JFrame {
         	for (int temp = 0; temp < nList.getLength(); temp++) {
          
         		Node nNode = nList.item(temp);
-         
-        		//System.out.println("\nCurrent Element :" + nNode.getNodeName());
-         
+  
         		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
          
         			Element eElement = (Element) nNode;
-        			//System.out.println("Hello from " + eElement.getAttribute("id"));
-         
-        			//System.out.println("Actual ID : " + eElement.getElementsByTagName("code").item(0).getTextContent());
+
         			employeeMap.put(eElement.getAttribute("id").toString(), eElement.getElementsByTagName("code").item(0).getTextContent());
-        			System.out.println("Mapping employee reference id " + eElement.getAttribute("id") + " to " + eElement.getElementsByTagName("code").item(0).getTextContent());
-         
+
         		}
         	}
         	
@@ -403,10 +369,8 @@ public class SolverAndPersistenceFrame extends JFrame {
         				continue;
         			
         			shiftMap.put(shiftType.getAttribute("id"), list.item(0).getTextContent());
-        			System.out.println("Mapping shift type " + shiftType.getAttribute("id") + " to " + list.item(0).getTextContent());
-        			
+
         			Integer wut = Integer.parseInt(shiftType.getAttribute("id"))-1;
-        			System.out.println("Mapping shift type " + wut + " to " + list.item(0).getTextContent());
         			shiftMap.put(wut, list.item(0).getTextContent());
         		}
         	}
@@ -433,8 +397,6 @@ public class SolverAndPersistenceFrame extends JFrame {
         			if(shiftType.hasAttribute("reference"))
         			{
         				id2typeMap.put(shift.getAttribute("id"), shiftType.getAttribute("reference"));
-            			
-            			System.out.println("Mapping shift id " + shift.getAttribute("id") + " to type id " + shiftType.getAttribute("reference"));
         			}
         			else
         			{
@@ -447,13 +409,8 @@ public class SolverAndPersistenceFrame extends JFrame {
         					Element codeElement = (Element) codeList.item(0);
         					
         					id2typeMap.put(shift.getAttribute("id"), codeElement.getTextContent());
-        					
-        					System.out.println("Mapping shift id " + shift.getAttribute("id") + " to type id " + codeElement.getTextContent());
         				}
         			}
-        			
-        			
-        			
         		}
         	}
         	
@@ -476,32 +433,19 @@ public class SolverAndPersistenceFrame extends JFrame {
         			
         			Element shift = (Element) list1.item(0);
         			Element employee = (Element) list2.item(0);
-        			
-        			//System.out.println("The employee id " + employee.getAttribute("reference") + " maps to " + employeeMap.get(employee.getAttribute("reference")));
-        			
-        			//System.out.println("The shift reference ID is " + shift.getAttribute("reference"));
+
         			String shiftReference = shift.getAttribute("reference");
         			String shiftType = id2typeMap.get(shiftReference).toString();
         			
-        			//System.out.println("The shiftType ID " + shiftType + " maps to " + shiftMap.get(id2typeMap.get(shiftReference)));
-
         			if(shiftMap.get(shiftType) == null)
         				continue;
         			
         			int shiftTypeInt = Integer.parseInt(shiftType);
-        			//System.out.println("shift type int is " + shiftTypeInt);
-        			
+
         			if(shiftMap.get(shiftType) != null)
         			{	
-            			//now retrieve that actual employee and shift id
-            			//System.out.println("Employee " + employeeMap.get(employee.getAttribute("reference")) + " is working the shift " + shiftMap.get(shiftType));
-            		
-            			//if(assignmentMap.containsValue(shiftMap.get(shiftType)))
-            				//assignmentMap.values().remove(shiftMap.get(shiftType));
-            			
             			assignmentMap.put(shiftMap.get(shiftType), employeeMap.get(employee.getAttribute("reference")));
         			}
-
         		}
         	}
         	
@@ -512,11 +456,6 @@ public class SolverAndPersistenceFrame extends JFrame {
         		String shift = (String) it.next();
         		
         		String employee = assignmentMap.get(shift).toString();
-        		
-        		System.out.println(" Employee " + employee + " is working " + shift);
-        		
-        		
-        		//Now write that garbage to the DB
         		
             	//Test DB connectivity
             	String hibernatePropsFilePath = "D:\\Student Data\\Desktop\\optaplanner-distribution-6.1.0.Final\\examples\\sources\\src\\main\\resources\\hibernate.cfg.xml";
@@ -539,15 +478,10 @@ public class SolverAndPersistenceFrame extends JFrame {
             	Session session = factory.openSession();
             	Transaction tx = null;
             	try{
-            		//tx = session.beginTransaction();
             		session.beginTransaction();
-            		
             		
             		Schedule s = new Schedule();
             		s.setId(Integer.parseInt(employee));
-            		
-            		//String ageGroup = ;
-            		//TODO: put em in rooms
             		
             		String description = shiftDescriptionMap.get(Integer.parseInt(shift)).toString();
             		
@@ -580,11 +514,6 @@ public class SolverAndPersistenceFrame extends JFrame {
             			int startIndex = Integer.parseInt(mondayShift.substring(0, delimIndex));
             			int endIndex = Integer.parseInt(mondayShift.substring(delimIndex + 1));
             			
-            			//System.out.println("start index " + startIndex);
-            			//System.out.println("end index" + endIndex);
-            			
-            			//convert to proper time format
-            			
             			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
             			Integer startMinute = (startIndex%4)*15;
             			Integer startTimeInteger = startHour + startMinute;
@@ -602,7 +531,6 @@ public class SolverAndPersistenceFrame extends JFrame {
             			s.setTime_end(endTime);
             			
             			//set the proper date
-                		//System.out.println("Our weekstart is " + weekStart);
                 		delimIndex = weekStart.indexOf("-");
                 		String dateYear = weekStart.substring(0, delimIndex);
                 		String newWeekStart = weekStart.substring(delimIndex + 1);
@@ -610,7 +538,6 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		String dateMonth = newWeekStart.substring(0, delimIndex);
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
                 		System.out.println("Date Month is " + dateMonth);
-                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
                 		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth)- 1, Integer.parseInt(dateDay));
                 		System.out.println(date.getTime());
                 		s.setDate(date.getTime());
@@ -625,9 +552,6 @@ public class SolverAndPersistenceFrame extends JFrame {
             			int startIndex = Integer.parseInt(tuesdayShift.substring(0, delimIndex));
             			int endIndex = Integer.parseInt(tuesdayShift.substring(delimIndex + 1));
             			
-            			//System.out.println("start index " + startIndex);
-            			//System.out.println("end index" + endIndex);
-            			
             			//convert to proper time format
             			
             			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
@@ -647,7 +571,6 @@ public class SolverAndPersistenceFrame extends JFrame {
             			s.setTime_end(endTime);
             			
             			//set the proper date
-                		//System.out.println("Our weekstart is " + weekStart);
                 		delimIndex = weekStart.indexOf("-");
                 		String dateYear = weekStart.substring(0, delimIndex);
                 		String newWeekStart = weekStart.substring(delimIndex + 1);
@@ -655,10 +578,8 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		String dateMonth = newWeekStart.substring(0, delimIndex);
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
                 		
-                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
                 		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth) - 1, Integer.parseInt(dateDay));
                 		date.add(Calendar.DAY_OF_MONTH, +1);
-                		//System.out.println(date.getTime());
                 		s.setDate(date.getTime());
             		}
             		else if(shiftId < 400)
@@ -670,12 +591,7 @@ public class SolverAndPersistenceFrame extends JFrame {
             			int delimIndex = wednesdayShift.indexOf("-");
             			int startIndex = Integer.parseInt(wednesdayShift.substring(0, delimIndex));
             			int endIndex = Integer.parseInt(wednesdayShift.substring(delimIndex + 1));
-            			
-            			//System.out.println("start index " + startIndex);
-            			//System.out.println("end index" + endIndex);
-            			
-            			//convert to proper time format
-            			
+
             			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
             			Integer startMinute = (startIndex%4)*15;
             			Integer startTimeInteger = startHour + startMinute;
@@ -693,7 +609,6 @@ public class SolverAndPersistenceFrame extends JFrame {
             			s.setTime_end(endTime);
             			
             			//set the proper date
-                		//System.out.println("Our weekstart is " + weekStart);
                 		delimIndex = weekStart.indexOf("-");
                 		String dateYear = weekStart.substring(0, delimIndex);
                 		String newWeekStart = weekStart.substring(delimIndex + 1);
@@ -701,10 +616,8 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		String dateMonth = newWeekStart.substring(0, delimIndex);
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
                 		
-                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
                 		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth) - 1, Integer.parseInt(dateDay));
                 		date.add(Calendar.DAY_OF_MONTH, +2);
-                		//System.out.println(date.getTime());
                 		s.setDate(date.getTime());
             		}
             		else if(shiftId < 500)
@@ -716,12 +629,7 @@ public class SolverAndPersistenceFrame extends JFrame {
             			int delimIndex = thursdayShift.indexOf("-");
             			int startIndex = Integer.parseInt(thursdayShift.substring(0, delimIndex));
             			int endIndex = Integer.parseInt(thursdayShift.substring(delimIndex + 1));
-            			
-            			//System.out.println("start index " + startIndex);
-            			//System.out.println("end index" + endIndex);
-            			
-            			//convert to proper time format
-            			
+
             			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
             			Integer startMinute = (startIndex%4)*15;
             			Integer startTimeInteger = startHour + startMinute;
@@ -739,7 +647,6 @@ public class SolverAndPersistenceFrame extends JFrame {
             			s.setTime_end(endTime);
             			
             			//set the proper date
-                		//System.out.println("Our weekstart is " + weekStart);
                 		delimIndex = weekStart.indexOf("-");
                 		String dateYear = weekStart.substring(0, delimIndex);
                 		String newWeekStart = weekStart.substring(delimIndex + 1);
@@ -747,10 +654,8 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		String dateMonth = newWeekStart.substring(0, delimIndex);
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
                 		
-                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
                 		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth) - 1, Integer.parseInt(dateDay));
                 		date.add(Calendar.DAY_OF_MONTH, +3);
-                		//System.out.println(date.getTime());
                 		s.setDate(date.getTime());
             		}
             		else
@@ -763,11 +668,6 @@ public class SolverAndPersistenceFrame extends JFrame {
             			int startIndex = Integer.parseInt(fridayShift.substring(0, delimIndex));
             			int endIndex = Integer.parseInt(fridayShift.substring(delimIndex + 1));
             			
-            			//System.out.println("start index " + startIndex);
-            			//System.out.println("end index" + endIndex);
-            			
-            			//convert to proper time format
-            			
             			Integer startHour = 600 + (Math.floorDiv(startIndex, 4)*100);
             			Integer startMinute = (startIndex%4)*15;
             			Integer startTimeInteger = startHour + startMinute;
@@ -785,7 +685,6 @@ public class SolverAndPersistenceFrame extends JFrame {
             			s.setTime_end(endTime);
             			
             			//set the proper date
-                		//System.out.println("Our weekstart is " + weekStart);
                 		delimIndex = weekStart.indexOf("-");
                 		String dateYear = weekStart.substring(0, delimIndex);
                 		String newWeekStart = weekStart.substring(delimIndex + 1);
@@ -793,30 +692,20 @@ public class SolverAndPersistenceFrame extends JFrame {
                 		String dateMonth = newWeekStart.substring(0, delimIndex);
                 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
                 		
-                		//System.out.println("Creating a date with day " + dateDay + " and month " + dateMonth + " and year " + dateYear);
                 		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth) - 1, Integer.parseInt(dateDay));
                 		date.add(Calendar.DAY_OF_MONTH, +4);
-                		//System.out.println(date.getTime());
                 		s.setDate(date.getTime());
             		}
-            		
-            		
-            		
-            		
+
             		session.save(s);
-            		
-            		
             		session.getTransaction().commit();
-            		//tx.commit();
+
             	}catch (HibernateException e) {
             		if (tx!=null) tx.rollback();
             		e.printStackTrace(); 
             	}finally {
             		session.close(); 
             	}
-        		
-        		
-        		
         	}
         }
         catch(Exception e)
@@ -857,12 +746,6 @@ public class SolverAndPersistenceFrame extends JFrame {
                 setSolvingState(false);
                 resetScreen();
                 System.out.println("Done");
-                
-                //TODO:
-                //run heathers code here
-            
-                //TOO:
-                //display a success screen
                 
                 if(!interrupted)
                 {
@@ -938,26 +821,20 @@ public class SolverAndPersistenceFrame extends JFrame {
     	}
     	
     	System.out.println("Solver and PErsistence has received " + fridayShifts.size() + " shifts for friday");
-    	
-    	//processOutput();
     }
     
     public void getWeekStart(String week)
     {
     	weekStart = week;
     	System.out.println("Passed weekstart " + weekStart);
-    	//processOutput();
     }
     
     public void getDescriptionMap(HashMap map)
     {
     	shiftDescriptionMap = map;
     	System.out.println("Passed description map with " + shiftDescriptionMap.size() + " mappings");
-    	//processOutput();
     }
     
-
-
     private class TerminateSolvingEarlyAction extends AbstractAction {
 
         public TerminateSolvingEarlyAction() {
@@ -1085,9 +962,7 @@ public class SolverAndPersistenceFrame extends JFrame {
             if (approved == JFileChooser.APPROVE_OPTION) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
-                    //solutionBusiness.importSolution(fileChooser.getSelectedFile());
                 	String fileString = "C:\\" + weekStart + ".xml";
-                	//solutionBusiness.importSolution(new File("C:\\2015-04-06.xml"));
                 	solutionBusiness.importSolution(new File(fileString));
                     setSolutionLoaded();
                 } finally {
@@ -1101,8 +976,6 @@ public class SolverAndPersistenceFrame extends JFrame {
     public void doTheDeed()
     {	
     	try {
-            //solutionBusiness.importSolution(fileChooser.getSelectedFile());
-        	//solutionBusiness.importSolution(new File("C:\\2015-04-06.xml"));
     		String fileString = "C:\\" + weekStart + ".xml";
     		solutionBusiness.importSolution(new File(fileString));
             setSolutionLoaded();
@@ -1175,15 +1048,12 @@ public class SolverAndPersistenceFrame extends JFrame {
         scorePanel.setBorder(BorderFactory.createEtchedBorder());
         showConstraintMatchesDialogAction = new ShowConstraintMatchesDialogAction();
         showConstraintMatchesDialogAction.setEnabled(false);
-        //scorePanel.add(new JButton(showConstraintMatchesDialogAction), BorderLayout.WEST);
         scoreField = new JTextField("Score:");
         scoreField.setEditable(false);
         scoreField.setForeground(Color.BLACK);
         scoreField.setBorder(BorderFactory.createLoweredBevelBorder());
-        //scorePanel.add(scoreField, BorderLayout.CENTER);
         refreshScreenDuringSolvingCheckBox = new JCheckBox("Refresh screen during solving",
                 solutionPanel.isRefreshScreenDuringSolving());
-       // scorePanel.add(refreshScreenDuringSolvingCheckBox, BorderLayout.EAST);
         return scorePanel;
     }
 
@@ -1211,18 +1081,6 @@ public class SolverAndPersistenceFrame extends JFrame {
     }
 
     private void setSolvingState(boolean solving) {
-    	/*
-        for (Action action : quickOpenUnsolvedActionList) {
-            action.setEnabled(!solving);
-        }
-        for (Action action : quickOpenSolvedActionList) {
-            action.setEnabled(!solving);
-        }
-        */
-        //importAction.setEnabled(!solving && solutionBusiness.hasImporter());
-        //openAction.setEnabled(!solving);
-        //saveAction.setEnabled(!solving);
-        //exportAction.setEnabled(!solving && solutionBusiness.hasExporter());
         solveAction.setEnabled(!solving);
         solveButton.setVisible(!solving);
         terminateSolvingEarlyAction.setEnabled(solving);
@@ -1240,9 +1098,6 @@ public class SolverAndPersistenceFrame extends JFrame {
         validate();
         scoreField.setForeground(determineScoreFieldForeground(solutionBusiness.getScore()));
         scoreField.setText("Score: " + solutionBusiness.getScore());
-        
-        //TODO:
-        
     }
 
     private Color determineScoreFieldForeground(Score<?> score) {

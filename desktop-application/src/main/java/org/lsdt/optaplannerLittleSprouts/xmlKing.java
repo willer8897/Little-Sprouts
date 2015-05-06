@@ -1,3 +1,9 @@
+/*
+ * Created by RAW, Spring 2015
+ * Please excuse the poor coding habits and the messy code. I was pressed for time and had much code to write.
+ * This code is so janky that I almost take pride in it.
+ */
+
 package org.lsdt.optaplannerLittleSprouts;
 
 import java.util.ArrayList;
@@ -9,6 +15,7 @@ import java.util.HashMap;
 import java.io.File;
 import java.math.BigInteger;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,6 +26,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
  
+
 
 
 
@@ -136,7 +144,7 @@ public class xmlKing
 	//An object for generating an Optaplanner xml contraint file
 	public xmlKing()
 	{
-		
+		//blank constructors is how we roll
 	}
 	
 	//get passed the user data
@@ -292,6 +300,20 @@ public class xmlKing
 		teacherAvailability.clear();
 		teacherAvailability.addAll(mostRecentTeacherAvailabilities.values());
 		
+		if(teacherAvailability.size() == 0)
+		{
+			Object[] options = {"OK"};
+        	int n = JOptionPane.showOptionDialog(null,
+        			"No teacher availability exists for that date","Failure!",
+        			JOptionPane.PLAIN_MESSAGE,
+        			JOptionPane.QUESTION_MESSAGE,
+        			null,
+        			options,
+        			options[0]);
+
+        	System.exit(0);
+		}
+		
 		System.out.println("We are working with " + teacherAvailability.size() + " availability object");
 		
 		//now the children
@@ -340,37 +362,22 @@ public class xmlKing
 		childAvailability.clear();
 		childAvailability.addAll(mostRecentChildAvailabilities.values());
 		
+		if(childAvailability.size() == 0)
+		{
+			Object[] options = {"OK"};
+        	int n = JOptionPane.showOptionDialog(null,
+        			"No child availability exists for that date","Failure!",
+        			JOptionPane.PLAIN_MESSAGE,
+        			JOptionPane.QUESTION_MESSAGE,
+        			null,
+        			options,
+        			options[0]);
+
+        	System.exit(0);
+		}
+		
 		System.out.println("We are working with " + childAvailability.size() + " child availability objects");
-		
-		//get the most recent availability object for each teacher
-		//TODO: retrieve actual availabilities based on weekstart
-		//remove all availabilities that are not for the week we want
-		/*
-		ArrayList<Availability> availabilitiesToRemove = new ArrayList<Availability>();
-		for(Availability a : teacherAvailability)
-		{
-			if(a.getWeekstart().toString().compareTo(weekStart) != 0)
-			{
-				System.out.println("Removing " + a.getWeekstart().toString() +" as it is not " + weekStart);
-				availabilitiesToRemove.add(a);
-			}
-		}
-		teacherAvailability.removeAll(availabilitiesToRemove);
-		*/
-		//TODO: is this needed?
-		/*
-		if(!teacherAvailability.isEmpty())
-		{
-			weekStartString = teacherAvailability.get(0).getWeekstart().toString();
-			long weekEndLong = teacherAvailability.get(0).getWeekstart().getTime() + 604800000;
-			Date weekEndDate = new Date();
-			weekEndDate.setTime(weekEndLong);
-			System.out.println("Start date is " + weekStartString);
-			System.out.println("End date is " + weekEndDate.toString() );
-			
-		}
-		*/
-		
+
 		//get everything read for XML writing
 		calculateNeededTeachers();
 		

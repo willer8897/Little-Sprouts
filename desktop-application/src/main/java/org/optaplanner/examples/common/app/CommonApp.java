@@ -97,7 +97,7 @@ public abstract class CommonApp extends LoggingMain {
     		,ArrayList<String> thursdayShifts, ArrayList<String> fridayShifts, String weekStart, HashMap map) {
         solutionBusiness = createSolutionBusiness();
         solverAndPersistenceFrame = new SolverAndPersistenceFrame(
-                solutionBusiness, createSolutionPanel(), "Little Sprout!s");
+                solutionBusiness, createSolutionPanel(), "Little Sprouts");
         solverAndPersistenceFrame.setDefaultCloseOperation(exitOnClose ? WindowConstants.EXIT_ON_CLOSE : WindowConstants.DISPOSE_ON_CLOSE);
         solverAndPersistenceFrame.init(centerForComponent);
         solverAndPersistenceFrame.setVisible(true);
