@@ -11,9 +11,10 @@ public class Availability {
 	private String thuhours;
 	private String frihours;
 	private int is_child;
+	private int availability_id;
 	
 	public Availability(){}
-	public Availability(Date weekstart, String monhours, String tuehours, String wedhours, String thuhours, String frihours, int is_child){
+	public Availability(Date weekstart, String monhours, String tuehours, String wedhours, String thuhours, String frihours, int is_child, int availability_id){
 		this.weekstart = weekstart;
 		this.monhours = monhours;
 		this.tuehours = tuehours;
@@ -21,6 +22,7 @@ public class Availability {
 		this.thuhours = thuhours;
 		this.frihours = frihours;
 		this.is_child = is_child;
+		this.availability_id = availability_id;
 	}
 	
 	public int getId() {
@@ -28,6 +30,13 @@ public class Availability {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getAvailability_id() {
+		return availability_id;
+	}
+	public void setAvailability_id(int availability_id) {
+		this.availability_id = availability_id;
 	}
 	public Date getWeekstart() {
 		return weekstart;

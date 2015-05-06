@@ -161,7 +161,6 @@ public class xmlKing
 		teacherAvailability.addAll(avail);
 		
 		System.out.println("Successfully passed " + teacherAvailability.size() + " teacher availability data chunks to the KING");
-		
 	}
 	
 	//get passed the child data
@@ -224,7 +223,10 @@ public class xmlKing
 		String dateMonth = newWeekStart.substring(0, delimIndex);
 		String dateDay = newWeekStart.substring(newWeekStart.indexOf("-") + 1);
 		Calendar date = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
+		Calendar date2 = new GregorianCalendar(Integer.parseInt(dateYear), Integer.parseInt(dateMonth), Integer.parseInt(dateDay));
 		date.add(Calendar.DAY_OF_MONTH, + 7);
+		date2.add(Calendar.MONTH, - 1);
+		//date2.add(Calendar.DAY_OF_MONTH, + 1);
 		
 		int dateMonthInt = date.get(Calendar.MONTH);
 		String dateMonthString = new Integer(dateMonthInt).toString();
@@ -242,6 +244,103 @@ public class xmlKing
 		weekEndString = date.get(Calendar.YEAR) + "-" + dateMonthString + "-" + dateDayString;
 		
 		System.out.println(weekEndString);
+		
+		HashMap mostRecentTeacherAvailabilities = new HashMap();
+		HashMap mostRecentChildAvailabilities = new HashMap();
+		for(Availability a : teacherAvailability)
+		{
+			String availabilityDateString = a.getWeekstart().toString();
+			
+			//The Date before() and after() are not working so lets make our own lol
+			delimIndex = availabilityDateString.indexOf("-");
+			String dateYear2 = availabilityDateString.substring(0, delimIndex);
+			String newAvailabilityDateString = availabilityDateString.substring(delimIndex + 1);
+			delimIndex = newAvailabilityDateString.indexOf("-");
+			String dateMonth2 = newAvailabilityDateString.substring(0, delimIndex);
+			String dateDay2 = newAvailabilityDateString.substring(newAvailabilityDateString.indexOf("-") + 1);
+			long availabilityDateWeight = Integer.parseInt(dateYear2)*10000 + Integer.parseInt(dateMonth2)*100 + Integer.parseInt(dateDay2);
+			long weekStartDateWeight = Integer.parseInt(dateYear)*10000 + Integer.parseInt(dateMonth)*100 + Integer.parseInt(dateDay);
+			
+
+			//is the Availability object for a week later than the one of interest? If so ignore it
+			if(availabilityDateWeight > weekStartDateWeight)
+			{
+				System.out.println("The availability object was ignored because " + availabilityDateString + " is after " + date2.getTime());
+				System.out.println(availabilityDateWeight + " > " + weekStartDateWeight);
+				
+				continue;
+			}
+			else
+			{
+				System.out.println("The availability object was not ingored");
+				System.out.println(availabilityDateWeight + " < " + weekStartDateWeight);
+			}
+			
+			if(mostRecentTeacherAvailabilities.containsKey(a.getId()))
+			{
+				//check if the current availability object more recent
+				Availability currentMostRecent = (Availability) mostRecentTeacherAvailabilities.get(a.getId());
+				if(a.getWeekstart().after(currentMostRecent.getWeekstart()))
+				{
+					mostRecentTeacherAvailabilities.put(a.getId(), a);
+				}
+			}
+			else
+				mostRecentTeacherAvailabilities.put(a.getId(), a);
+		}
+		
+		teacherAvailability.clear();
+		teacherAvailability.addAll(mostRecentTeacherAvailabilities.values());
+		
+		System.out.println("We are working with " + teacherAvailability.size() + " availability object");
+		
+		//now the children
+		for(Availability a : childAvailability)
+		{
+			String availabilityDateString = a.getWeekstart().toString();
+			
+			//The Date before() and after() are not working so lets make our own lol
+			delimIndex = availabilityDateString.indexOf("-");
+			String dateYear2 = availabilityDateString.substring(0, delimIndex);
+			String newAvailabilityDateString = availabilityDateString.substring(delimIndex + 1);
+			delimIndex = newAvailabilityDateString.indexOf("-");
+			String dateMonth2 = newAvailabilityDateString.substring(0, delimIndex);
+			String dateDay2 = newAvailabilityDateString.substring(newAvailabilityDateString.indexOf("-") + 1);
+			long availabilityDateWeight = Integer.parseInt(dateYear2)*10000 + Integer.parseInt(dateMonth2)*100 + Integer.parseInt(dateDay2);
+			long weekStartDateWeight = Integer.parseInt(dateYear)*10000 + Integer.parseInt(dateMonth)*100 + Integer.parseInt(dateDay);
+			
+
+			//is the Availability object for a week later than the one of interest? If so ignore it
+			if(availabilityDateWeight > weekStartDateWeight)
+			{
+				System.out.println("The availability object was ignored because " + availabilityDateString + " is after " + date2.getTime());
+				System.out.println(availabilityDateWeight + " > " + weekStartDateWeight);
+				
+				continue;
+			}
+			else
+			{
+				System.out.println("The availability object was not ingored");
+				System.out.println(availabilityDateWeight + " < " + weekStartDateWeight);
+			}
+			
+			if(mostRecentChildAvailabilities.containsKey(a.getId()))
+			{
+				//check if the current availability object more recent
+				Availability currentMostRecent = (Availability) mostRecentChildAvailabilities.get(a.getId());
+				if(a.getWeekstart().after(currentMostRecent.getWeekstart()))
+				{
+					mostRecentChildAvailabilities.put(a.getId(), a);
+				}
+			}
+			else
+				mostRecentChildAvailabilities.put(a.getId(), a);
+		}
+		
+		childAvailability.clear();
+		childAvailability.addAll(mostRecentChildAvailabilities.values());
+		
+		System.out.println("We are working with " + childAvailability.size() + " child availability objects");
 		
 		//get the most recent availability object for each teacher
 		//TODO: retrieve actual availabilities based on weekstart

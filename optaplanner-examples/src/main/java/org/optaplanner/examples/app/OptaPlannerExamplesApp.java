@@ -75,6 +75,7 @@ import org.optaplanner.examples.vehiclerouting.app.VehicleRoutingApp;
 
 
 
+
 //our imports
 import java.io.File;
 import java.util.ArrayList;
@@ -148,12 +149,12 @@ public class OptaPlannerExamplesApp extends JFrame {
     		ArrayList<Child> children = (ArrayList<Child>) session.createQuery("FROM Child").list(); 
     		ArrayList<Availability> childAvailabilities = (ArrayList<Availability>) session.createQuery("FROM Availability WHERE is_child = 1").list(); 
     		ArrayList<Availability> teacherAvailabilities = (ArrayList<Availability>) session.createQuery("FROM Availability WHERE is_child = 0").list();
-
+    		
     		KING.retrieveUserData(users);
     		KING.retrieveChildAvailabilityData(childAvailabilities);
     		KING.retrieveTeacherAvailabilityData(teacherAvailabilities);
     		KING.retrieveChildData(children);
-    		
+    		KING.setWeekStart(box.getSelectedItem().toString());
     		KING.doItAll(box.getSelectedItem().toString());
 
     		tx.commit();
@@ -263,9 +264,14 @@ public class OptaPlannerExamplesApp extends JFrame {
         
         
         box = new JComboBox();
-        box.addItem("2014-04-06");
-        box.addItem("2014-04-13");
-        box.addItem("2014-04-20");
+        box.addItem("2015-03-30");
+        box.addItem("2015-04-06");
+        box.addItem("2015-04-13");
+        box.addItem("2015-04-20");
+        box.addItem("2015-04-27");
+        box.addItem("2015-05-04");
+        box.addItem("2015-05-11");
+        box.addItem("2015-05-18");
         panel.add(new JLabel("Select The Week"));
         panel.add(box).setLocation(1, 1);
         
@@ -283,8 +289,6 @@ public class OptaPlannerExamplesApp extends JFrame {
         JButton button = new JButton(new AbstractAction("Generate Schedule") {
             public void actionPerformed(ActionEvent e) {
             	System.out.println("Generating");
-            	//KING.setWeekStart(box.getSelectedItem().toString());
-            	//KING.doItAll(box.getSelectedItem().toString());
             	contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             	generateXMLFile();
                 commonApp.init(OptaPlannerExamplesApp.this, false, KING.getMondayShifts(), KING.getTuesdayShfits() , KING.getWednesdayShfits() , KING.getThursdayShfits() , KING.getFridayShfits(), KING.getWeekStart(), KING.getDescriptionMap() );
