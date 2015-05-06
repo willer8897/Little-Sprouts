@@ -44,7 +44,7 @@
 
 <script>
 function processInput(){
-	toStraaang(
+	document.getElementById('monSubmit').value=toStraaang(
 			document.getElementById('monCheck1'),
 			document.getElementById('monCheck2'),
 			document.getElementById('monErr1'),
@@ -63,7 +63,7 @@ function processInput(){
 			document.getElementById('monpm2'),
 			document.getElementById('monpm3'),
 			document.getElementById('monpm4'));
-	toStraaang(
+	document.getElementById('tueSubmit').value=toStraaang(
 			document.getElementById('tueCheck1'),
 			document.getElementById('tueCheck2'),
 			document.getElementById('tueErr1'),
@@ -82,7 +82,7 @@ function processInput(){
 			document.getElementById('tuepm2'),
 			document.getElementById('tuepm3'),
 			document.getElementById('tuepm4'));
-	toStraaang(
+	document.getElementById('wedSubmit').value=toStraaang(
 			document.getElementById('wedCheck1'),
 			document.getElementById('wedCheck2'),
 			document.getElementById('wedErr1'),
@@ -101,7 +101,7 @@ function processInput(){
 			document.getElementById('wedpm2'),
 			document.getElementById('wedpm3'),
 			document.getElementById('wedpm4'));
-	toStraaang(
+	document.getElementById('thuSubmit').value=toStraaang(
 			document.getElementById('thuCheck1'),
 			document.getElementById('thuCheck2'),
 			document.getElementById('thuErr1'),
@@ -120,7 +120,7 @@ function processInput(){
 			document.getElementById('thupm2'),
 			document.getElementById('thupm3'),
 			document.getElementById('thupm4'));
-	toStraaang(
+	document.getElementById('friSubmit').value=toStraaang(
 			document.getElementById('friCheck1'),
 			document.getElementById('friCheck2'),
 			document.getElementById('friErr1'),
@@ -139,6 +139,9 @@ function processInput(){
 			document.getElementById('fripm2'),
 			document.getElementById('fripm3'),
 			document.getElementById('fripm4'));
+	document.getElementById('dateSubmit').value=document.getElementById('dateInput').value;
+	document.getElementById('noteSubmit').value=document.getElementById('noteInput').value;
+	document.forms["finalRequestForm"].submit();
 }
 
 function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, min3, min4, pm1, pm2, pm3, pm4)
@@ -315,8 +318,9 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 		for(i=0;i<50;i++){
 			printout += finalHours[i];
 		}
-		// Debug processed output\
-		window.alert(printout);
+		// Debug processed output
+		// window.alert(printout);
+		return printout;
 	}
 }
 </script>
@@ -823,7 +827,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="thuErr4" class="errorMessage"></span>
-<%-- 								<form:errors path="thuhours" cssClass="error" /> --%>
+ 								<form:errors path="thuhours" cssClass="error" />
 							</div>
 						</div>
 						<br />
@@ -886,7 +890,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 									<option value="0">am</option>
 									<option value="48">pm</option>
 								</select><span id="friErr2" class="errorMessage"></span>
-<%-- 								<form:errors path="frihours" cssClass="error" /> --%>
+ 								<form:errors path="frihours" cssClass="error" />
 							</div>
 							</br>
 							<div id='fri2' style="visibility:hidden">
@@ -948,18 +952,18 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 						</div>
 						<script>
 							$(function() {
-								$( "#datepicker" ).datepicker({minDate:0,altField: "#dateSelected",altFormat: "yy-mm-dd"});
+								$( "#datepicker" ).datepicker({minDate:0,altField: "#dateInput",altFormat: "y-mm-dd"});
 							});
 						</script>
-						Date Effective: <div id="datepicker"></div><input id="dateSelected" type="hidden"></input>
+						Date Effective: <div id="datepicker"></div><input id="dateInput" type="hidden"></input>
 						<br />
 						<br />
 						<div align="left">
-							<label for="requestTimeStartInput">Note</label>
+							<label for="requestTimeStartInput"></label>
 							<div>
 								<form:textarea
-								 type="text" path="request_note" id="dateInput"
-									placeholder="Note" class="form-control" />
+								 type="text" path="request_note" id="noteInput"
+									placeholder="Note" class="form-control" maxlength="255"/>
 								<form:errors path="request_note" cssClass="error" />
 							</div>
 						</div>
@@ -969,11 +973,26 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 						</div>
 	
 					</fieldset>
-				</form:form>
+				</form:form> -->
 			</div>
 	</div>
 <br />
 <br />
 <br />
+<form:form id="finalRequestForm" method="post"
+	 modelAttribute="request">
+	<fieldset>
+		<form:input type="text" path="account_id" class="form-control" id="idSubmit"/>
+		<form:input type="text" path="week_start" class="form-control" id="dateSubmit"/>
+		<form:input type="text" path="monhours" class="form-control" id="monSubmit"/>
+		<form:input type="text" path="tuehours" class="form-control" id="tueSubmit"/>
+		<form:input type="text" path="wedhours" class="form-control" id="wedSubmit"/>
+		<form:input type="text" path="thuhours" class="form-control" id="thuSubmit"/>
+		<form:input type="text" path="frihours" class="form-control" id="friSubmit"/>
+		<form:input type="text" path="isChild" class="form-control" value="0"/>
+		<form:input type="text" path="request_note" class="form-control" id="noteSubmit"/>
+		<button type="button" class="btn btn-primary" onclick="processInput()">Submit Request</button>
+	</fieldset>
+</form:form>
 </body>
 </html>

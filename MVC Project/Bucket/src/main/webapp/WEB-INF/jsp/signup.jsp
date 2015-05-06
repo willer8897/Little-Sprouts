@@ -10,7 +10,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Little Sprouts Signup</title>
+	<title>Little Sprouts Registration</title>
 	<link href="assets/css/littleSproutsStyle.css" rel="stylesheet" type="text/css" />
 	<style>
 	.error {
@@ -75,7 +75,7 @@
 			<form:form id="myForm" method="post"
 				 modelAttribute="user">
 				<fieldset>
-					<legend>User Signup Form</legend>
+					<legend>User Registration Form</legend>
 	
 					<div align="left">
 						<label for="userNameInput">User Name</label>

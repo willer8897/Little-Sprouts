@@ -603,12 +603,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/trequests", method=RequestMethod.POST)
-	public String trequests(@Valid @ModelAttribute("request") Request request, BindingResult result, Model model) {
+	public String trequests(@ModelAttribute("request") Request request, BindingResult result, Model model) {
 	
 		if (result.hasErrors()) {
 			return "trequests";
 		} else {
 			requestService.save(request);
+			model.addAttribute("message", "Saved request details");
 			return "trequests";
 		}
 	}

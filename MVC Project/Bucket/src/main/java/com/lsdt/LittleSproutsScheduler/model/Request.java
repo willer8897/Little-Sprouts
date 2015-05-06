@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="Request")
 public class Request {
 
-	@JoinColumn(name="account_id")
+	//@JoinColumn(name="account_id")
 	private int account_id;
 	
 	private Date week_start;

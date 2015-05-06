@@ -23,7 +23,7 @@
 			<legend align="center">Scheduling Service</legend>
 			<div>
 				<a href="login.html" class="btn btn-primary" role="button">Login</a>
-				<a href="signup.html" class="btn btn-primary" role="button">Signup</a>
+				<a href="signup.html" class="btn btn-primary" role="button">Register</a>
 			</div>
 		</div>
 	</div>
