@@ -19,6 +19,11 @@ public class UserServiceImpl implements UserService {
 	public User save(User user) {
 		return userRepository.save(user);
 	}
+	//Heather's code
+	public void delete(User user){
+		 this.userRepository.delete(user);
+
+	}
 
 	public boolean findByLogin(String username, String password) {
 		User stud = userRepository.findByUserName(username);

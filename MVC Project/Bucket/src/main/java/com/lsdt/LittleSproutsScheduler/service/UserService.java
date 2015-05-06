@@ -10,4 +10,7 @@ public interface UserService {
   boolean findByLogin(String userName, String password);
   boolean findByUserName(String userName);
   List<User> getUsers();
+  //new user , delete user user method like save instead of .save just use delete.
+  void delete(User user);
+  
 }
