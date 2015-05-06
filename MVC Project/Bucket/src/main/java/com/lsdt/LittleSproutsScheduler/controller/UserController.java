@@ -27,13 +27,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.lsdt.LittleSproutsScheduler.json.AvailabilityJsonObject;
 import com.lsdt.LittleSproutsScheduler.json.RequestJsonObject;
 import com.lsdt.LittleSproutsScheduler.json.ScheduleJsonObject;
 import com.lsdt.LittleSproutsScheduler.json.UserJsonObject;
+import com.lsdt.LittleSproutsScheduler.model.Availability;
 import com.lsdt.LittleSproutsScheduler.model.Request;
 import com.lsdt.LittleSproutsScheduler.model.Schedule;
 import com.lsdt.LittleSproutsScheduler.model.User;
 import com.lsdt.LittleSproutsScheduler.model.UserLogin;
+import com.lsdt.LittleSproutsScheduler.service.AvailabilityService;
 import com.lsdt.LittleSproutsScheduler.service.ScheduleService;
 import com.lsdt.LittleSproutsScheduler.service.UserService;
 import com.lsdt.LittleSproutsScheduler.service.RequestService;
@@ -50,6 +53,9 @@ public class UserController {
 	
 	@Autowired
 	private ScheduleService scheduleService;
+	
+	@Autowired
+	private AvailabilityService availabilityService;
 	
 	// ------------------------------------------------------------ Sign up --------------------------------------------------
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -393,6 +399,65 @@ public class UserController {
 	public String tavailability(Model model) {
 		
 		return "tavailability";
+	}
+	
+	@RequestMapping(value = "/tavailability", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public @ResponseBody String tAvailabilityDataTable(HttpServletRequest  request) throws IOException {
+		
+    	//Fetch the page number from client
+    	Integer pageNumber = 0;
+    	if (null != request.getParameter("iDisplayStart"))
+    		pageNumber = (Integer.valueOf(request.getParameter("iDisplayStart"))/10)+1;		
+    	
+    	//Fetch search parameter
+    	String searchParameter = request.getParameter("sSearch");
+    	
+    	//Fetch Page display length
+    	Integer pageDisplayLength = Integer.valueOf(request.getParameter("iDisplayLength"));
+    	
+    	//Create page list data
+    	List<Availability> availabilitiesList = tCreateAvailabilityPaginationData(pageDisplayLength);
+		
+		//Search functionality: Returns filtered list based on search parameter
+		availabilitiesList = tGetAvailabilityListBasedOnSearchParameter(searchParameter,availabilitiesList);
+		
+		AvailabilityJsonObject availabilityJsonObject = new AvailabilityJsonObject();
+		
+		//Set Total display record
+		availabilityJsonObject.setiTotalDisplayRecords(availabilitiesList.size());
+		
+		//Set Total record
+		availabilityJsonObject.setiTotalRecords(availabilitiesList.size());
+		availabilityJsonObject.setAaData(availabilitiesList);
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json2 = gson.toJson(availabilityJsonObject);
+	
+		return json2;
+    }
+	
+	private List<Availability> tGetAvailabilityListBasedOnSearchParameter(String searchParameter,List<Availability> availabilitiesList) {
+		
+		if (null != searchParameter && !searchParameter.equals("")) {
+			List<Availability> availabilitiesListForSearch = new ArrayList<Availability>();
+			searchParameter = searchParameter.toUpperCase();
+			for (Availability availability : availabilitiesList) {
+				if (availability.getMonhours().indexOf(searchParameter)!= -1 || availability.getTuehours().toUpperCase().indexOf(searchParameter)!= -1) {
+					availabilitiesListForSearch.add(availability);					
+				}
+				
+			}
+			availabilitiesList = availabilitiesListForSearch;
+			availabilitiesListForSearch = null;
+		}
+		return availabilitiesList;
+	}
+	
+	private List<Availability> tCreateAvailabilityPaginationData(Integer pageDisplayLength) {
+		List<Availability> availabilitesList = new ArrayList<Availability>();
+		availabilitesList = availabilityService.getAvailabilities();
+
+		return availabilitesList;
 	}
 	
 	@RequestMapping(value="/trequests", method=RequestMethod.GET)
