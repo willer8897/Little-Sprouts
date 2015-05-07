@@ -123,7 +123,7 @@
 		</form>
 
 		<form:form action="" method="GET">
-		<legend>User Accounts in Little Sprouts Scheduler<br><br></legend>
+		<legend>User Accounts in Little Sprouts Scheduler</legend>
 		<table width="70%" style="border: 3px;background: rgb(230, 244, 230);"><tr><td>
 			<table id="accounts" class="display" cellspacing="0" width="100%">
 		        <thead>

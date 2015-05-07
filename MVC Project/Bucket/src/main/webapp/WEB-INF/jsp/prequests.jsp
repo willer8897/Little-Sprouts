@@ -973,7 +973,7 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 						</div>
 	
 					</fieldset>
-				</form:form> -->
+				</form:form>
 			</div>
 	</div>
 <br />
@@ -982,16 +982,15 @@ function toStraaang(day1, day2, e1, e2, e3, e4, hr1, hr2, hr3, hr4, min1, min2, 
 <form:form id="finalRequestForm" method="post"
 	 modelAttribute="request">
 	<fieldset>
-		<form:input type="text" path="account_id" class="form-control" id="idSubmit"/>
-		<form:input type="text" path="week_start" class="form-control" id="dateSubmit"/>
-		<form:input type="text" path="monhours" class="form-control" id="monSubmit"/>
-		<form:input type="text" path="tuehours" class="form-control" id="tueSubmit"/>
-		<form:input type="text" path="wedhours" class="form-control" id="wedSubmit"/>
-		<form:input type="text" path="thuhours" class="form-control" id="thuSubmit"/>
-		<form:input type="text" path="frihours" class="form-control" id="friSubmit"/>
-		<form:input type="text" path="isChild" class="form-control" value="0"/>
-		<form:input type="text" path="request_note" class="form-control" id="noteSubmit"/>
-		<button type="button" class="btn btn-primary" onclick="processInput()">Submit Request</button>
+		<form:input type="hidden" path="account_id" class="form-control" id="idSubmit"/>
+		<form:input type="hidden" path="week_start" class="form-control" id="dateSubmit"/>
+		<form:input type="hidden" path="monhours" class="form-control" id="monSubmit"/>
+		<form:input type="hidden" path="tuehours" class="form-control" id="tueSubmit"/>
+		<form:input type="hidden" path="wedhours" class="form-control" id="wedSubmit"/>
+		<form:input type="hidden" path="thuhours" class="form-control" id="thuSubmit"/>
+		<form:input type="hidden" path="frihours" class="form-control" id="friSubmit"/>
+		<form:input type="hidden" path="isChild" class="form-control" value="0"/>
+		<form:input type="hidden" path="request_note" class="form-control" id="noteSubmit"/>
 	</fieldset>
 </form:form>
 </body>
